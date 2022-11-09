@@ -3,22 +3,26 @@
     border-radius: 10px;
     text-align: center;
     padding: 50px;
-    align-items: center;
 }
 
-.form button{
+.form button:hover{
+    border: 1px solid;
+}
+.form > button{
     background-color: black;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.form svg{
+.form >div> svg{
     border: 1px solid;
     width: 30px;
     height: 30px;
     padding: 5px;
     border-radius: 50%;
+    display: block;
+    margin: auto;
 }
 .form svg:hover{
     background-color: grey;
@@ -30,4 +34,11 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 30px;
+}
+
+.error{
+    border: 1px solid rgb(250, 175, 175);;
+    background-color: rgba(250, 175, 175, 0.482);
+    color: red;
+    padding: 10px;
 }

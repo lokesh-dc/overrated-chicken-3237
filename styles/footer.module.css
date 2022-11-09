@@ -5,17 +5,22 @@
 }
 
 .footer input ,
-    .footer select,
-    .footer button {
-    border-radius: 0;
+.footer select,
+.footer button {
+    border-radius: 10px;
     height: 100%;
 }
 
+
 .footer > div:first-child{
-    width: fit-content;
+    width: 75%;
     margin: auto;
     border-radius: 20px;
     background-color: rgb(27, 118, 236);
+}
+
+.footer > div:first-child > div{
+    border-radius: 10px;
 }
 
 .footer > div:nth-child(2) > div > p:first-child{

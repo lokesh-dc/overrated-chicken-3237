@@ -23,13 +23,18 @@
     color: rgba(128, 128, 128, 0.767);
 }
 
+.footer > div:last-child img{
+    width: 100px;
+}
+
 .footer > div:nth-child(2) > div > p:not(:first-child){
     padding-left: 10px;
     font-size: 1.2rem;
     color: rgb(201, 201, 201);
 }
 
-.footer > div:nth-child(2) > div > p:not(:first-child):hover {
+.footer > div:nth-child(2) > div > p:not(:first-child):hover,
+.footer svg:hover {
     color : rgb(27, 118, 236);
     cursor: pointer;
 }
@@ -39,9 +44,6 @@
     height: 20px;
 }
 
-.footer svg:hover{
-    color: rgb(27, 118, 236);
-}
 
 .footer input {
     color: white;

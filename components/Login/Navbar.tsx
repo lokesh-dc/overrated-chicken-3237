@@ -8,7 +8,7 @@ import CompanyName from "../../Resources/logo-web.png"
 
 export default function Navbar(){
     return(
-        <Grid  alignItems="center">
+        <Grid  alignItems="center" h="7vh">
             <Link href="/">
                 <Flex gap="5px" alignItems="center">
                     <Img src={logo.src} w="60px" h="60px" />

@@ -1,0 +1,66 @@
+.footer{
+    color: white;
+    padding: 30px;
+    background-color: black;
+}
+
+.footer input ,
+.footer select,
+.footer button {
+    border-radius: 10px;
+    height: 100%;
+}
+
+
+.footer > div:first-child{
+    width: 75%;
+    margin: auto;
+    border-radius: 20px;
+    background-color: rgb(27, 118, 236);
+}
+
+.footer > div:first-child > div{
+    border-radius: 10px;
+}
+
+.footer > div:nth-child(2) > div > p:first-child{
+    font-size: 2rem;
+    color: rgba(128, 128, 128, 0.767);
+}
+
+.footer > div:last-child img{
+    width: 100px;
+}
+
+.footer > div:nth-child(2) > div > p:not(:first-child){
+    padding-left: 10px;
+    font-size: 1.2rem;
+    color: rgb(201, 201, 201);
+}
+
+.footer > div:nth-child(2) > div > p:not(:first-child):hover,
+.footer svg:hover {
+    color : rgb(27, 118, 236);
+    cursor: pointer;
+}
+
+.footer svg{
+    width: 20px;
+    height: 20px;
+}
+
+
+.footer input {
+    color: white;
+}
+
+.footer  input::placeholder{
+    color: rgba(255, 255, 255, 0.801);
+}
+.footer button{
+    background-color: white;
+    color: black;
+    height: 100%;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+}

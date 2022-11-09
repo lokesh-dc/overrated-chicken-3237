@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+
+.logo{
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar{
+    position: sticky;
+    top: 0;
+    padding: 10px 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    align-items: center;
+}    
+
+
+.navbar *{
+    border: none;
+    border-radius: 0;
+}    
+
+.navbar select{
+    background-color: rgba(128, 128, 128, 0.253);
+}    
+
+.navbar svg{
+    width:  30px;
+    height: 30px;
+}    
+.navbar div{
+    height: fit-content;
+}    
+
+.navbar button{
+    background-color: black;
+    border: 1px solid black;
+}    
+

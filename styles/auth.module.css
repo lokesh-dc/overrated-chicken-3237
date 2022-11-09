@@ -1,0 +1,44 @@
+.form{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 50px;
+}
+
+.form button:hover{
+    border: 1px solid;
+}
+.form > button{
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form >div> svg{
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+}
+.form svg:hover{
+    background-color: grey;
+    color: white;
+}
+
+.head{
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.error{
+    border: 1px solid rgb(250, 175, 175);;
+    background-color: rgba(250, 175, 175, 0.482);
+    color: red;
+    padding: 10px;
+}

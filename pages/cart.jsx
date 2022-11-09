@@ -1,5 +1,6 @@
 
 import { MinusIcon, SmallAddIcon } from "@chakra-ui/icons";
+//  import Razorpay from 'razorpay-checkout';
 import {
   Button,
   Input,
@@ -18,20 +19,19 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { Component, useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { setcartLength } from "../Context/action";
 // import { AuthContext } from "../Context/AuthContext";
-import "../Styles/cart.css";
+// import "../Styles/cart.css";
 
 function Cart() {
+    const [change, setchange] = useState(false);
     const [amount, setamount] = useState('');
 //   const { dispatchA } = useContext(AuthContext); //set cart length on icon
   const { isOpen, onOpen, onClose } = useDisclosure(); // uset to open thanks purachase
-  const [cartitem, setcartitem] = useState(
-    JSON.parse(localStorage.getItem("cartmei")) || []
-  ); // use to show items , cartmei is the ky on ls for items
+  const [cartitem, setcartitem] = useState([]); // use to show items , cartmei is the ky on ls for items
   const [total, settotal] = useState(0); //set for total price
 //   const navigate = useNavigate(); // set to move home page after purchase
   const [state, setState] = useState("");
@@ -52,6 +52,15 @@ function Cart() {
     settotal(totall);
     prev.current = totall;
   }, [cartitem]);
+
+
+
+ useEffect(()=>{
+    
+        handlepurchase()
+    
+    
+ },[])
 
   // change1 is used to manage increase in quantity
   function change1(el, i) {
@@ -107,8 +116,9 @@ function Cart() {
     }
   }
 
-  const handlepurchase = (e) => {
-    e.preventDefault();
+  const handlepurchase = () => {
+    // e.preventDefault();
+    let amount = Number(10)
     if (amount === "") {
         alert("Please enter amount");
     }
@@ -135,10 +145,17 @@ function Cart() {
                 color: "#000"
             }
         };
-        var pay = new window.Razorpay(options);
-        pay.open();
+       
+            // Client-side-only code
+            var pay = new Razorpay(options);
+            pay.open();
+        
+       
     }
 }
+  
+ 
+  
 
   return (
     <div>
@@ -232,7 +249,7 @@ function Cart() {
           <span className="cart-total-price">Rs:{total}</span>
         </div>
         <button
-          onClick={handlepurchase}
+          onClick={()=>setchange(true)}
           className="btn btn-primary btn-purchase"
           type="button"
         >

@@ -1,5 +1,6 @@
 // pages/_app.js
 import { ChakraProvider, Img } from '@chakra-ui/react'
+import '../styles/index.css'
 
 
 

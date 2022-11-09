@@ -9,6 +9,9 @@ import TopSec from "../../components/Products/TopSec";
 
 import bgSvg from '../../Resources/blob-scene-haikei.svg'
 import bubbles from '../../Resources/circle-scatter-haikei.svg'
+import blob1 from '../../Resources/blob1.svg'
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 export default function Products() {
 
@@ -26,7 +29,7 @@ export default function Products() {
         // .catch((err) => setLoading(false))
     }, [page, filter])
  
-    const getProductByPrice = (from , to) => {
+    const getProductByPrice = (from:any, to:any) => {
         setLoading(true)
         // filterProductByPrice(from, to).then((res) => {
         //     setData(res.data)
@@ -34,7 +37,7 @@ export default function Products() {
         // })
         // .catch((err) => setLoading(false))
     }
-    const getProductByRating = (from , to) => {
+    const getProductByRating = (from:any , to : any) => {
         setLoading(true)
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
@@ -45,6 +48,9 @@ export default function Products() {
 
     return(
     <>
+        <Navbar />
+
+
         <TopSec/>
 
 
@@ -81,6 +87,7 @@ export default function Products() {
 
 
             {/* //? Here starts the code for Product's grid & Filters */}
+            <Image src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' />
             <Box w='100%' 
               py={3}
               backgroundSize='cover'
@@ -105,6 +112,9 @@ export default function Products() {
             </Box>
 
         </Box>
+
+
+        <Footer/>
     
     </>
     )

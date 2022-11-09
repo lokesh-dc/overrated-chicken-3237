@@ -7,7 +7,9 @@ import { HiOutlineIdentification } from 'react-icons/hi'
 import { FiPieChart } from 'react-icons/fi'
 
 import dashBack from '../../Resources/dashboard.svg'
-import AllTable from './Table/AllTable'
+import AllTable from '../../components/AdminComps/Table/AllTable'
+import Dashboard from '../../components/AdminComps/Dashboard/Dashboard'
+// import AllTable from '../../components/AdminComps/Table/AllTable'
 
 const Admin = () => {
   return (
@@ -15,7 +17,7 @@ const Admin = () => {
             variant="soft-rounded"
             colorScheme="purple"
             minH="100vh"
-            defaultIndex={3}
+            defaultIndex={0}
             bg="whitesmoke"
             isLazy='true'
             overflow='hidden'
@@ -122,13 +124,14 @@ const Admin = () => {
                         color:'#553C9A'
                      }}
                      w="100%"
-                     gap={3}
+                     // gap={3}
                      display={{ base: "none", lg: "flex" }}
                      bg= "black"
                      color='white' 
                      justifyContent="flex-start"
                   >
-                     <AiOutlineTeam fontSize="26px" color="gray" /> Create Products
+                     <AiOutlineTeam fontSize="26px" color="gray" /> 
+                     <Text>Create Products</Text>
                   </Tab>
 
                   <Tab
@@ -141,7 +144,7 @@ const Admin = () => {
                         color:'#553C9A'
                      }}
                      w="100%"
-                     gap={3}
+                     gap={1}
                      display={{ base: "none", lg: "flex" }}
                      bg= "black"
                      color='white'
@@ -177,33 +180,44 @@ const Admin = () => {
 
             <TabPanels p={2} pl="15%" bgImage={dashBack.src} backgroundSize='cover' h='100vh'>
 
-               <TabPanel border='1px solid blue'>ABC</TabPanel>
-
                <TabPanel >
-                    <Box p={6} w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
-                        <Text fontSize='4xl' color='white'>Users</Text>
-                        <AllTable/>
+                     <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' >
+                        <Dashboard/>
                     </Box>
                </TabPanel>
 
+               //* FOR ALL USERS
+               <TabPanel >
+                    <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
+                        <Text fontSize='4xl' color='white'>Users</Text>
+                        <AllTable title="User" roleHeading="role" role="Admin" amount="2500" totalP="Total Purchases(in Rs)" user='Aaryan Sinha' email="aaryansinha16@gmail.com"/>
+                    </Box>
+               </TabPanel>
+
+               //* FOR ALL BRANDS
+               <TabPanel>
+                  <Box p={6} w='100%' h='90vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
+                        <Text fontSize='4xl' color='white'>Brands</Text>
+                        <AllTable title="User" roleHeading="role" role="Admin" amount="2500" totalP="Total Purchases(in Rs)" user='Aaryan Sinha' email="aaryansinha16@gmail.com"/>
+                  </Box>
+               </TabPanel>
+
+               //* FOR ALL PRODUCTS
+               <TabPanel>
+                  <Box w='100%' p={6} h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
+                        <Text fontSize='4xl' color='white'>Products</Text>
+                        <AllTable title="Products" roleHeading="Brand" role="Addidas" amount="4.5" totalP="Ratings" user='Sneakers' />
+                  </Box>
+               </TabPanel>
+
+               //* CREATING PRODUCTS
                <TabPanel>
                <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
 
                 </Box>
                </TabPanel>
 
-               <TabPanel>
-               <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
-
-                </Box>
-               </TabPanel>
-
-               <TabPanel>
-               <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
-
-                </Box>
-               </TabPanel>
-
+               //* CREATING BRANDS
                <TabPanel>
                <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
 

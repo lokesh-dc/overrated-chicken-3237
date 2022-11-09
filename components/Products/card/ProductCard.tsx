@@ -20,7 +20,7 @@ import Link from 'next/link';
   //   numReviews: number;
   // }
   
-  function Rating({ rating, numReviews }) {
+  function Rating({ rating, numReviews }:any) {
     // console.log(rating, typeof numReviews)
     return (
       <Flex alignItems="center">
@@ -60,7 +60,7 @@ import Link from 'next/link';
     rating,
     number_of_reviews,
     description
-  }) {
+  }:any) {
 
     // const {handleAddCart} = useContext(AppContext)
     
@@ -92,7 +92,7 @@ import Link from 'next/link';
           </Link>
   
           <Box p="6">
-            <Box d="flex" alignItems="baseline">
+            <Box display="flex" alignItems="baseline">
               {available && (
                 <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
                   New
@@ -105,7 +105,7 @@ import Link from 'next/link';
                 fontWeight="semibold"
                 as="h4"
                 lineHeight="tight"
-                isTruncated>
+                >
                 {name}
               </Box>
               <Tooltip
@@ -114,9 +114,7 @@ import Link from 'next/link';
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'0.8em'}>
-                <IconButton onClick={() => {
-                //   handleAddCart(name, brand,price, description ,rating ,number_of_reviews,available, image)
-                  }} variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart h={9} w={9} alignSelf={'center'}/>}/>
+                <IconButton aria-label='add-to-cart' variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart height={9} width={9} alignSelf={'center'}/>}/>
               </Tooltip>
             </Flex>
   

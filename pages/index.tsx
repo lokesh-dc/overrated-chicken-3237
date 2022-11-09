@@ -5,6 +5,7 @@ import { InferGetServerSidePropsType } from 'next'
 import { Grid, Img } from "@chakra-ui/react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Homepage from './Homepage/Homepage';
 
 
 // export async function getServerSideProps(context) {
@@ -34,6 +35,7 @@ export default function Home() {
   return (
     <div className="container">
       <Navbar />
+      <Homepage/>
       <Footer />
     </div>
   )

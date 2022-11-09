@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-redux": "^8.0.5",
+    "react-slick": "^0.29.0",
     "redux": "^4.2.0"
   },
   "devDependencies": {

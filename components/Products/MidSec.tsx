@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import ProductCard from "./card/ProductCard";
 
 export default function MidSec({data, page, setPage}:any) {
-    // console.log('this is midSec', data)
     const [allData, setAllData] = useState([])
 
     useEffect(() => {
@@ -18,12 +17,11 @@ export default function MidSec({data, page, setPage}:any) {
     console.log(totalPages, data.length)
 
     return(
-        <Flex flexDir='column' >
+        <Flex flexDir='column' zIndex='0' >
             <SimpleGrid minChildWidth='250px' placeItems='center' gap={4} 
-            // background='url(https://images.unsplash.com/photo-1544306094-e2dcf9479da3)' 
             >
                 {
-                    data.map((item:any) => (
+                    data.slice(0,20)?.map((item:any) => (
                         <ProductCard {...item} key={item.id}/>
                     ))
                 }

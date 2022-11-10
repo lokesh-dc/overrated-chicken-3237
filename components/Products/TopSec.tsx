@@ -11,9 +11,11 @@ const TopSec = () => {
 
     const [menuItem, setMenuItem] = useState('All Departments')
   return (
-    <VStack w='100%' h='100px' mt='100px' bg='orange' align='center' justify='center' >
+    <VStack w='100%' h='100px' bg='orange' align='center' justify='center' zIndex='2'>
 
-        <HStack size='md' w='50%' bg="white" borderRadius='md' py={3} px={5} mt='100px' boxShadow='2xl'>
+        <HStack size='md' w={{base:'80%', md:'50%'}} borderRadius='md' py={{base:3, md:3}} px={5} mt='100px' boxShadow='2xl'
+        bgColor='rgba(255, 255, 255, .65)' style={{backdropFilter: 'blur(5px)'}} _hover={{bgColor:'rgba(255, 255, 255, .95)'}}
+        >
 
             <Box w='30px' >
                 <SearchIcon color='gray' fontSize='20px'/>
@@ -21,7 +23,7 @@ const TopSec = () => {
 
             <Input
                 px={4}
-                bg='white'
+                // bg='white'
                 fontSize='18px'
                 placeholder='Search Products...'
                 variant='unstyled'
@@ -29,14 +31,14 @@ const TopSec = () => {
 
             <CloseIcon w={2} h={3} bg="gray.50" borderRadius='full' onClick={handleClick}/>
 
-            <Center h='20px' bg='gray'>
+            <Center h='20px' bg='gray' display={{base:'none', md:'block'}}>
                 <Divider orientation='vertical'/>
             </Center>
 
-            <Box >
+            <Box display={{base:'none', md:'block'}} >
 
                 <Menu closeOnSelect={true} 
-                border='1px solid green' 
+                isLazy='true'
                 >
                     {({ isOpen }) => (
                         <>
@@ -49,8 +51,8 @@ const TopSec = () => {
                         >
                         {menuItem}
                     </MenuButton>
-                    <MenuList minWidth='240px' overflowY='scroll' h='300px'>
-                            <MenuOptionGroup type='radio' onChange={(e) => setMenuItem(e.toUpperCase())}>
+                    <MenuList minWidth='240px' overflowY='scroll' h='300px' >
+                            <MenuOptionGroup type='radio' onChange={(e) => setMenuItem(e.toUpperCase())} zIndex='100'>
                                 <MenuItemOption value='All Departments'>All Departments</MenuItemOption>
                                 <MenuItemOption value='phone'>Auto</MenuItemOption>
                                 <MenuItemOption value='baby'>Baby</MenuItemOption>

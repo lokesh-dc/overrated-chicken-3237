@@ -11,6 +11,8 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { AiOutlineStar } from 'react-icons/ai';
+import { AddReview } from './AddReview';
+import { BsStar, BsStarFill } from 'react-icons/bs';
 
 const Testimonial = ({ children }: { children: ReactNode }) => {
   return <Box>{children}</Box>;
@@ -122,19 +124,14 @@ const review =[
     header:"Efficent Collabrating"
 
 },
-{
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
 
-},
 ]
 
 export default function WithSpeechBubbles() {
   return (
-    <Box>
-      <Container  maxW={'7xl'} py={16} as={Stack} spacing={12} >
+    <Box maxH={"100vh"}>
+      <AddReview/>
+      <Container  maxW={'8xl'} py={16} as={Stack} spacing={12} >
         <SimpleGrid
             columns={[1,2,3]}
             gap="20"
@@ -143,16 +140,16 @@ export default function WithSpeechBubbles() {
           return <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
-                <Box display={"flex"}>
+                <Box display={"flex"} gap="10px">
                     {Array(5)
                     .fill("")
                     .map((_, i) => (
-                        <AiOutlineStar key={i} color={i < 4 ? "#2a977d" : "gray.300"}/>
+                        <BsStarFill key={i} color={i < 4 ? "orange" : "gray"}/>
                     ))}
                 </Box>
                 </TestimonialHeading>
               <TestimonialText>
-                {e.content}
+                <Text fontSize={"17px"}>{e.content}</Text>
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar

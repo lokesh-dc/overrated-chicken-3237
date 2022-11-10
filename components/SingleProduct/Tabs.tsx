@@ -6,7 +6,7 @@ import Feature from "./Tab2";
 const TabsSection = () => {
   return (
     <>
-      <Tabs align="center" variant='enclosed' marginTop={"50px"}>
+      <Tabs align="center" variant='enclosed' marginTop={"90px"}>
         <TabList>
           <Tab w="50%" fontSize={"3xl"}>Reviews</Tab>
           <Tab w="50%" fontSize={"3xl"}>Feature</Tab>

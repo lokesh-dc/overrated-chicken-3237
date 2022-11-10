@@ -3,6 +3,7 @@ import Advertise from './HComponents/Advertise'
 import CaptionCarousel from "./HComponents/CaptionCarousel"
 import Essential from "./HComponents/Essential"
 import NewArrivals from './HComponents/NewArrivals'
+import Popular from "./HComponents/Popular"
 
 const Homepage = () => {
   return (
@@ -11,7 +12,7 @@ const Homepage = () => {
     <CaptionCarousel/>
     <Essential/>
     <NewArrivals/>
-    <CaptionCarousel/>
+    <Popular/>
     </div>
   )
 }

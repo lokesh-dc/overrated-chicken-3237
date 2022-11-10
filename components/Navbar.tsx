@@ -20,17 +20,21 @@ export default function Navbar(){
             </Flex>
             </Link>
 
-            <Grid border="1px solid" templateColumns={{base:"5fr 2fr", lg:"1fr 5fr 100px"}} display={{base:'grid', sm:"grid", md:"grid", lg:"grid" }}>
-                <Select placeholder='All Deartments' border="none" borderRadius={0} display={{base:'none', sm:"none", md:"none", lg:"flex" }} >
-                    <option value='option1'>Option 1</option>
-                    <option value='option2'>Option 2</option>
-                    <option value='option3'>Option 3</option>
+            <Grid  templateColumns={{base:"5fr 2fr", lg:"1fr 5fr 130px"}} display={{base:'grid', sm:"grid", md:"grid", lg:"grid" }}>
+                <Select placeholder='All Deartments' border="none" borderRadius={0} display={{base:'none', sm:"none", md:"none", lg:"flex" }} focusBorderColor="transparent" >
+                    <option value='option1'>Auto</option>
+                    <option value='option2'>Baby</option>
+                    <option value='option3'>Beauty</option>
+                    <option value='option3'>Books</option>
+                    <option value='option3'>Bussiness</option>
                 </Select>
-                <Input placeholder="search Mohollamart.com" border="none" />
+                <Input placeholder="Search Mohollamart.com" border="none" focusBorderColor="transparent" />
                 <Button borderRadius="0" border="none" colorScheme="transparent">Search</Button>
             </Grid>
             <Flex justifyContent="space-evenly" display={{base:'none', sm:"none", md:"flex", lg:"flex" }} >
-                <BiUser />
+                <Link href="/login">
+                    <BiUser />
+                </Link>
                 <BiCart />
                 <BiShoppingBag />
             </Flex>

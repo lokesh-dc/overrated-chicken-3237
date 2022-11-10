@@ -1,10 +1,12 @@
-import { Box } from "@chakra-ui/react"
+import { Flex , Img, Text } from "@chakra-ui/react"
 
-import market from "../../Resources/market.jpg"
+import market from "../../Resources/illustrations/welcome.jpg"
 
 
 export default function BoxImage(){
     return(
-        <Box h="100vh" justifyContent="center" alignItems="center" bgSize="cover" bgImage={market.src} display={{base:"none", sm:"none", md:"none", lg:"block"}} ></Box>
+        <Flex justifyContent="flex-end" h="100vh" alignItems="center" gap="0" flexDirection="column" display={{base:"none", sm:"none", md:"none", lg:"flex"}} >
+            <Img src={market.src} />
+        </Flex>
     )
 }

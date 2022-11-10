@@ -3,7 +3,7 @@ import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon  }
 
 // Import Components
 import Navbar from "../components/Login/Navbar"
-import PasswordInput from "../components/Login/passwordInput"
+import PasswordInput from "../components/Login/PasswordInput"
 import useForm from "../Hooks/useForm"
 
 // Import stylesheet
@@ -31,14 +31,16 @@ export default function signup(){
 
     return(
        <Grid templateColumns={{base:"1fr", sm:"1fr", md:"1fr", lg:"2fr 1.5fr"}}>
-            <Grid  p={{base:"2", sm:"2",md:'2', lg:"10"}} h="100vh" templateRows="7vh 93vh"  bgImage={bg.src} >
+            <Grid  p={{base:"2", sm:"2",md:'2', lg:"10"}} h="100vh" templateRows="7vh 93vh" >
                 <Navbar />
                 <Flex className={style.form} flexDirection="column" gap={5} 
-                    w={{base:"100%", sm:"100%", md:"100%", lg:"60%"}}  m="auto"  bgColor="white" 
+                    w={{base:"100%", sm:"100%", md:"80%", lg:"60%"}}  m="auto"  bgColor="white" 
                     px={{base:"10px", sm:"10px", md:"20px", lg:"50px"}}
                     py={{base:"30px", sm:"30px", md:"50px", lg:"50px"}}
-
+                    position="relative"
                 >
+                    <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text>
+
                     <Text className={style.head}>Create an Account</Text>
 
                     <Grid gap="20px" templateColumns="repeat(2,1fr)" >

@@ -28,10 +28,11 @@
 }
 
 .head{
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 30px;
+    color: grey;
 }
 
 .error{

@@ -14,15 +14,15 @@ import { SlSocialTwitter, SlSocialLinkedin, SlSocialInstagram, SlSocialFacebook 
 export default function Footer(){
     return(
         <Grid className={style.footer}  p={0} pt="10">
-            <Grid templateColumns="1fr 1fr"justifyContent="space-evenly" px={30}  py={7} gap="50px">
-                <Text fontSize="2rem">Subscribe to Newsletter</Text>
-                <Flex border="1px solid">
-                    <Input placeholder="example@gmail.com" border="none" />
-                    <Button colorScheme="transparent" borderRadius="0"> Subscribe</Button>
+            <Grid templateColumns={{base:"1fr", sm:"1fr", md:"1fr 1fr", lg:"1fr 1fr"}} justifyContent="space-evenly" px={30}  py={7} gap="50px" borderRadius={{base:"0", lg:"20px"}}>
+                <Text fontSize={{base:"1.5rem",md:"1rem", lg:"1.6rem"}}>Subscribe to Newsletter</Text>
+                <Flex border="1px solid" borderRadius={{base:"0", lg:"10px"}}>
+                    <Input placeholder="example@gmail.com" border="none" borderRadius={{base:0, lg:"10px"}} />
+                    <Button colorScheme="transparent" borderRadius={{base:0, lg:"10px"}}> Subscribe</Button>
                 </Flex>
             </Grid>
-            <Grid templateColumns="0.5fr 1fr 1fr" w="90%" m="auto" py={10}>
-                <Flex justifyContent="space-evenly" flexDirection="column">
+            <Grid templateColumns={{base:"1fr", sm:"1fr", md:"1fr", lg:"0.5fr 1fr 1fr"}} gap="20px" w="90%" m="auto" py={10}>
+                <Flex justifyContent="space-evenly" flexDirection={{base:"column-reverse", lg:"column"}}>
                     <Img src={logo.src} w="160px" />
                     <Flex gap={10}>
                         <SlSocialTwitter />
@@ -49,12 +49,12 @@ export default function Footer(){
                 </Flex>
             </Grid>
             <Text textAlign={"center"} bg="white" color="black" p="10px" borderBottom="1px solid">© 1997-2022 Market America, Inc. or its affiliates. All other designated trademarks, copyrights, and brands are the property of their respective owners.</Text>
-            <Flex justifyContent="center" gap="10" bg="white" p={5} borderBottom="1px solid">
+            {/* <Flex justifyContent="center" gap="10" bg="white" p={5} borderBottom="1px solid">
                 <Img src={award1.src} />
                 <Img src={award2.src} />
                 <Img src={award3.src} />
                 <Img src={award4.src} />
-            </Flex>
+            </Flex> */}
         </Grid>
     )
 }

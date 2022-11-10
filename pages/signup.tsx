@@ -33,13 +33,18 @@ export default function signup(){
     }
 
     return(
-       <Grid templateColumns="2fr 1.5fr" >
-            <Grid  p={10} h="100vh" templateRows="7vh 93vh"  bgImage={bg.src} >
+       <Grid templateColumns={{base:"1fr", sm:"1fr", md:"1fr", lg:"2fr 1.5fr"}}>
+            <Grid  p={{base:"2", sm:"2",md:'2', lg:"10"}} h="100vh" templateRows="7vh 93vh"  bgImage={bg.src} >
                 <Navbar />
-                <Flex className={style.form} flexDirection="column" gap={5} w="60%"  m="auto"  bgColor="white" >
+                <Flex className={style.form} flexDirection="column" gap={5} 
+                    w={{base:"100%", sm:"100%", md:"100%", lg:"60%"}}  m="auto"  bgColor="white" 
+                    px={{base:"10px", sm:"10px", md:"20px", lg:"50px"}}
+                    py={{base:"30px", sm:"30px", md:"50px", lg:"50px"}}
+
+                >
                     <Text className={style.head}>Create an Account</Text>
 
-                    <Grid gap="20px" templateColumns="repeat(2,1fr)" w="100%" >
+                    <Grid gap="20px" templateColumns="repeat(2,1fr)" >
                         <Input placeholder="First name" name="firstName" onChange={handleChange} />
                         <Input placeholder="Last name"  name="lastName" onChange={handleChange} />
                     </Grid>
@@ -63,7 +68,7 @@ export default function signup(){
                     <BsGoogle /> */}
                 </Flex>
             </Grid>
-           <Box h="100vh" justifyContent="center" alignItems="center" bgSize="cover" bgImage={market.src} ></Box>
+           <Box h="100vh" justifyContent="center" alignItems="center" bgSize="cover" bgImage={market.src} display={{base:"none", sm:"none", md:"none", lg:"block"}} ></Box>
        </Grid>
     )
 }

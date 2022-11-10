@@ -7,25 +7,29 @@
 .footer input ,
 .footer select,
 .footer button {
-    border-radius: 10px;
     height: 100%;
+}
+
+.footer input{
+    min-height: 50px;
 }
 
 
 .footer > div:first-child{
     width: 75%;
     margin: auto;
-    border-radius: 20px;
     background-color: rgb(27, 118, 236);
 }
 
-.footer > div:first-child > div{
-    border-radius: 10px;
-}
 
 .footer > div:nth-child(2) > div > p:first-child{
     font-size: 2rem;
     color: rgba(128, 128, 128, 0.767);
+}
+
+.footer > div:nth-child(2) > div{
+    align-items: center;
+    justify-content: center;
 }
 
 .footer > div:last-child img{

@@ -44,7 +44,7 @@ const NewArrivals = () => {
                     />
             </VStack>        
         </SimpleGrid>
-        <Text fontSize='50px' alignItems='center' ml="5%" mt="30px" mb="30px">NEW ARRIVALS</Text>
+        <Text fontSize='50px' alignItems='center' ml="5%" mt="30px" mb="30px">Our Popular Products</Text>
     </div>
   )
 }

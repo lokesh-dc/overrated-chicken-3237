@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, IconButton, useBreakpointValue, Image } from "@chakra-ui/react";
+import {Text, Box, IconButton, useBreakpointValue, Image } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
 
@@ -15,7 +15,7 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function CaptionCarousel() {
+export default function Popular() {
  
   const [slider, setSlider] = useState({});
 
@@ -27,22 +27,10 @@ export default function CaptionCarousel() {
       title: "Design Projects 1",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
-        "https://wallpaperaccess.com/full/1595330.jpg",
-    },
-    {
-      title: "Design Projects 2",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        "https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1200&format=pjpg&exif=1&iptc=1",
-    },
-    {
-      title: "Design Projects 3",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
         "https://wallpaperaccess.com/full/2267830.jpg",
     },
     {
-      title: "Design Projects 3",
+      title: "Girls Top",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://c8.alamy.com/comp/A6409H/rows-of-vitamin-pills-and-food-supplements-in-health-store-england-A6409H.jpg",
@@ -52,6 +40,18 @@ export default function CaptionCarousel() {
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://img.freepik.com/free-photo/cute-stylish-children_155003-8330.jpg?w=2000",
+    },
+    {
+      title: "Design Projects 3",
+      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      image:
+        "https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1200&format=pjpg&exif=1&iptc=1",
+    },
+    {
+      title: "Design Projects 3",
+      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      image:
+        "https://wallpaperaccess.com/full/1595330.jpg",
     },
   ];
 
@@ -66,6 +66,8 @@ export default function CaptionCarousel() {
       overflow={"hidden"}
       textAlign={"center"}
     >
+          <Text fontSize='30px' mt="20px"
+      mb="20px" alignItems='center' color="red">15 to 20 Percent off on below category products</Text>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -108,11 +110,13 @@ export default function CaptionCarousel() {
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
           <Box key={index} position="relative">
+            
             <Image
               src={card.image}
               w={{ base: "80%", md: "60%", lg: "60%" }}
               m="auto"
             />
+            
           </Box>
         ))}
       </Slider>

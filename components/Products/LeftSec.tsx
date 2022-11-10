@@ -11,7 +11,7 @@ import { useState } from "react";
 import { MdGraphicEq } from "react-icons/md";
 // import { filterProductByPrice } from "../../../API/api";
 
-export default function LeftSec({data, getProductByPrice, getProductByRating}) {
+export default function LeftSec({data, getProductByPrice, getProductByRating}:any) {
     const [maxMin, setMaxMin] = useState([200, 2000])
     return (
         <Box px={2} py={2} >
@@ -57,7 +57,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}) {
                     <AccordionPanel pb={4}>
                         <Flex flexDir='column' gap={3} justify='center' align='flex-start' pl={6}>
                             {
-                                data.slice(0,6).map((item) => (
+                                data.slice(0,6).map((item:any) => (
                                     // <Button fontSize='15px' color='#2e2c38' variant='link' key={item.id}>{item.brand}({item.number_of_reviews})</Button>
                                     <Checkbox defaultChecked fontSize='15px' color='#2e2c38' key={item.id}>{item.brand}({item.number_of_reviews})</Checkbox>
                                 ))

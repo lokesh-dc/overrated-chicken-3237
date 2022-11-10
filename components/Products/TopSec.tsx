@@ -2,7 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon, CloseIcon, SearchIcon } from '@chakra-u
 import { Box, Button, Center, Divider, HStack, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FiCrosshair } from 'react-icons/fi'
-import MidMenu from '../../../Components/Navbar/DeskNav/MidSec/MidMenu'
+// import MidMenu from '../../../Components/Navbar/DeskNav/MidSec/MidMenu'
 // import { Button } from 'semantic-ui-react'
 
 const TopSec = () => {
@@ -35,7 +35,9 @@ const TopSec = () => {
 
             <Box >
 
-                <Menu closeOnSelect={true} border='1px solid green' >
+                <Menu closeOnSelect={true} 
+                border='1px solid green' 
+                >
                     {({ isOpen }) => (
                         <>
                     <MenuButton as={Button} 

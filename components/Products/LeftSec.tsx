@@ -77,11 +77,11 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                     </h2>
                     <AccordionPanel pb={4} >
                         <Flex flexDir='column' gap={2} justify='center' align='flex-start' pl={6}>
-                            <Button fontSize='15px' color='#2e2c38' variant='link' onClick={() => getProductByRating(0,1)}>1 & below</Button>
-                            <Button fontSize='15px' color='#2e2c38' variant='link' onClick={() => getProductByRating(1.1,2)}>1.1 to 2</Button>
-                            <Button fontSize='15px' color='#2e2c38' variant='link' onClick={() => getProductByRating(2,3)}>2.1 to 3</Button>
-                            <Button fontSize='15px' color='#2e2c38' variant='link' onClick={() => getProductByRating(3,4)}>3.1 to 4</Button>
-                            <Button fontSize='15px' color='#2e2c38' variant='link' onClick={() => getProductByRating(4,5)}>4.1 & above</Button>
+                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(0,1)}>1 & below</Checkbox>
+                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(1.1,2)}>1.1 to 2</Checkbox>
+                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(2,3)}>2.1 to 3</Checkbox>
+                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(3,4)}>3.1 to 4</Checkbox>
+                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(4,5)}>4.1 & above</Checkbox>
                         </Flex>
                     </AccordionPanel>
                 </AccordionItem>

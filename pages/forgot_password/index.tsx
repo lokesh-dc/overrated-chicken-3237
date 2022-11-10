@@ -1,9 +1,9 @@
 import { Box, Button, Flex, Grid, Img, Input, Text } from "@chakra-ui/react";
-import Navbar from "../components/Login/Navbar";
+import Navbar from "../../components/Login/Navbar";
 
-import forgot from "../Resources/illustrations/gorgot.jpg"
+import forgot from "../../Resources/illustrations/gorgot.jpg"
 
-import style from "../styles/auth.module.css"
+import style from "../../styles/auth.module.css"
 
 export default function forgot_password(){
     return(
@@ -18,7 +18,7 @@ export default function forgot_password(){
                      flexDirection="column" gap="30px"
                      position="relative"
                 >
-                    <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >FORGOT PASSWORD?</Text>
+                    <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} color="grey" left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >FORGOT PASSWORD?</Text>
 
                     <Text fontSize="1.5rem" my="30px" textTransform="uppercase" >Verify your Email : </Text>
                     <Input placeholder="example@email.com" />

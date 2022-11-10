@@ -3,10 +3,6 @@ import { Grid , Flex, Text, Input, Button, Img, Box } from "@chakra-ui/react"
 import style from "../styles/footer.module.css"
 import logo from "../Resources/blackCircle.png"
 
-import award1 from "../Resources/Awards/1.webp"
-import award2 from "../Resources/Awards/2.png"
-import award3 from "../Resources/Awards/3.webp"
-import award4 from "../Resources/Awards/4.webp"
 
 
 import { SlSocialTwitter, SlSocialLinkedin, SlSocialInstagram, SlSocialFacebook } from "react-icons/sl"
@@ -49,12 +45,6 @@ export default function Footer(){
                 </Flex>
             </Grid>
             <Text textAlign={"center"} bg="white" color="black" p="10px" borderBottom="1px solid">© 1997-2022 Market America, Inc. or its affiliates. All other designated trademarks, copyrights, and brands are the property of their respective owners.</Text>
-            {/* <Flex justifyContent="center" gap="10" bg="white" p={5} borderBottom="1px solid">
-                <Img src={award1.src} />
-                <Img src={award2.src} />
-                <Img src={award3.src} />
-                <Img src={award4.src} />
-            </Flex> */}
         </Grid>
     )
 }

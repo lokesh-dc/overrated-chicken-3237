@@ -1,6 +1,6 @@
-import clientPromise from "../../lib/mongodb";
+import clientPromise from "../../../lib/mongodb";
 
-export default async (req, res) => {
+export default async (req:any, res:any) => {
     try {
         const client = await clientPromise;
         const db = client.db("Mart");
@@ -19,7 +19,7 @@ export default async (req, res) => {
             const users = await db.collection("users").find().toArray();
             res.json(users);
         }
-    } catch (e) {
+    } catch (e:any) {
         console.error(e);
         res.status(500).send(e.message);
     }

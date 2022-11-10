@@ -1,7 +1,5 @@
 import Link from "next/link"
-import { Grid, Box, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon  } from "@chakra-ui/react"
-
-import { BsGoogle } from "react-icons/bs"
+import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon  } from "@chakra-ui/react"
 
 // Import Components
 import Navbar from "../components/Login/Navbar"
@@ -13,12 +11,11 @@ import style from "../styles/auth.module.css"
 
 // Images import 
 import bg from "../Resources/b.png"
-import market from "../Resources/market.jpg"
 import { useState } from "react"
+import BoxImage from "../components/Login/BoxImage"
+import Errordiv from "../components/Login/Errordiv"
 
 export default function signup(){
-
-
     const { creds, execute} = useForm();
     const [formError, setFormError] = useState("");
 
@@ -57,18 +54,16 @@ export default function signup(){
                     </InputGroup>
                     {
                         formError!=="" &&
-                        <Text className={style.error}>{formError}</Text>
+                        <Errordiv />
                     }
                     <Button colorScheme="transparent" color="black" onClick={handleSubmit}>Signup</Button>
                     <Checkbox size='lg' defaultChecked>
                         Signup for offers & discounts
                     </Checkbox>
                     <Text >Already have an account? <Link href="/login">Sign in.</Link>  </Text>
-                    {/* <Text >or</Text>
-                    <BsGoogle /> */}
                 </Flex>
             </Grid>
-           <Box h="100vh" justifyContent="center" alignItems="center" bgSize="cover" bgImage={market.src} display={{base:"none", sm:"none", md:"none", lg:"block"}} ></Box>
+           <BoxImage />
        </Grid>
     )
 }

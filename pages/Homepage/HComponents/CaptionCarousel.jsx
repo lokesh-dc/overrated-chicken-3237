@@ -66,8 +66,6 @@ export default function CaptionCarousel() {
       overflow={"hidden"}
       textAlign={"center"}
     >
-       <Text fontSize='30px' mt="20px"
-      mb="20px" alignItems='center' color="red">15 to 20 Percent off on below category products</Text>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"

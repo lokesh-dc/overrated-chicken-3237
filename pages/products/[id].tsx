@@ -11,6 +11,7 @@ import {
 import { RadioSizeCard } from "../../components/SingleProduct/RadioCard";
 import { AiOutlineStar } from "react-icons/ai";
 import { SlBag } from "react-icons/sl";
+import TabsSection from "../../components/SingleProduct/Tabs";
 
 const SingleProductPage = () => {
   return (
@@ -110,7 +111,7 @@ const SingleProductPage = () => {
           </Box>
         </Box>
       </SimpleGrid>
-
+        <TabsSection/>
     </>
   );
 };

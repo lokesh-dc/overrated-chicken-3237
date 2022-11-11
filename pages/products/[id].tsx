@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,10 +13,14 @@ import { AiOutlineStar } from "react-icons/ai";
 import { SlBag } from "react-icons/sl";
 import TabsSection from "../../components/SingleProduct/Tabs";
 import { BsStarFill } from "react-icons/bs";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const SingleProductPage = () => {
+
   return (
     <>
+    <Navbar/>
       <SimpleGrid
         columns={[1, 1, 2]}
         maxWidth="90%"
@@ -44,12 +48,12 @@ const SingleProductPage = () => {
           <Text fontSize="3xl" color={"black"} fontWeight="500">
             Essential Men's Regular-Fit-Long Sleeve Oxford Shirt
           </Text>
-          
           <Box display="flex" mt="2" alignItems="center" gap="5px">
             {Array(5)
               .fill("")
-              .map((_, i) => (
-                <BsStarFill fontSize={"17px"} key={i} color={i < 4 ? "orange" : "gray"} />
+              .map((_, i) => 
+              (
+                <BsStarFill fontSize={"17px"} key={i}  color={i < 4 ? "orange": "grey"} />
               ))}
           </Box>
           <Text fontSize="3xl" color={"black"} fontWeight="500">$ 433</Text>
@@ -112,6 +116,7 @@ const SingleProductPage = () => {
         </Box>
       </SimpleGrid>
         <TabsSection/>
+      <Footer/>
     </>
   );
 };

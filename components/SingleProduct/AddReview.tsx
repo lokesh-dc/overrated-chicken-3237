@@ -1,5 +1,5 @@
 import { Box, Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react"
-import React, { useState } from "react"
+import React, { useState , useEffect } from "react"
 import { BsStarFill } from "react-icons/bs"
 import {GoPlus} from "react-icons/go"
 
@@ -16,7 +16,9 @@ export function AddReview() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [overlay, setOverlay] = React.useState(<OverlayTwo />)
     const [fillStar , setFillStar] = useState(Number)
-    console.log(fillStar);
+    useEffect(()=>{
+
+    },[fillStar])
         
     return (
       <>
@@ -38,9 +40,9 @@ export function AddReview() {
             <ModalCloseButton />
             <ModalBody>
                 <Box display={"flex"} gap="10px" justifyContent={"center"} marginBottom="20px">
-                {Array(5).fill("").map((_, i) => (
-                    <BsStarFill key={i} fontSize="30px" cursor="pointer" color={i < fillStar ? "orange" : "gray"} onClick={()=>(setFillStar(i+1))}/>
-                ))}
+                {Array(5).fill("").map((_, i) => {
+                  return <BsStarFill key={i} fontSize="30px" cursor="pointer" color={i < fillStar ? "orange" : "gray"} onClick={()=>(setFillStar(i+1))}/>
+                  })}
                 </Box>
                 <Input type="text" placeholder="Enter Your Review" />
             </ModalBody>

@@ -2,8 +2,6 @@ import { connect }  from "../../../lib/dbConnect";
 import cartModel from "../../../models/cart.model";
 const jwt = require("jsonwebtoken");
 
-let date = new Date();
-
 export default async (req:any, res:any) => {
     const {token} = req.headers;
     if(token){
@@ -23,7 +21,7 @@ export default async (req:any, res:any) => {
                 const { productId, userId } = req.body;
                 const checkProduct = await cartModel.findOne({productId, userId});
                 if(!checkProduct){
-                    await cartModel.create({productId, userId, date});
+                    await cartModel.create({productId, userId});
                     return res.send("Product added");
                 }else{
                     return res.send("Product already Added");

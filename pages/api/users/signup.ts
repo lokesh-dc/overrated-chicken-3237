@@ -1,17 +1,19 @@
-import clientPromise from "../../../lib/mongodb";
+
+import { connect } from "../../../lib/dbConnect";
+import usersModel from "../../../models/users.model";
 
 export default async (req:any, res:any) => {
     try {
-        const client = await clientPromise;
-        const db = client.db("Mart");
+
+        await connect();
         if(req.method === "POST"){
             const { firstName, lastName, mobile, email, password} = req.body;
 
-            const user = await db.collection("users").findOne({email})
+            const user = await usersModel.findOne({email})
             if(user){
                 return res.status(401).send("Email Id exists")
             }else{
-                await db.collection("users").insertOne({firstName, lastName, email, password, mobile});
+                await usersModel.create({firstName, lastName, email, password, mobile});
                 res.send("User created")
             }
         }

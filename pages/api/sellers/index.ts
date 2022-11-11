@@ -32,18 +32,23 @@ export default async (req:any, res:any) => {
             else if(req.method==="PATCH"){
                 if(logged_User?.role==="Seller" || logged_User?.role==="Admin"){
                     let update = req.body;
-                    console.log(update, logged_User )
                     let s = await seller.updateOne({userId: id}, update );
-                    return res.send(s)
-                    return res.send("Updated Successfully");
+                    if(s.modifiedCount>0){
+                        return res.send("Updated Successfully");
+                    }else{
+                        return res.send("Couldn't update Product");
+                    }
                 }else{
                     return res.send("Unauuthorised access");
                 }
             }
             else if(req.method==="DELETE"){
-                if(logged_User?.role==="Seller"){
+                if(logged_User?.role==="Seller" || logged_User?.role==="Admin"){
                     let d = await seller.deleteOne({userId: id});
-                    return res.send(d);
+                    if(d.deletedCount>0){
+                        return res.send("Seller deleted successfully!");
+                    }
+                    return res.status(404).send("Could't find Seller");
                 }else{
                     return res.send("Unauthorised Access");
                 }

@@ -7,7 +7,7 @@ import logo from "../Resources/logo-circle.png"
 import CompanyName from "../Resources/logo-web.png"
 import style from "../styles/navbar.module.css"
 
-import { BiUser, BiCart, BiShoppingBag } from "react-icons/bi"
+import { BiUser, BiHeart, BiShoppingBag } from "react-icons/bi"
 
 export default function Navbar(){
     return(
@@ -35,8 +35,8 @@ export default function Navbar(){
                 <Link href="/login">
                     <BiUser />
                 </Link>
-                <BiCart />
-                <BiShoppingBag />
+                <Link href="/wishlist"><BiHeart /> </Link>
+                <Link href="/cart"><BiShoppingBag /></Link>
             </Flex>
         </Grid>
     ) 

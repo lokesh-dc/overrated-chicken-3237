@@ -24,7 +24,8 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { setcartLength } from "../Context/action";
 // import { AuthContext } from "../Context/AuthContext";
-// import "../Styles/cart.css";
+//  import "./global.css";
+
 
 function Cart() {
     const [change, setchange] = useState(false);
@@ -54,13 +55,6 @@ function Cart() {
   }, [cartitem]);
 
 
-
- useEffect(()=>{
-    
-        handlepurchase()
-    
-    
- },[])
 
   // change1 is used to manage increase in quantity
   function change1(el, i) {
@@ -116,43 +110,43 @@ function Cart() {
     }
   }
 
-  const handlepurchase = () => {
-    // e.preventDefault();
-    let amount = Number(10)
-    if (amount === "") {
-        alert("Please enter amount");
-    }
-    else {
-        var options = {
-            key: "rzp_live_GD1u84vAqpHA5x",
-            key_secret: "cLBmDfPvJdwZtl15oaDZInri",
-            amount: amount * 100,
-            currenty: "INR",
-            name: "Test Razorpay",
-            description: "Razorpay project",
-            handler: function (response) {
-                alert(response.razorpay_payment_id);
-            },
-            prefill: {
-                name: "",
-                email: "",
-                contact: ""
-            },
-            notes: {
-                address: "",
-            },
-            theme: {
-                color: "#000"
-            }
-        };
+//   const handlepurchase = () => {
+//     // e.preventDefault();
+//     let amount = Number(10)
+//     if (amount === "") {
+//         alert("Please enter amount");
+//     }
+//     else {
+//         var options = {
+//             key: "rzp_live_GD1u84vAqpHA5x",
+//             key_secret: "cLBmDfPvJdwZtl15oaDZInri",
+//             amount: amount * 100,
+//             currenty: "INR",
+//             name: "Test Razorpay",
+//             description: "Razorpay project",
+//             handler: function (response) {
+//                 alert(response.razorpay_payment_id);
+//             },
+//             prefill: {
+//                 name: "",
+//                 email: "",
+//                 contact: ""
+//             },
+//             notes: {
+//                 address: "",
+//             },
+//             theme: {
+//                 color: "#000"
+//             }
+//         };
        
-            // Client-side-only code
-            var pay = new Razorpay(options);
-            pay.open();
+//             // Client-side-only code
+//             var pay = new Razorpay(options);
+//             pay.open();
         
        
-    }
-}
+//     }
+// }
   
  
   
@@ -280,6 +274,177 @@ function Cart() {
           </ModalContent>
         </Modal>
       </>
+     <style jsx>{`
+     
+     @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,700");
+     @import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
+     
+     .cartstart {
+       box-sizing: border-box;
+       font-family:"EB Garamond" ;
+       color: #777;
+       /* border:2px solid green; */
+       max-width: 900px;
+       margin: 0 auto;
+       padding: 0 1.5em;
+       /* border:2px solid red; */
+       margin: 1em;
+     }
+     .cartheader {
+       font-family:"EB Garamond";
+       font-weight: normal;
+       color: #333;
+       text-align: center;
+       font-size: 2.5em;
+       /* border:2px solid red; */
+     }
+     html,
+     body {
+       margin: 0;
+       padding: 0;
+       min-height: 100%;
+       /* border:2px solid green; */
+     }
+     .cart-row {
+       display: flex;
+     }
+     .cart-header {
+       font-weight: bold;
+       font-size: 1.25em;
+       color: #333;
+       font-family: "EB Garamond";
+       /* border:2px solid green; */
+     }
+     .cart-item {
+       width: 45%;
+       /* border:2px solid green; */
+     }
+     
+     .cart-price {
+       width: 20%;
+       font-size: 1.2em;
+       /* height:100px; */
+       color: #333;
+       /* border:2px solid green;  */
+     }
+     .cart-column {
+       display: flex;
+       align-items: center;
+       border-bottom: 1px solid black;
+       margin-right: 1.5em;
+       padding-bottom: 10px;
+       margin-top: 10px;
+       /* border:1px solid green */
+     }
+     .cart-quantity {
+       width: 35%;
+     }
+     .btn-purchase {
+       display: block;
+       margin: 40px auto 80px auto;
+       font-size: 1.75em;
+     
+       /* border:2px solid red */
+     }
+     .btn-primary {
+       color: white;
+       /* background-color: #87439662; */
+       border: none;
+       border-radius: 0.3em;
+       font-weight: bold;
+       background-color: #298cce;
+       /* background-image:  #49565e */
+     
+       /* border:2px solid red; */
+     }
+     
+     .btn-primary:hover {
+       background-color: #2d9cdb;
+       /* border:2px solid red; */
+     }
+     .btn {
+       text-align: center;
+       vertical-align: middle;
+       padding: 0.67em 0.67em;
+       cursor: pointer;
+       /* border:2px solid red; */
+     }
+     .cart-total {
+       text-align: end;
+       margin-top: 10px;
+       margin-right: 10px;
+       /* border:2px solid red */
+       font-family: "EB Garamond";
+     }
+     
+     .cart-total-title {
+       font-weight: bold;
+       font-size: 1.5em;
+       color: black;
+       margin-right: 20px;
+       /* border:2px solid red */
+     }
+     
+     .cart-total-price {
+       color: #333;
+       font-size: 1.1em;
+       /* border:2px solid red; */
+       font-family: "EB Garamond";
+     }
+     .cart-item-title {
+       color: #333;
+       margin-left: 0.5em;
+       font-size: 1.2em;
+     }
+     
+     .cart-item-image {
+       width: 75px;
+       height: auto;
+       border-radius: 10px;
+     }
+     
+     .btn-danger {
+       color: white;
+       background-color: #eb5757;
+       border: none;
+       border-radius: 0.3em;
+       font-weight: bold;
+       /* border:2px solid red */
+     }
+     
+     .btn-danger:hover {
+       background-color: #cc4c4c;
+       /* border:2px solid red */
+     }
+     
+     .cart-quantity-input {
+       height: 34px;
+       width: 50px;
+       border-radius: 5px;
+       border: 1px solid #56ccf2;
+       background-color: #eee;
+       color: #333;
+       padding: 0;
+       text-align: center;
+       font-size: 1.2em;
+       margin-right: 25px;
+     
+       /* border:2px solid red */
+     }
+     
+     .cart-row:last-child {
+       border-bottom: 1px solid black;
+       /* border:2px solid red */
+     }
+     
+     .cart-row:last-child .cart-column {
+       border: none;
+       /* border:2px solid red */
+     }
+     /* #toast-8:hover{
+         background-color: white;
+     } */
+          `}</style> 
     </div>
   );
 }

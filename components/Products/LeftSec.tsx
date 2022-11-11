@@ -69,7 +69,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                 <AccordionItem py={2}>
                     <h2>
                     <AccordionButton>
-                        <Box  textAlign='left' fontSize='18px'>
+                        <Box flex='1'  textAlign='left' fontSize='18px'>
                         Ratings Range
                         </Box>
                         <AccordionIcon />

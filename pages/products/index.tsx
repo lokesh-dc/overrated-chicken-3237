@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Divider, Flex, HStack, Image, Select, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, Image, Input, Select, Text, useDisclosure } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 
 import LeftSec from "../../components/Products/LeftSec";
 import MidSec from "../../components/Products/MidSec";
@@ -17,6 +17,7 @@ import blob3 from '../../Resources/blob3.svg'
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import axios from "axios";
+import { FiFilter } from "react-icons/fi";
 
 export default function Products() {
 
@@ -48,12 +49,15 @@ export default function Products() {
         // .catch((err) => setLoading(false))
     }
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = useRef<any>()
+
     return(
     <>
         <Navbar />
 
 
-        <TopSec/>
+        {/* <TopSec/> */}
 
 
         {/* // ? Below is the code for Breadcrumb's and Sorting strip */}
@@ -83,16 +87,40 @@ export default function Products() {
                         <option value='ASC'>Low to High</option>
                     </Select>
                 </HStack>
-                <Text w={{base:'65%', lg:'80%'}}>You searched <b>rc toys</b>: 6,523 product results</Text>
+
+                <Button display={{lg:'none'}} ref={btnRef} onClick={onOpen} variant='outline' rightIcon={<FiFilter/>}>Filters </Button>
+                <Drawer
+                    isOpen={isOpen}
+                    placement='bottom'
+                    onClose={onClose}
+                    finalFocusRef={btnRef}
+                >
+                    <DrawerOverlay />
+                    <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>Filters</DrawerHeader>
+
+                    <DrawerBody>
+                        <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button variant='outline' mr={3} onClick={onClose}>
+                        Cancel
+                        </Button>
+                        <Button colorScheme='blue'>Save</Button>
+                    </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
                 
             </Flex>
 
 
             {/* //? Here starts the code for Product's grid & Filters */}
-            <Image display={{base:'none', md:'block'}} src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' />
+            {/* <Image display={{base:'none', md:'block'}} src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' /> */}
             <Image display={{base:'none', md:'block'}} src={blob2.src} w='400px' position='fixed' top='40%' left='80%' zIndex='-10' />
             <Image display={{base:'none', md:'block'}} src={blob3.src} w='400px' position='fixed' top='20%' left='50%' zIndex='-10' />
-            <Image display={{base:'none', md:'block'}} src='https://animoto.com/static/TealDots-212c4a91665ce0cc624cdf92514a34d6.svg' w='180px' position='fixed' top='20%' left='0%' zIndex='-10' />
+            {/* <Image display={{base:'none', md:'block'}} src='https://animoto.com/static/TealDots-212c4a91665ce0cc624cdf92514a34d6.svg' w='180px' position='fixed' top='20%' left='0%' zIndex='-10' /> */}
             <Box w='100%' 
               py={3}
               backgroundSize='cover'
@@ -100,7 +128,7 @@ export default function Products() {
               backgroundAttachment='fixed'
               >
 
-                <Flex m='auto' mt='30px' mb='30px' w='80%' justify={{base:'center', lg:'space-between'}}  >
+                <Flex m='auto' mt='30px' mb='30px' w={{lg:'90%', xl:'80%'}} justify={{base:'center', lg:'space-between'}}  >
 
                     <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                         bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
@@ -108,7 +136,7 @@ export default function Products() {
                         <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
                     </Box>
 
-                    <Box  w={{base:'95%', xl:'78%'}} >
+                    <Box  w={{base:'95%',lg: "75%", xl:'78%'}} >
                         <MidSec data={data} page={page} setPage={setPage} currPage="products"/>
                     </Box>
 

@@ -1,23 +1,22 @@
-import clientPromise from "../../../lib/mongodb";
+
+import { connect } from "../../../lib/dbConnect";
+import user from "../../../models/users.model";
 
 const jwt = require("jsonwebtoken");
 
 export default async (req:any, res:any) => {
     try {
-        const client = await clientPromise;
-        const db = client.db("Mart");
+        await connect();
+
         if(req.method === "POST"){
             const { email, password} = req.body;
-            const user = await db.collection("users").findOne({email})
-            if(user){
-                let userCheck = await db.collection("users").findOne({ email, password});
-                if(userCheck){
-                    let id = userCheck._id;
-                        let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
-                        return res.send(token)  
+            let userCheck = await user.findOne({ email, password});
+            if(userCheck){
+                let id = userCheck._id;
+                let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
+                return res.send({message:"Succesfully Logged in", token})  
             }else{
-                return res.send("not found")
-            }
+                return res.status(401).send("Invalid Credentials")
             }
         }
     } catch (e:any) {
@@ -26,4 +25,3 @@ export default async (req:any, res:any) => {
     }
 };
 
-// mongodb+srv://lokeshdc:lokeshcd@martdatabase.9uiehdp.mongodb.net/martDatabase

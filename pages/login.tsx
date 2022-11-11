@@ -14,6 +14,7 @@ import { useState } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"
 
+
 export default function signup(){
 
 

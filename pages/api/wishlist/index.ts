@@ -1,42 +1,45 @@
 import { ObjectId } from "mongodb";
-import clientPromise from "../../../lib/mongodb";
+
+import { connect }  from "../../../lib/dbConnect";
+import productModel from "../../../models/products.model";
+
+import wishlistModel from "../../../models/wishlist.model";
 
 let date = new Date();
 
 export default async (req:any, res:any) => {
     try {
-        const client = await clientPromise;
-        const db = client.db("Mart");
+        await connect();
         if(req.method==="GET"){
-            const {id} = req.body;
-            const wishlist = await db.collection("wishlists").find({}).toArray();
-
+            const wishlist = await wishlistModel.find({}).populate({path : "product", model : productModel, options : { strictPopolate : false } }).exec((err, product) => {
+                console.log("Populated User " + product);
+              });
             return res.json(wishlist);
         }
         
         else if(req.method==="POST"){
             const { productId, userId } = req.body;
-            const wishlist = await db.collection("wishlists").insertOne({product : productId, user : userId, date});
+            const wishlist = await wishlistModel.create({productId, userId, date});
             return res.json(wishlist);   
         }
         
         else if(req.method==="PATCH"){
             const user = req.body;
             const id = user.id;
-            const dbwishlist = await db.collection("wishlists").findOne({_id: ObjectId(`${id}`)});
+            const dbwishlist = await wishlistModel.findOne({_id: id});
 
             let title = user.title ?  user.title : dbwishlist?.title;
             let price = user.price ? user.price : dbwishlist?.price;
             let quantity = user.quantity ? user.quantity : dbwishlist?.quantity;
             let src = user.src ? user.src : dbwishlist?.src
             
-            const wishlist = await db.collection("wishlists").updateOne({_id: ObjectId(`${id}`)}, {$set: { title: user.title || dbwishlist?.title, price, quantity, src }})
+            const wishlist = await wishlistModel.updateOne({_id: id}, {$set: { title: user.title || dbwishlist?.title, price, quantity, src }})
             return res.json(wishlist);
         }
         
         else if(req.method === "DELETE"){
             const { id } = req.body;
-            const wishlist = await db.collection("wishlists").deleteOne({_id: ObjectId(`${id}`)});
+            const wishlist = await wishlistModel.deleteOne({_id: id});
             return res.send(wishlist);
         }
     } catch (e:any) {
@@ -45,3 +48,11 @@ export default async (req:any, res:any) => {
     }
 };
 
+
+// function getUserWithPosts(username){
+//     return User.findOne({ username: username })
+//       .populate('posts').exec((err, posts) => {
+//         console.log("Populated User " + posts);
+//       })
+//   }
+  

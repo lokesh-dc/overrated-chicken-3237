@@ -55,13 +55,6 @@ function Cart() {
 
 
 
- useEffect(()=>{
-    
-        handlepurchase()
-    
-    
- },[])
-
   // change1 is used to manage increase in quantity
   function change1(el, i) {
     if (Number(cartitem[i].quantity) < 9) {
@@ -116,44 +109,76 @@ function Cart() {
     }
   }
 
-  const handlepurchase = () => {
-    // e.preventDefault();
-    let amount = Number(10)
-    if (amount === "") {
-        alert("Please enter amount");
+  const nameRef:any = useRef<any>(null)
+  const emailRef = useRef(null)
+  const contactRef = useRef(null)
+  const amountRef = useRef(null)
+
+  const makePayment = async (name:string, email:string, contact:number, amount:number) => {
+    console.log("here...", name);
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      alert("Razorpay SDK Failed to load");
+      return;
     }
-    else {
-        var options = {
-            key: "rzp_live_GD1u84vAqpHA5x",
-            key_secret: "cLBmDfPvJdwZtl15oaDZInri",
-            amount: amount * 100,
-            currenty: "INR",
-            name: "Test Razorpay",
-            description: "Razorpay project",
-            handler: function (response) {
-                alert(response.razorpay_payment_id);
-            },
-            prefill: {
-                name: "",
-                email: "",
-                contact: ""
-            },
-            notes: {
-                address: "",
-            },
-            theme: {
-                color: "#000"
-            }
-        };
-       
-            // Client-side-only code
-            var pay = new Razorpay(options);
-            pay.open();
-        
-       
-    }
-}
-  
+
+    // Make API call to the serverless API
+    const data = await fetch("/api/razorpay", { 
+      method: "POST", 
+      body: JSON.stringify({
+        name,
+        email, 
+        contact,
+        amount
+      })
+    }).then((t) =>
+      t.json()
+    );
+    // const data = axios.post('/api/razorpay', {
+    //   name, email, contact, amount
+    // }).then((res) => console.log(res, "DATA"))
+    console.log(data, "DATA2");
+    var options = {
+      key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
+      name: "Mohalla Mart Pvt Ltd",
+      currency: data.currency,
+      amount: data.amount,
+      order_id: data.id,
+      description: "Thankyou for your patronage",
+      image: "https://manuarora.in/logo.png",
+      handler: function (response:any) {
+        // Validate payment at server - using webhooks is a better idea.
+        alert(`Payment Id: ${response.razorpay_payment_id}`);
+        alert(`Order Id: ${response.razorpay_order_id}`);
+        alert(`Razorpay Signature${response.razorpay_signature}`);
+      },
+      prefill: {
+        name: {name},
+        email: {email},
+        contact: {contact},
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      // document.body.appendChild(script);
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
  
   
 
@@ -249,7 +274,7 @@ function Cart() {
           <span className="cart-total-price">Rs:{total}</span>
         </div>
         <button
-          onClick={()=>setchange(true)}
+          onClick={()=>makePayment("testname", "aaryansinha16@gmail.com", 980988976, 899)}
           className="btn btn-primary btn-purchase"
           type="button"
         >

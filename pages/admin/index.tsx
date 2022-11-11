@@ -19,7 +19,7 @@ const Admin = () => {
             minH="100vh"
             defaultIndex={0}
             bg="whitesmoke"
-            isLazy='true'
+            isLazy={true}
             overflow='hidden'
          >
             <TabList

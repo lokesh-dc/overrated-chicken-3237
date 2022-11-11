@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import clientPromise from '../lib/mongodb'
+// import clientPromise from '../lib/mongodb'
 import { InferGetServerSidePropsType } from 'next'
 
 import { Grid, Img } from "@chakra-ui/react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Homepage from './Homepage/Homepage';
+import Homepage from '../components/Homepage/Homepage';
 
 
 // export async function getServerSideProps(context) {

@@ -23,35 +23,41 @@ export default function Popular() {
   const side = useBreakpointValue({ base: "30%", md: "40px" });
 
   const cards = [
+    
     {
-      title: "Design Projects 1",
+      title3: "Woman's Fashion",
+      title31:"15% OFF upto ₹200",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://wallpaperaccess.com/full/2267830.jpg",
     },
     {
-      title: "Girls Top",
+      title4: "Multivitamins Tablets",
+      title41:"15% OFF upto ₹200",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://c8.alamy.com/comp/A6409H/rows-of-vitamin-pills-and-food-supplements-in-health-store-england-A6409H.jpg",
     },
     {
-      title: "Design Projects 3",
+      title2: "Kid's wear",
+      title21: "15% OFF upto ₹200",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://img.freepik.com/free-photo/cute-stylish-children_155003-8330.jpg?w=2000",
     },
     {
-      title: "Design Projects 3",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        "https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1200&format=pjpg&exif=1&iptc=1",
-    },
-    {
-      title: "Design Projects 3",
+      title: "Woman's Fashion",
+      title1:"15% OFF upto ₹200",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
       image:
         "https://wallpaperaccess.com/full/1595330.jpg",
+    },
+    {
+      title: "Kichen Collections",
+      title1:"15% OFF upto ₹200",
+      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      image:
+        "https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1200&format=pjpg&exif=1&iptc=1",
     },
   ];
 
@@ -109,15 +115,25 @@ export default function Popular() {
       {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
-          <Box key={index} position="relative">
-            
-            <Image
-              src={card.image}
-              w={{ base: "80%", md: "60%", lg: "60%" }}
-              m="auto"
-            />
-            
-          </Box>
+           <>
+         
+           <Box key={index} position="relative">
+           <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
+           <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="white" >{card.title1}</Text>
+           <Text position="absolute" fontSize='40px' ml="50%" mt="8%" color="white" >{card.title3}</Text>
+           <Text position="absolute" fontSize='20px' ml="50%" mt="6%" color="white" >{card.title31}</Text>
+           <Text position="absolute" fontSize='40px' ml="43%" mt="1%" color="Red" >{card.title2}</Text>
+           <Text position="absolute" fontSize='20px' ml="43%" mt="6%" color="Red" >{card.title21}</Text>
+           <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="#6366F1" >{card.title4}</Text>
+           <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="#6366F1" >{card.title41}</Text>
+             <Image
+               src={card.image}
+               w={{ base: "80%", md: "60%", lg: "60%" }}
+               m="auto"
+             />
+             
+           </Box>
+           </>
         ))}
       </Slider>
     </Box>

@@ -1,3 +1,4 @@
+import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 import {
     Flex,
     Circle,
@@ -12,6 +13,7 @@ import {
     useToast,
   } from '@chakra-ui/react';
 import Link from 'next/link';
+import { AiOutlineHeart } from 'react-icons/ai';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
   
@@ -59,11 +61,13 @@ import Link from 'next/link';
     price,
     rating,
     number_of_reviews,
-    description
+    description,
+    currPage
+
   }:any) {
 
     // const {handleAddCart} = useContext(AppContext)
-    
+    console.log(currPage, 'this is current page')
     return (
       <Flex alignItems="center" justifyContent="center" bgColor='rgba(255, 255, 255, .15)' _hover={{bgColor:'rgba(255, 255, 255, .55)'}} style={{backdropFilter: 'blur(7px)'}}
          rounded='xl' shadow='lg'
@@ -90,7 +94,28 @@ import Link from 'next/link';
             roundedTop="lg"
             />
           </Link>
-  
+          {
+            currPage == 'wishlist' ?
+              <Tooltip
+              label="Remove"
+              bg="white"
+              placement={'bottom'}
+              color={'gray.800'}
+              fontSize={'0.8em'}>
+                <DeleteIcon color='red' cursor='pointer' position='absolute' top='3%' left="87%" background='white' fontSize='26px'  padding="5px" borderRadius='13px'/>
+              </Tooltip>
+              :
+              <Tooltip
+              label="Add to Favourite"
+              bg="white"
+              placement={'bottom'}
+              color={'gray.800'}
+              fontSize={'0.8em'}>
+                <AiOutlineHeart style={{color:'red' ,cursor:'pointer' ,position:'absolute', top:'3%', left:"87%", background:'white' , fontSize:'26px',  padding:"5px" ,borderRadius:'13px'}} />
+              </Tooltip>
+
+          }
+
           <Box p="6">
             <Box display="flex" alignItems="baseline">
               {available && (

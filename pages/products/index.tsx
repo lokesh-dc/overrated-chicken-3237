@@ -109,7 +109,7 @@ export default function Products() {
                     </Box>
 
                     <Box  w={{base:'95%', xl:'78%'}} >
-                        <MidSec data={data} page={page} setPage={setPage}/>
+                        <MidSec data={data} page={page} setPage={setPage} currPage="products"/>
                     </Box>
 
                 </Flex>

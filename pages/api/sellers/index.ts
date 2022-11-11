@@ -30,12 +30,22 @@ export default async (req:any, res:any) => {
                 }
             }
             else if(req.method==="PATCH"){
-                if(logged_User?.role==="Seller" || logged_User?.role==="Admin" ){
+                if(logged_User?.role==="Seller" || logged_User?.role==="Admin"){
                     let update = req.body;
+                    console.log(update, logged_User )
                     let s = await seller.updateOne({userId: id}, update );
+                    return res.send(s)
                     return res.send("Updated Successfully");
                 }else{
                     return res.send("Unauuthorised access");
+                }
+            }
+            else if(req.method==="DELETE"){
+                if(logged_User?.role==="Seller"){
+                    let d = await seller.deleteOne({userId: id});
+                    return res.send(d);
+                }else{
+                    return res.send("Unauthorised Access");
                 }
             }
         } catch (e:any) {

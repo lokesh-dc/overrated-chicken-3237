@@ -129,7 +129,7 @@ const review =[
 
 export default function WithSpeechBubbles() {
   return (
-    <Box maxH={"100vh"}>
+    <Box maxH={"100vh"} overflow="scroll">
       <AddReview/>
       <Container  maxW={'8xl'} py={16} as={Stack} spacing={12} >
         <SimpleGrid

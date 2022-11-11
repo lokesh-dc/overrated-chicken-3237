@@ -1,6 +1,6 @@
 
 import { connect } from "../../../lib/dbConnect";
-import user from "../../../models/users.model";
+import user from "../../../models/user.model";
 
 export default async (req:any, res:any) => {
     try {

@@ -1,7 +1,7 @@
-import userModel from "./models/users.model"
-import cartModel from "./models/carts.model"
-import productModel from "./models/carts.model"
-import wishlistModel from "./models/carts.model"
+import userModel from "./models/user.model"
+import cartModel from "./models/cart.model"
+import productModel from "./models/cart.model"
+import wishlistModel from "./models/cart.model"
 
 
 ex

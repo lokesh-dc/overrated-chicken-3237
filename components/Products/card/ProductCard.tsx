@@ -73,19 +73,9 @@ import { AiOutlineHeart } from 'react-icons/ai';
          rounded='xl' shadow='lg'
       >
         <Box
-          // bg={useColorModeValue('white', 'gray.800')}
           maxW="sm"
-          // borderWidth="1px"
-          // rounded="lg"
-          // shadow="lg"
-          // _hover={{boxShadow: '2xl'}}
+          h={{base:'auto', lg:'500px'}}
           >
-          {/* {available && (
-            <Circle
-            size="10px"
-            bg="red.200"
-            />
-            )} */}
   
           <Link href={`/products/${id}`}>
           <Image
@@ -139,7 +129,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'0.8em'}>
-                <IconButton aria-label='add-to-cart' variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart height={9} width={9} alignSelf={'center'}/>}/>
+                <IconButton aria-label='add-to-cart' variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart />}/>
               </Tooltip>
             </Flex>
   

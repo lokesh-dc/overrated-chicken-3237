@@ -11,9 +11,9 @@ const TopSec = () => {
 
     const [menuItem, setMenuItem] = useState('All Departments')
   return (
-    <VStack w='100%' h='100px' bg='orange' align='center' justify='center' zIndex='2'>
+    // <VStack w='100%' h='100px' bg='orange' align='center' justify='center' zIndex='2'>
 
-        <HStack size='md' w={{base:'80%', md:'50%'}} borderRadius='md' py={{base:3, md:3}} px={5} mt='100px' boxShadow='2xl'
+        <HStack display={{base:'none', sm:'flex'}} size='md' w={{base:'80%', md:'50%'}} borderRadius='md' py={{base:3, md:2}} px={5}  boxShadow='lg'
         bgColor='rgba(255, 255, 255, .65)' style={{backdropFilter: 'blur(5px)'}} _hover={{bgColor:'rgba(255, 255, 255, .95)'}}
         >
 
@@ -38,7 +38,7 @@ const TopSec = () => {
             <Box display={{base:'none', md:'block'}} >
 
                 <Menu closeOnSelect={true} 
-                isLazy='true'
+                isLazy
                 >
                     {({ isOpen }) => (
                         <>
@@ -73,7 +73,7 @@ const TopSec = () => {
 
         </HStack>
 
-    </VStack>
+    // {/* </VStack> */}
   )
 }
 

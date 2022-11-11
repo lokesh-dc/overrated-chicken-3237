@@ -79,10 +79,10 @@ const SingleProductPage = () => {
               </Text>
               <RadioSizeCard />
               <Text fontSize={"1xl"} fontWeight="500" marginTop={"30px"}>
-                Quantity
+                Choose Color
               </Text>
               <Flex
-                maxWidth="140px"
+                maxWidth="350px"
                 marginTop={"10px"}
                 justifyContent={"center"}
                 gap="15px"
@@ -93,11 +93,13 @@ const SingleProductPage = () => {
                 }
                 alignItems={"center"}
               >
-                <Button borderRadius={"50%"}>-</Button>
-                <Text>1</Text>
-                <Button borderRadius={"50%"}>+</Button>
+                <Button borderRadius={"50%"} colorScheme="blue" ></Button>
+                <Button borderRadius={"50%"} bg="black"></Button>
+                <Button borderRadius={"50%"} colorScheme="pink"></Button>
+                <Button borderRadius={"50%"} bg="grey"></Button>
+                <Button borderRadius={"50%"} colorScheme="orange"></Button>
               </Flex>
-              <VStack w="80%" m="auto" marginTop={"30px"} gap="10px">
+              <VStack w="80%" m="auto" marginTop={"60px"} gap="10px">
                 <Button w="100%" color="white" bg={"#2a977d"}>
                   {" "}
                   Buy Now

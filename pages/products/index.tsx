@@ -10,8 +10,13 @@ import TopSec from "../../components/Products/TopSec";
 import bgSvg from '../../Resources/blob-scene-haikei.svg'
 import bubbles from '../../Resources/circle-scatter-haikei.svg'
 import blob1 from '../../Resources/blob1.svg'
+import blob2 from '../../Resources/blob2.svg'
+import blob3 from '../../Resources/blob3.svg'
+
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import axios from "axios";
 
 export default function Products() {
 
@@ -22,11 +27,8 @@ export default function Products() {
 
     useEffect(() => {
         setLoading(true)
-        // getProducts(page, 20, filter).then((res) => {
-        //     setData(res.data)
-        //     setLoading(false)
-        // })
-        // .catch((err) => setLoading(false))
+        axios.get(`https://shop-api-gqqn.onrender.com/products`).then((res:any) => setData(res.data))
+        .catch((err) => setLoading(false))
     }, [page, filter])
  
     const getProductByPrice = (from:any, to:any) => {
@@ -87,7 +89,10 @@ export default function Products() {
 
 
             {/* //? Here starts the code for Product's grid & Filters */}
-            <Image src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' />
+            <Image display={{base:'none', md:'block'}} src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' />
+            <Image display={{base:'none', md:'block'}} src={blob2.src} w='400px' position='fixed' top='40%' left='80%' zIndex='-10' />
+            <Image display={{base:'none', md:'block'}} src={blob3.src} w='400px' position='fixed' top='20%' left='50%' zIndex='-10' />
+            <Image display={{base:'none', md:'block'}} src='https://animoto.com/static/TealDots-212c4a91665ce0cc624cdf92514a34d6.svg' w='180px' position='fixed' top='20%' left='0%' zIndex='-10' />
             <Box w='100%' 
               py={3}
               backgroundSize='cover'
@@ -97,8 +102,8 @@ export default function Products() {
 
                 <Flex m='auto' mt='30px' mb='30px' w='80%' justify={{base:'center', lg:'space-between'}}  >
 
-                    <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='50px' p={2}
-                        bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
+                    <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
+                        bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
                     >
                         <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
                     </Box>

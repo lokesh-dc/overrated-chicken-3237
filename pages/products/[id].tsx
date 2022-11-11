@@ -12,6 +12,7 @@ import { RadioSizeCard } from "../../components/SingleProduct/RadioCard";
 import { AiOutlineStar } from "react-icons/ai";
 import { SlBag } from "react-icons/sl";
 import TabsSection from "../../components/SingleProduct/Tabs";
+import { BsStarFill } from "react-icons/bs";
 
 const SingleProductPage = () => {
   return (
@@ -43,16 +44,15 @@ const SingleProductPage = () => {
           <Text fontSize="3xl" color={"black"} fontWeight="500">
             Essential Men's Regular-Fit-Long Sleeve Oxford Shirt
           </Text>
-          <Box display="flex" mt="2" alignItems="center">
+          
+          <Box display="flex" mt="2" alignItems="center" gap="5px">
             {Array(5)
               .fill("")
               .map((_, i) => (
-                <AiOutlineStar key={i} color={i < 4 ? "#2a977d" : "gray.300"} />
+                <BsStarFill fontSize={"17px"} key={i} color={i < 4 ? "orange" : "gray"} />
               ))}
-            <Box as="span" ml="2" color="gray.600" fontSize="sm">
-              4+ Rating
-            </Box>
           </Box>
+          <Text fontSize="3xl" color={"black"} fontWeight="500">$ 433</Text>
           <Box marginTop={"20px"}>
             <Box marginTop={"20px"}>
               <Text fontSize={"1xl"} fontWeight="500">

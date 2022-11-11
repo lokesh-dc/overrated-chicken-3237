@@ -1,8 +1,10 @@
-import { Box, Button, Flex, HStack, SimpleGrid, Stat, StatArrow, StatHelpText, StatLabel, StatNumber, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, HStack, IconButton, SimpleGrid, Stat, StatArrow, StatHelpText, StatLabel, StatNumber, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { GiCash } from 'react-icons/gi'
 import { FaGlobeAsia, FaWallet } from 'react-icons/fa'
+import { FiDelete } from 'react-icons/fi'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const Dashboard = () => {
   return (
@@ -75,48 +77,41 @@ const Dashboard = () => {
 
         <HStack justify='space-between' mt='50px'>
             <Box color='black' w='48%' h='450px' borderRadius='3xl' py={6} px={5} 
-            bgColor='rgba(255, 255, 255, .20)' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg'
+            bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg'
             _hover={{bgColor:'rgba(230, 230, 230, .20)', boxShadow:'none'}}
             // overflowY='scroll'
             >
-                <Text fontSize='22px'>WishList</Text>
+                <Text fontSize='22px' fontWeight='semibold' color='messenger.900'>WishList</Text>
                 <VStack 
+                mt='15px'
                 // overflowY='scroll'
                 >
-                    <HStack>
-                        <Text>Product Name</Text>
-                        <Button>Remove</Button>
-                        <Button>300Rs</Button>
-                    </HStack>
-                    <HStack>
-                        <Text>Product Name</Text>
-                        <Button>Remove</Button>
-                        <Button>300Rs</Button>
-                    </HStack>
-                    <HStack>
-                        <Text>Product Name</Text>
-                        <Button>Remove</Button>
-                        <Button>300Rs</Button>
-                    </HStack>
-                    <HStack>
-                        <Text>Product Name</Text>
-                        <Button>Remove</Button>
-                        <Button>300Rs</Button>
+                    <HStack fontFamily='sans-serif' color='purple' w='90%' justify='space-between' py={2} px={4} bg='white' borderRadius='2xl' backgroundBlendMode='darken'>
+                        <Flex alignItems='center' justifyContent='flex-start' w='60%' gap={2}>
+                            <Avatar src='https://rukminim1.flixcart.com/image/312/312/kuwzssw0/television/u/i/r/u-series-65-u1s-65uc1a00-oneplus-original-imag7xtnmnkyz7je.jpeg?q=70' width='30px' height='30px'/>
+                            <Text fontSize='18px'>Product Name</Text>
+                        </Flex>
+                        <Text fontSize='18px' w='20%'>300₹</Text>
+                        <IconButton colorScheme='red' size='sm' aria-label='icon' icon={<DeleteIcon/>} w='40px'/>
                     </HStack>
                 </VStack>
             </Box>
 
+
             <Box w='48%' h='450px' bg='white' borderRadius='3xl' py={6} px={5}
-             bgColor='rgba(255, 255, 255, .20)' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg'
+             bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg'
              _hover={{bgColor:'rgba(230, 230, 230, .20)', boxShadow:'none'}}
              >
-                <Text fontSize='22px'>Cart</Text>
-                <VStack>
-                    <HStack>
-                        <Text>Product Name</Text>
-                        <Button>Remove</Button>
-                        <Button>300Rs</Button>
-                    </HStack>
+                <Text fontSize='22px' fontWeight='semibold' color='messenger.900'>Cart</Text>
+                <VStack mt='15px'>
+                        <HStack fontFamily='sans-serif' color='purple' w='90%' justify='space-between' py={2} px={4} bg='white' borderRadius='2xl' backgroundBlendMode='darken'>
+                            <Flex alignItems='center' justifyContent='flex-start' w='60%' gap={2}>
+                                <Avatar src='https://rukminim1.flixcart.com/image/312/312/kuwzssw0/television/u/i/r/u-series-65-u1s-65uc1a00-oneplus-original-imag7xtnmnkyz7je.jpeg?q=70' width='30px' height='30px'/>
+                                <Text fontSize='18px'>Product Name</Text>
+                            </Flex>
+                            <Text fontSize='18px' w='20%'>300₹</Text>
+                            <IconButton colorScheme='red' size='sm' aria-label='icon' icon={<DeleteIcon/>} w='40px'/>
+                        </HStack>
                 </VStack>
             </Box>
         </HStack>

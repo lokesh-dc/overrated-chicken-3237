@@ -19,7 +19,7 @@ const Admin = () => {
             minH="100vh"
             defaultIndex={0}
             bg="whitesmoke"
-            isLazy='true'
+            isLazy={true}
             overflow='hidden'
          >
             <TabList
@@ -188,7 +188,7 @@ const Admin = () => {
 
                //* FOR ALL USERS
                <TabPanel >
-                    <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
+                    <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
                         <Text fontSize='4xl' color='white'>Users</Text>
                         <AllTable title="User" roleHeading="role" role="Admin" amount="2500" totalP="Total Purchases(in Rs)" user='Aaryan Sinha' email="aaryansinha16@gmail.com"/>
                     </Box>
@@ -204,7 +204,7 @@ const Admin = () => {
 
                //* FOR ALL PRODUCTS
                <TabPanel>
-                  <Box w='100%' p={6} h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
+                  <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
                         <Text fontSize='4xl' color='white'>Products</Text>
                         <AllTable title="Products" roleHeading="Brand" role="Addidas" amount="4.5" totalP="Ratings" user='Sneakers' />
                   </Box>

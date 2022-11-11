@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,10 +13,14 @@ import { AiOutlineStar } from "react-icons/ai";
 import { SlBag } from "react-icons/sl";
 import TabsSection from "../../components/SingleProduct/Tabs";
 import { BsStarFill } from "react-icons/bs";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const SingleProductPage = () => {
+
   return (
     <>
+    <Navbar/>
       <SimpleGrid
         columns={[1, 1, 2]}
         maxWidth="90%"
@@ -44,12 +48,12 @@ const SingleProductPage = () => {
           <Text fontSize="3xl" color={"black"} fontWeight="500">
             Essential Men's Regular-Fit-Long Sleeve Oxford Shirt
           </Text>
-          
           <Box display="flex" mt="2" alignItems="center" gap="5px">
             {Array(5)
               .fill("")
-              .map((_, i) => (
-                <BsStarFill fontSize={"17px"} key={i} color={i < 4 ? "orange" : "gray"} />
+              .map((_, i) => 
+              (
+                <BsStarFill fontSize={"17px"} key={i}  color={i < 4 ? "orange": "grey"} />
               ))}
           </Box>
           <Text fontSize="3xl" color={"black"} fontWeight="500">$ 433</Text>
@@ -75,10 +79,10 @@ const SingleProductPage = () => {
               </Text>
               <RadioSizeCard />
               <Text fontSize={"1xl"} fontWeight="500" marginTop={"30px"}>
-                Quantity
+                Choose Color
               </Text>
               <Flex
-                maxWidth="140px"
+                maxWidth="350px"
                 marginTop={"10px"}
                 justifyContent={"center"}
                 gap="15px"
@@ -89,11 +93,13 @@ const SingleProductPage = () => {
                 }
                 alignItems={"center"}
               >
-                <Button borderRadius={"50%"}>-</Button>
-                <Text>1</Text>
-                <Button borderRadius={"50%"}>+</Button>
+                <Button borderRadius={"50%"} colorScheme="blue" ></Button>
+                <Button borderRadius={"50%"} bg="black"></Button>
+                <Button borderRadius={"50%"} colorScheme="pink"></Button>
+                <Button borderRadius={"50%"} bg="grey"></Button>
+                <Button borderRadius={"50%"} colorScheme="orange"></Button>
               </Flex>
-              <VStack w="80%" m="auto" marginTop={"30px"} gap="10px">
+              <VStack w="80%" m="auto" marginTop={"60px"} gap="10px">
                 <Button w="100%" color="white" bg={"#2a977d"}>
                   {" "}
                   Buy Now
@@ -112,6 +118,7 @@ const SingleProductPage = () => {
         </Box>
       </SimpleGrid>
         <TabsSection/>
+      <Footer/>
     </>
   );
 };

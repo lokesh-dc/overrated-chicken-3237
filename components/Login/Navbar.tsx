@@ -8,9 +8,9 @@ import CompanyName from "../../Resources/logo-web.png"
 
 export default function Navbar(){
     return(
-        <Grid  alignItems="center" h="7vh">
+        <Grid  h="7vh">
             <Link href="/">
-                <Flex gap="5px" alignItems="center">
+                <Flex gap="5px" alignItems="center" p="10px 30px">
                     <Img src={logo.src} w="60px" h="60px" />
                     <Img src={CompanyName.src}  h="60px" />
                     {/* <Text className={style.logo}> Mohollamart.com </Text> */}

@@ -14,7 +14,7 @@
     letter-spacing: 1px;
 }
 
-.form >div> svg{
+.form >div:first-of-type> svg{
     border: 1px solid;
     width: 30px;
     height: 30px;
@@ -24,20 +24,31 @@
     margin: auto;
 }
 .form svg:hover{
-    background-color: grey;
-    color: white;
+    color: black;
 }
 
 .head{
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 30px;
+    color: grey;
 }
 
 .error{
     border: 1px solid rgb(250, 175, 175);;
-    background-color: rgba(250, 175, 175, 0.482);
+    background-color: rgba(250, 175, 175, 0.11);
     color: red;
-    padding: 10px;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error svg{
+    height: 25px;
+    width: 25px;
+}
+
+.error svg:hover{
+    color: red;
 }

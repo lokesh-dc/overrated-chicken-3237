@@ -14,6 +14,10 @@
     min-height: 50px;
 }
 
+.footer button{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 .footer > div:first-child{
     width: 75%;
@@ -22,13 +26,12 @@
 }
 
 
-.footer > div:nth-child(2) > div > p:first-child{
+.footer > div:nth-child(2) > div  p:first-child{
     font-size: 2rem;
     color: rgba(128, 128, 128, 0.767);
 }
 
 .footer > div:nth-child(2) > div{
-    align-items: center;
     justify-content: center;
 }
 
@@ -36,13 +39,13 @@
     width: 100px;
 }
 
-.footer > div:nth-child(2) > div > p:not(:first-child){
+.footer > div:nth-child(2) > div  p:not(:first-child){
     padding-left: 10px;
     font-size: 1.2rem;
     color: rgb(201, 201, 201);
 }
 
-.footer > div:nth-child(2) > div > p:not(:first-child):hover,
+.footer > div:nth-child(2) > div  p:not(:first-child):hover,
 .footer svg:hover {
     color : rgb(27, 118, 236);
     cursor: pointer;

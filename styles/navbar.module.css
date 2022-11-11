@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap');
 
 .logo{
-    font-family: 'Pathway Gothic One', sans-serif;
-    font-size: 2rem;
+    font-family: 'Arvo', serif;
+    font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 700;
 }
 
 .navbar{
@@ -22,9 +23,23 @@
     border-radius: 0;
 }    
 
-.navbar select{
+.navbar > div:nth-child(2){
+    /* background-color: rgba(128, 128, 128, 0.31); */
+    height: 80%;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+/* .navbar select{
     background-color: rgba(128, 128, 128, 0.253);
-}    
+}     */
+
+.navbar select,
+.navbar input{
+    background-color: transparent;
+    height: 100%;
+}
 
 .navbar svg{
     width:  30px;
@@ -37,5 +52,6 @@
 .navbar button{
     background-color: black;
     border: 1px solid black;
+    height: 100%;
 }    
 

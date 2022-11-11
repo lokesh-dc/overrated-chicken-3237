@@ -13,11 +13,10 @@ export default async (req:any, res:any) => {
                 let userCheck = await db.collection("users").findOne({ email, password});
                 if(userCheck){
                     let id = userCheck._id;
-                        // let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
-                        // res.send(token)  
-                    res.send(id)
+                        let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
+                        return res.send(token)  
             }else{
-                res.send("not found")
+                return res.send("not found")
             }
             }
         }
@@ -27,3 +26,4 @@ export default async (req:any, res:any) => {
     }
 };
 
+// mongodb+srv://lokeshdc:lokeshcd@martdatabase.9uiehdp.mongodb.net/martDatabase

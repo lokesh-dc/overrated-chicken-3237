@@ -12,3 +12,8 @@ const productsSchema = new Schema({
 
 export default mongoose.models.product || mongoose.model("product",productsSchema)
 
+// product: {
+//     type: mongoose.Schema.ObjectId,
+//     ref: 'Product', <-- Should be same as modelName
+//     required: [true, 'Cart must belong to a product']
+// }

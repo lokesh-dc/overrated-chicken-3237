@@ -10,7 +10,6 @@ import useForm from "../Hooks/useForm"
 import style from "../styles/auth.module.css"
 
 // Images import 
-import bg from "../Resources/b.png"
 import { useState } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"

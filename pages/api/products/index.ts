@@ -1,13 +1,11 @@
-import clientPromise from "../../../lib/mongodb";
 
 import { connect }  from "../../../lib/dbConnect";
 
-import productsModel from "../../../models/products.model";
+import productsModel from "../../../models/product.model";
 
 
 export default async (req:any, res:any) => {
     try {
-        const client = await clientPromise;
         await connect();
         if(req.method==="GET"){
             const products = await productsModel.find()

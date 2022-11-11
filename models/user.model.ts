@@ -6,7 +6,7 @@ const usersSchema = new Schema({
     lastName : String,
     email : {type : String , unique : true , required : true},
     password : {type : String ,  required : true},
-    role : {type: String ,  enum : ["Seller", "Buyer", "Admin"]}
+    role : {type: String ,  enum : ["Seller", "Buyer", "Admin"] , default: "Buyer"}
 })
 
 const user = mongoose.models.user || model( "user" , usersSchema );

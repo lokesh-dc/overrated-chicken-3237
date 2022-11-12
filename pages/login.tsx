@@ -42,7 +42,6 @@ export default function signup({props}:any){
 
 
     const { creds, execute} = useForm();
-    const [formError, setFormError] = useState("");
 
     const firstRef:any = useRef(null)
 
@@ -53,17 +52,22 @@ export default function signup({props}:any){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
-        creds.password = firstRef.current.value
         console.log(creds, firstRef.current.value)
     }
 
     const handleSubmit = () =>{
-        // alert(creds.password);
+        toast({
+            title: 'Signing you in.',
+            description: "Checking your credentials",
+            status: 'info',
+            duration: 9000,
+            isClosable: true,
+        })
         axios.post("/api/users/login", creds).then((res) => {
             console.log(res)
             toast({
                 title: 'Login Successful',
-                description: "Guess what!, you have successfully logged in.",
+                description: "Hooray! You have successfully logged in.",
                 status: 'success',
                 duration: 9000,
                 isClosable: true,
@@ -104,15 +108,11 @@ export default function signup({props}:any){
                     position="relative"
                     
                 >
-                    <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text>
+                    {/* <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text> */}
                     <Text className={style.head}>Sign In</Text>
                     <Input placeholder="example@email.com" name="email" onChange={handleChange}/>
                     <PasswordInput firstRef={firstRef} handleChange={handleChange}/>
-                    {
-                        formError!=="" &&
-                        <Errordiv formError={formError}/>
-                    }
-                    <Button colorScheme="transparent" color="black" onClick={handleSubmit}>Signup</Button>
+                    <Button colorScheme="transparent" color="black" onClick={handleSubmit}>Sign in</Button>
                     <Flex justifyContent="space-between">
                         <Checkbox size='lg' defaultChecked>
                             Remember me

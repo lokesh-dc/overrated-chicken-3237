@@ -1,4 +1,3 @@
-
 import { serialize } from "cookie";
 import { connect } from "../../../lib/dbConnect";
 import user from "../../../models/user.model";
@@ -15,20 +14,18 @@ export default async (req:any, res:any) => {
             if(userCheck){
                 let id = userCheck._id;
                 let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
+                let refreshToken = jwt.sign({email, id},"refreshbvhvbfhvfbhfvkbvfdkdfbdfhbvdfbvdf");
 
-                const serialised = serialize("mohallaMartJwt", token, {
+                const cookieToken = serialize("mohallaMartJwt", JSON.stringify({token, refreshToken}), {
                     httpOnly: true,
                     secure: "development" !== "development",
                     sameSite: "strict",
-                    maxAge: 60*60*12, //12hours
+                    maxAge: 60*60*12, // 12 Hours
                     path: "/",
                   });
+                res.setHeader("Set-Cookie", cookieToken);
 
-                res.setHeader("Set-Cookie", serialised);
-
-                // res.setHeader('Location', req.headers.referer || '/');
-
-                return res.send({message:"Succesfully Logged in", token})  
+                return res.send({message:"Succesfully Logged in", token, refreshToken})  
             }else{
                 return res.status(401).send("Invalid Credentials")
             }

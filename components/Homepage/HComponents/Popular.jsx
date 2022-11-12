@@ -117,8 +117,6 @@ export default function Popular({tit}) {
       {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
-           <>
-         
            <Box key={index} position="relative">
            {/* <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
            <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="white" >{card.title1}</Text>
@@ -136,7 +134,6 @@ export default function Popular({tit}) {
              />
              
            </Box>
-           </>
         ))}
       </Slider>
     </Box>

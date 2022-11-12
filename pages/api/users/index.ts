@@ -1,4 +1,3 @@
-
 import { connect } from "../../../lib/dbConnect";
 import userModel from "../../../models/user.model";
 
@@ -25,11 +24,11 @@ export default async (req:any, res:any) => {
                 return res.status(401).send("Missing permissions");
             }
         }
-        else if(req.method==="POST"){
+        else if(req.method==="PATCH"){
             let updated = req.body;
             const updateStatus = await userModel.updateOne({id}, updated);
                 if(updateStatus.modifiedCount>0){
-                    return res.send("Brand details updated successfully.")
+                    return res.send("User details updated successfully.")
                 }
                 return res.send("Could't update details or already been updated");
         }

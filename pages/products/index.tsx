@@ -173,3 +173,4 @@ export async function getServerSideProps() {
       props: {props: resp.data}, // will be passed to the page component as props
     }
   }
+

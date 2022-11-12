@@ -11,6 +11,7 @@ import {
     Tooltip,
     IconButton,
     useToast,
+    Text,
   } from '@chakra-ui/react';
 import Link from 'next/link';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -53,34 +54,41 @@ import { AiOutlineHeart } from 'react-icons/ai';
 
   
   function ProductCard({
-    id,
-    image,
-    name,
+    _id,
+    src,
+    title,
     brand,
     available,
     price,
-    rating,
+    ratings,
     number_of_reviews,
     description,
-    currPage
-
+    quantity,
+    currPage,
+    handleWishlist,
+    handleDelWishlist
   }:any) {
 
+    title= title.slice(0,25)
     // const {handleAddCart} = useContext(AppContext)
     console.log(currPage, 'this is current page')
+
     return (
       <Flex alignItems="center" justifyContent="center" bgColor='rgba(255, 255, 255, .15)' _hover={{bgColor:'rgba(255, 255, 255, .55)'}} style={{backdropFilter: 'blur(7px)'}}
-         rounded='xl' shadow='lg'
+         shadow='lg' rounded='xl'
       >
         <Box
           maxW="sm"
           h={{base:'auto', lg:'500px'}}
+          // mixBlendMode='multiply'
           >
   
-          <Link href={`/products/${id}`}>
+          <Link href={`/products/${_id}`}>
           <Image
-            src="https://burst.shopifycdn.com/photos/set-of-custom-enamel-pins.jpg?width=373&format=pjpg&exif=1&iptc=1"
-            alt={`Picture of ${name}`}
+            mixBlendMode='multiply'
+            // borderRadius='full'
+            src={src}
+            alt={`Picture of ${title}...`}
             roundedTop="lg"
             />
           </Link>
@@ -92,7 +100,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
               placement={'bottom'}
               color={'gray.800'}
               fontSize={'0.8em'}>
-                <DeleteIcon color='red' cursor='pointer' position='absolute' top='3%' left="87%" background='white' fontSize='26px'  padding="5px" borderRadius='13px'/>
+                <DeleteIcon onClick={() => handleDelWishlist(_id)} color='red' cursor='pointer' position='absolute' top='3%' left="87%" background='white' fontSize='26px'  padding="5px" borderRadius='13px'/>
               </Tooltip>
               :
               <Tooltip
@@ -101,7 +109,10 @@ import { AiOutlineHeart } from 'react-icons/ai';
               placement={'bottom'}
               color={'gray.800'}
               fontSize={'0.8em'}>
-                <AiOutlineHeart style={{color:'red' ,cursor:'pointer' ,position:'absolute', top:'3%', left:"87%", background:'white' , fontSize:'26px',  padding:"5px" ,borderRadius:'13px'}} />
+                <Box onClick={() => handleWishlist(_id)} cursor='pointer' position='absolute' top='3%' left="87%" background='white'  fontSize='20px'  padding="5px" borderRadius='13px'
+                _hover={{bg:'pink'}}>
+                  <AiOutlineHeart style={{color:'red'}} />
+                </Box>
               </Tooltip>
 
           }
@@ -121,7 +132,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
                 as="h4"
                 lineHeight="tight"
                 >
-                {name}
+                {title}...
               </Box>
               <Tooltip
                 label="Add to cart"
@@ -134,7 +145,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
             </Flex>
   
             <Flex justifyContent="space-between" alignContent="center">
-              <Rating rating={rating} numReviews={number_of_reviews} />
+              <Rating rating={ratings} numReviews={quantity} />
               <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
                 <Box as="span" color={'gray.600'} fontSize="lg">
                   $

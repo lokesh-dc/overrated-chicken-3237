@@ -10,7 +10,8 @@ export default async (req:any, res:any) => {
         if(req.method==="GET"){
             let id = req.query.id;
             const products = await productsModel.find({_id: id})
-            return res.send(products);
+            // console.log(products[0], "PRODUCTS")
+            return res.send(products[0]);
         }else{
             return res.status(401).send("Operation not allowed");
         }

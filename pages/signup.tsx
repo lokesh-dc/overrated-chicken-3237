@@ -13,6 +13,7 @@ import style from "../styles/auth.module.css"
 import { useState } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"
+import axios from "axios"
 
 export default function signup(){
     const { creds, execute} = useForm();
@@ -26,6 +27,7 @@ export default function signup(){
 
     const handleSubmit = () =>{
         alert(creds.firstName);
+        axios.post('http://localhost:3000/api/users/signup', creds ).then((res:any) => console.log(res, "SIGNUP ")).catch((e) => console.log("ERRROR"))
     }
 
     return(

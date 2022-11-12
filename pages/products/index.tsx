@@ -19,29 +19,37 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import { FiFilter } from "react-icons/fi";
 
-export default function Products() {
+export default function Products({props}:any) {
+
+    console.log(props, "PROPS")
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
 
-    useEffect(() => {
-        setLoading(true)
-        axios.get(`https://shop-api-gqqn.onrender.com/products`).then((res:any) => setData(res.data))
-        .catch((err) => setLoading(false))
-    }, [page, filter])
+    var cookie = false
+
  
-    const getProductByPrice = (from:any, to:any) => {
+    const handleWishlist = (id:any) => {
         setLoading(true)
+        if(cookie == true){
+            axios.post('/api/wishlist', id).then((res) => console.log(res, 'this is wishlist res'))
+            .catch((e) => console.log(e, 'this is wishlist error'))
+        }else{
+            alert("Login first")
+        }
+        console.log("ADDED TO WISHLIST", id)
+
         // filterProductByPrice(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)
         // })
         // .catch((err) => setLoading(false))
     }
-    const getProductByRating = (from:any , to : any) => {
+    const handleDelWishlist = (id:any) => {
         setLoading(true)
+        console.log("DELETE WISHLIST", id)
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)
@@ -101,7 +109,7 @@ export default function Products() {
                     <DrawerHeader>Filters</DrawerHeader>
 
                     <DrawerBody>
-                        <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
+                        <LeftSec data={data} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
                     </DrawerBody>
 
                     <DrawerFooter>
@@ -133,11 +141,11 @@ export default function Products() {
                     <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                         bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
                     >
-                        <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
+                        <LeftSec data={props} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
                     </Box>
 
                     <Box  w={{base:'95%',lg: "75%", xl:'78%'}} >
-                        <MidSec data={data} page={page} setPage={setPage} currPage="products"/>
+                        <MidSec data={props} page={page} setPage={setPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} currPage="products"/>
                     </Box>
 
                 </Flex>
@@ -152,3 +160,11 @@ export default function Products() {
     </>
     )
 };
+
+
+export async function getServerSideProps() {
+    let resp:any = await axios.get("http://localhost:3000/api/products")
+    return {
+      props: {props: resp.data}, // will be passed to the page component as props
+    }
+  }

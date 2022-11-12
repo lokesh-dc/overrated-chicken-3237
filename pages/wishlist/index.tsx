@@ -8,7 +8,7 @@ import MidSec from '../../components/Products/MidSec'
 
 import bgSvg from '../../Resources/blob-scene-haikei.svg'
 
-const index = () => {
+const index = ({props}: any) => {
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
@@ -54,11 +54,11 @@ const index = () => {
             <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                 bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
             >
-                <LeftSec data={data} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
+                <LeftSec data={props} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
             </Box>
 
             <Box  w={{base:'95%', xl:'78%'}} >
-                <MidSec data={data} page={page} setPage={setPage} currPage="wishlist"/>
+                <MidSec data={props} page={page} setPage={setPage} currPage="wishlist"/>
             </Box>
 
         </Flex>
@@ -71,3 +71,12 @@ const index = () => {
 }
 
 export default index
+
+
+
+export async function getServerSideProps() {
+    let resp:any = await axios.get("http://localhost:3000/api/products")
+    return {
+      props: {props: resp.data}, // will be passed to the page component as props
+    }
+  }

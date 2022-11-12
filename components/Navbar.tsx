@@ -1,17 +1,18 @@
 import Link from "next/link"
 
-import { Grid, Text, Img, Flex, Input, Button, Select, Box, HStack, Menu, MenuButton, IconButton, MenuList, MenuItem, Tooltip, useDisclosure, Collapse, Stack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, VStack } from "@chakra-ui/react";
+import { Img, Flex, Button,  HStack, Menu, MenuButton, MenuList, MenuItem, Tooltip, useDisclosure, Collapse, Stack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, VStack, cookieStorageManager } from "@chakra-ui/react";
 
 
 import logo from "../Resources/logo-circle.png"
-import CompanyName from "../Resources/logo-web.png"
 import style from "../styles/navbar.module.css"
 import removedBG from '../Resources/removedBgMohallamart.png'
 
 import { BiUser, BiCart, BiShoppingBag } from "react-icons/bi"
 import TopSec from "./Products/TopSec";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { GiHamburgerMenu } from "react-icons/gi"
 import { useRef } from "react";
+import axios from "axios";
 
 export default function Navbar(){
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -66,8 +67,8 @@ export default function Navbar(){
             </Flex>
 
              
-            <Button ref={btnRef} colorScheme='telegram' onClick={onOpen} display={{md:'none'}}>
-                <HamburgerIcon />
+            <Button ref={btnRef} colorScheme='transparent' color="black" border="1px solid" onClick={onOpen} display={{md:'none'}}>
+                <GiHamburgerMenu />
             </Button>
 
             <Drawer
@@ -82,12 +83,18 @@ export default function Navbar(){
                 <DrawerHeader>Menu</DrawerHeader>
 
                 <DrawerBody>
-                    <VStack fontSize='30px' spacing={5}>
+                    {/* <VStack fontSize='30px' spacing={5}>
                         <Link href='products'>See all Products</Link>
                         <Link href='wishlist'>Wishlist</Link>
                         <Link href='cart'>Cart</Link>
                         <Button colorScheme='green'>Login</Button>
-                    </VStack>
+                    </VStack> */}
+                    <Flex flexDirection="column" className={style.drawer}>
+                    <Link href='products'>See all Products</Link>
+                        <Link href='wishlist'>Wishlist</Link>
+                        <Link href='cart'>Cart</Link>
+                        <Button colorScheme='transparent'>Login</Button>
+                    </Flex>
                 </DrawerBody>
 
                 <DrawerFooter>
@@ -102,3 +109,5 @@ export default function Navbar(){
         </HStack>
     ) 
 }
+
+

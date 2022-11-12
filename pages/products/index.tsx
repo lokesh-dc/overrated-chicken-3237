@@ -19,33 +19,45 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import { FiFilter } from "react-icons/fi";
 
-export default function Products({props}:any) {
+export default function Products(props:any) {
 
-    // console.log(props, "PROPS")
+    console.log(props, "PROPS")
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
     const [products , setProducts] = useState(false)
-    const [Allproducts , setAllProducts] = useState(props)
-    var cookie = false
+    const [Allproducts , setAllProducts] = useState(props.props)
+    // var cookie = true
 
     const toast = useToast()
 
-    console.log(products)
-    const handleWishlist = (id:any) => {
+    // console.log(products)
+    const handleWishlist = (productId:any) => {
         setLoading(true)
-        if(cookie == true){
-            axios.post('/api/wishlist', id).then((res) => {
-                console.log(res, 'this is wishlist res')
-                toast({
-                    title: 'Item Added.',
-                    description: "Product added to Wishlist.",
-                    status: 'success',
-                    duration: 6000,
-                    isClosable: true,
-                })
+        // console.log(id,'ID')
+        if(props.cook != ""){
+            axios.post('/api/wishlist', {productId}).then((res) => {
+                console.log(res.data, 'this is wishlist res')
+                if(res.data == "Product added"){
+                    toast({
+                        title: 'Item Added.',
+                        description: "Product added to Wishlist.",
+                        status: 'success',
+                        duration: 6000,
+                        isClosable: true,
+                    })
+                }
+                else if(res.data == "Product already Added"){
+                    toast({
+                        title: "Item alread added",
+                        description: "Product is already present in wishlist.",
+                        status: 'info',
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                }
             })
             .catch((e) => {
                 console.log(e.response.data, 'this is wishlist error')
@@ -60,13 +72,7 @@ export default function Products({props}:any) {
         }else{
             alert("Login first")
         }
-        console.log("ADDED TO WISHLIST", id)
-
-        // filterProductByPrice(from, to).then((res) => {
-        //     setData(res.data)
-        //     setLoading(false)
-        // })
-        // .catch((err) => setLoading(false))
+        // console.log("ADDED TO WISHLIST", id)
     }
     const handleDelWishlist = (id:any) => {
         setLoading(true)
@@ -86,22 +92,29 @@ export default function Products({props}:any) {
     const handleFilter =(e:any)=>{
         console.log(e.target.value);
         if(e.target.value=="ASC"){
-            let sorted =props.sort((a:any,b:any)=>{
+            let sorted = Allproducts.sort((a:any,b:any)=>{
                 return +(a.price) - +(b.price)
             })
             setProducts(!products)
         }else if(e.target.value==="DESC"){
-            let sorted =props.sort((a:any,b:any)=>{
+            let sorted = Allproducts.sort((a:any,b:any)=>{
                 return +(b.price) - +(a.price)
             })
             setProducts(!products)
         }
     }
+
     const getProductsByPrice=(data:any)=>{
-        console.log(data)
+        console.log(data, "mobile")
         setAllProducts(data)
         setProducts(!products)
+        // setAllProducts(props)
     }
+
+    const getProductsByRating = () => {
+
+    }
+
     useEffect(()=>{
 
     },[products])
@@ -109,13 +122,63 @@ export default function Products({props}:any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any>()
 
+
+    const handleAddToCart = (productId:any) => {
+
+        if(props.cook == ""){
+            return toast({
+                title: 'Login first',
+                description: "Please login first for using cart",
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            })
+        }
+
+        axios.post('/api/carts', {productId}).then((res) => {
+            console.log(res, 'ADD TO CART SUCCESS')
+            if(res.data == "Product added"){
+                toast({
+                    title: 'ADDED TO CART.',
+                    description: "Items successfully added to cart.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+            else if(res.data == 'Product already Added'){
+                toast({
+                    title: 'Already Added.',
+                    description: "Item is already in the cart.",
+                    status: 'info',
+                    duration: 4000,
+                    isClosable: true,
+                })
+            }
+        }).catch((e) => {
+            console.log(e, 'FAILURE ADD TO CART')
+            toast({
+                title: 'Something went wrong',
+                description: "Oops! Something went wrong",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
+        } )
+    }
+
     const handleClick =() => {
         axios.get('/api/users/logout').then((res) => console.log(res))
     }
 
     return(
     <>
-        <Navbar />
+        {
+            props.cook == '' ? 
+            <Navbar props=""/> : 
+            <Navbar  props={props.cook}/> 
+
+        }
 
 
         {/* <TopSec/> */}
@@ -163,7 +226,7 @@ export default function Products({props}:any) {
                     <DrawerHeader>Filters</DrawerHeader>
 
                     <DrawerBody>
-                        <LeftSec data={Allproducts} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
+                        <LeftSec data={Allproducts} getProductsByPrice={getProductsByPrice} />
                     </DrawerBody>
 
                     <DrawerFooter>
@@ -195,11 +258,11 @@ export default function Products({props}:any) {
                     <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                         bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
                     >
-                        <LeftSec data={Allproducts} getProductByPrice={getProductsByPrice}/>
+                        <LeftSec data={Allproducts} getProductsByPrice={getProductsByPrice} getProductByRating={getProductsByRating}/>
                     </Box>
 
                     <Box  w={{base:'95%',lg: "75%", xl:'78%'}} >
-                        <MidSec data={Allproducts} page={page} setPage={setPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} currPage="products"/>
+                        <MidSec data={Allproducts} page={page} setPage={setPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} handleAddToCart={handleAddToCart} currPage="products"/>
                     </Box>
 
                 </Flex>
@@ -216,10 +279,29 @@ export default function Products({props}:any) {
 };
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}:any) {
     let resp:any = await axios.get("http://localhost:3000/api/products")
-    return {
-      props: {props: resp.data}, // will be passed to the page component as props
+
+    
+    if(req?.cookies?.mohallaMartJwt){
+        let mohallaToken = req.cookies.mohallaMartJwt
+        console.log(mohallaToken, 'MOHALLA TOKEN')
+
+        return {
+              props: {
+                props: resp.data,
+                cook: mohallaToken
+            } // will be passed to the page component as props
+        }
     }
+
+    return {
+        props: {
+            props: resp.data,
+            cook: ""
+        }
+    }
+
+
   }
 

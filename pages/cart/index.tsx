@@ -10,6 +10,7 @@ import {
   useColorModeValue as mode,
   useToast,
 } from '@chakra-ui/react'
+import axios from "axios";
 import Link from "next/link";
 import React, { Component, useContext, useEffect, useRef } from "react";
 import { useState } from "react";
@@ -19,9 +20,27 @@ import { cartData } from "../../components/cart/_data";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 
-function Cart() {
+// export const getServerSideProps = async () => {
+//   let resp:any = axios.get('http://localhost:3000/api/carts').then((res) => console.log(res, 'GET CARTSSSS'))
+
+//   return {
+//     props: {props: resp.data}
+//   }
+// }
+
+function Cart({props}:any) {
+  console.log(props, 'props')
   const amountRef = useRef(null)
   const toast = useToast()
+  const [data, setData] = useState<any>([])
+
+  useEffect(() => {
+    axios.get("/api/carts").then((r) => setData(r.data)).catch((e) => alert(e))
+  }, [])
+
+  const [totalCost, setTotalCost] = useState<any>(0)
+
+  
 
   const makePayment = async (name:string, email:string, contact:number, amount:number) => {
     // console.log("here...", name);
@@ -109,12 +128,12 @@ function Cart() {
         >
           <Stack spacing={{ base: '8', md: '10' }} flex="2">
             <Heading fontSize="2xl" fontWeight="extrabold">
-              Shopping Cart (3 items)
+              Shopping Cart ({data.length} items)
             </Heading>
 
             <Stack spacing="6">
-              {cartData.map((item) => (
-                <CartItem key={item.id} {...item} />
+              {data.map((item:any) => (
+                <CartItem key={item._id} {...item} />
               ))}
             </Stack>
           </Stack>

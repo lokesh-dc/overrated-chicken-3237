@@ -6,14 +6,14 @@ const jwt = require("jsonwebtoken");
 let date = new Date();
 
 export default async (req:any, res:any) => {
-    const {token} = req.headers;
     const {cookies} = req
     
-    if(cookies.mohallaMartJwt){
-        console.log(cookies.mohallaMartJwt, 'COOKIESs', token)
+    const parsedCookie = JSON.parse(cookies.mohallaMartJwt)
+    // console.log(JSON.parse(cookies.mohallaMartJwt), 'COOKIESs', parsedCookie)
+    if(parsedCookie.token){
         try {
             await connect();
-            let {id} = jwt.verify(cookies.mohallaMartJwt, "vdvhsvdsvcdcvsdvcvkc");
+            let {id} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="GET"){
                 const wishlist = await wishlistModel.find({userId : id}).populate("productId")
                 if(wishlist.length==0){
@@ -23,7 +23,7 @@ export default async (req:any, res:any) => {
             }
             
             else if(req.method==="POST"){
-                res.send(req.body)
+                // res.send(req.body)
                 const { productId } = req.body;
                 const checkProduct = await wishlistModel.findOne({productId, userId: id});
                 if(!checkProduct){

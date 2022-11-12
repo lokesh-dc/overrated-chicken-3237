@@ -8,7 +8,6 @@ let date = new Date();
 export default async (req:any, res:any) => {
     const {token} = req.headers;
     const {cookies} = req
-
     
     if(cookies.mohallaMartJwt){
         console.log(cookies.mohallaMartJwt, 'COOKIESs', token)

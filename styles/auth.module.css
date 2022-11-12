@@ -7,7 +7,7 @@
 .form button:hover{
     border: 1px solid;
 }
-.form > button{
+.form > button:last-of-type{
     background-color: black;
     color: white;
     text-transform: uppercase;

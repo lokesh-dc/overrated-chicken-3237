@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon, useToast  } from "@chakra-ui/react"
+import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon, useToast, HStack, PinInput, PinInputField, FormLabel  } from "@chakra-ui/react"
 
 // Import Components
 import Navbar from "../components/Login/Navbar"
@@ -10,14 +10,14 @@ import useForm from "../Hooks/useForm"
 import style from "../styles/auth.module.css"
 
 // Images import 
-import { useState, useRef } from "react"
+import { useRef } from "react"
 import BoxImage from "../components/Login/BoxImage"
-import Errordiv from "../components/Login/Errordiv"
 import axios from "axios"
+import Router from "next/router"
 
 export default function signup(){
     const { creds, execute} = useForm();
-    const [formError, setFormError] = useState("");
+
 
     const firstRef:any = useRef(null)
     const toast = useToast()
@@ -25,22 +25,28 @@ export default function signup(){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
-        // console.log(creds, firstRef.current.value)
         creds.password = firstRef.current.value
     }
 
     const handleSubmit = () =>{
-        // alert(creds);
-        // console.log(creds)
+        
+        toast({
+            title: 'Signing up.',
+            description: "Creating your account.",
+            status: 'success',
+            duration: 1000,
+            isClosable: true,
+        })
+        
         axios.post('http://localhost:3000/api/users/signup', creds ).then((res:any) => {
-            // console.log(res, "SIGNUP ")
             toast({
                 title: 'Account created.',
-                description: "We've created your account for you.",
+                description: "Kindly verify your account.",
                 status: 'success',
                 duration: 6000,
                 isClosable: true,
             })
+            Router.push("/verify");
         })
         .catch((e) => {
             console.log(e.response.data)
@@ -66,7 +72,7 @@ export default function signup(){
                     py={{base:"30px", sm:"30px", md:"50px", lg:"50px"}}
                     position="relative"
                 >
-                    <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text>
+                    {/* <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text> */}
 
                     <Text className={style.head}>Create an Account</Text>
 
@@ -74,22 +80,17 @@ export default function signup(){
                         <Input placeholder="First name" name="firstName" onChange={handleChange} />
                         <Input placeholder="Last name"  name="lastName" onChange={handleChange} />
                     </Grid>
-                    <Input placeholder="example@email.com" name="email" onChange={handleChange} />
-                    {/* <Input type="password" placeholder="password" name="password" onChange={handleChange} /> */}
+                        <Input placeholder="example@email.com" name="email" onChange={handleChange} />
                     <PasswordInput firstRef={firstRef} handleChange={handleChange}/>
                     <InputGroup>
                         <InputLeftAddon children='+91' />
                         <Input type='tel' placeholder='Phone number' name="mobile" onChange={handleChange} />
                     </InputGroup>
-                    {
-                        formError!=="" &&
-                        <Errordiv />
-                    }
                     <Button colorScheme="transparent" color="black" onClick={handleSubmit}>Signup</Button>
                     <Checkbox size='lg' defaultChecked>
                         Signup for offers & discounts
                     </Checkbox>
-                    <Text >Already have an account? <Link href="/login">Sign in.</Link>  </Text>
+                    <Text >Already have an account? <Link href="/login">Sign in.</Link></Text>
                 </Flex>
             </Grid>
            <BoxImage />

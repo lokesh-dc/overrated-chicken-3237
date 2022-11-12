@@ -71,6 +71,11 @@ export default function Products({props}:any) {
     const handleDelWishlist = (id:any) => {
         setLoading(true)
         console.log("DELETE WISHLIST", id)
+        axios.delete("/api/wishlist", id).then((res:any) => {
+            console.log(res, "PRODUCT DELETED ")
+        }).catch((e) => {
+            console.log(e, 'DELETE FAIL')
+        })
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)

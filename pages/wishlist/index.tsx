@@ -77,8 +77,19 @@ export default index
 
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}:any) {
     let resp:any = await axios.get("http://localhost:3000/api/products")
+
+    if(!req.cookies.mohallaMartJwt){
+        return {
+            redirect: {
+                destination: '/products',
+                permanent: false,
+            },
+        }
+    }
+    
+
     return {
       props: {props: resp.data}, // will be passed to the page component as props
     }

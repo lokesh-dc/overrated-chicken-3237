@@ -1,15 +1,15 @@
 
-import { connect }  from "../../../lib/dbConnect";
+import { connect }  from "../../../../lib/dbConnect";
 
-import productsModel from "../../../models/product.model";
-
+import productsModel from "../../../../models/product.model";
 
 export default async (req:any, res:any) => {
-    let query = req.query;
+    let {title} = req.query;
     try {
         await connect();
         if(req.method==="GET"){
-           console.log(query);
+           let products = await productsModel.find({ "title" : { "$regex": title , "$options": "i" } },);
+           res.send(products)
         }else{
             return res.status(401).send("Operation not allowed");
         }

@@ -29,8 +29,11 @@ const index = ({props}: any) => {
         // })
         // .catch((err) => setLoading(false))
     }
-    const getProductByRating = (from:any , to : any) => {
+    
+    const handleDelWishlist = (id:any) => {
         setLoading(true)
+        console.log("DELETE WISHLIST", id)
+        axios.delete('/api/wishlist', id).then((res) => console.log(res, 'delete wishlist res'))
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)
@@ -54,11 +57,11 @@ const index = ({props}: any) => {
             <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                 bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
             >
-                <LeftSec data={props} getProductByPrice={getProductByPrice} getProductByRating={getProductByRating}/>
+                <LeftSec data={props} getProductByPrice={getProductByPrice} getProductByRating={handleDelWishlist}/>
             </Box>
 
             <Box  w={{base:'95%', xl:'78%'}} >
-                <MidSec data={props} page={page} setPage={setPage} currPage="wishlist"/>
+                <MidSec data={props} page={page} setPage={setPage} currPage="wishlist"  handleDelWishlist={handleDelWishlist}/>
             </Box>
 
         </Flex>

@@ -23,7 +23,7 @@ import axios from "axios";
 
 
 export async function getServerSideProps(props:any){
-  console.log(props.req.url, "GSP")
+  // console.log(props.req.url, "GSP")
 
   return {
     props: {props: props.req.url}
@@ -34,13 +34,13 @@ const SingleProductPage = ({props}:any) => {
   const router = useRouter()
   const [data, setData] = useState<any>()
 
-  console.log(router.query.id, 'router', props)
+  // console.log(router.query.id, 'router', props)
   useEffect(() => {
     axios.get(`/api/products/${router.query.id}`).then((res) => setData(res.data))
   }, [])
 
   const handleClick= () => {
-    console.log(data)
+    // console.log(data)
   }
 
 

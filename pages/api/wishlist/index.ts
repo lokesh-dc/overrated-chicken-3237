@@ -7,6 +7,10 @@ let date = new Date();
 
 export default async (req:any, res:any) => {
     const {token} = req.headers;
+    const {cookies} = req
+
+    console.log(cookies, 'COOKIES')
+    
     if(token){
         try {
             await connect();

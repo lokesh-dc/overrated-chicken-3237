@@ -12,7 +12,19 @@ import { MdGraphicEq } from "react-icons/md";
 // import { filterProductByPrice } from "../../../API/api";
 
 export default function LeftSec({data, getProductByPrice, getProductByRating}:any) {
-    const [maxMin, setMaxMin] = useState([200, 2000])
+    const [maxMin, setMaxMin] = useState([10, 2000])
+    console.log(data);
+    const handleChange =(e:any)=>{
+        setMaxMin(e)
+
+    }
+    const handleFilter=()=>{
+        let filterData = data.filter((e:any)=>{
+            return +(e.price) >= maxMin[0] && +(e.price) <= maxMin[1]
+        })
+        // console.log(filterData)
+        getProductByPrice(filterData)
+    }
     return (
         <Box px={2} py={2} >
             <HStack justify='space-between' py={2} px={4}>
@@ -29,7 +41,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                         <AccordionIcon />
                     </AccordionButton>
                     <AccordionPanel pb={4} >
-                        <RangeSlider aria-label={['min', 'max']} min={200} max={6000} defaultValue={[200, 2000]} onChangeEnd={(e) => setMaxMin(e)}>
+                        <RangeSlider aria-label={['min', 'max']} min={10} max={5000} defaultValue={[10, 5000]} onChangeEnd={(e)=>{handleChange(e)}} onChange={handleFilter}>
                         <RangeSliderTrack bg='red.100'>
                             <RangeSliderFilledTrack bg='tomato' />
                         </RangeSliderTrack>
@@ -70,7 +82,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                     <h2>
                     <AccordionButton>
                         <Box flex='1'  textAlign='left' fontSize='18px'>
-                        Ratings Range
+                            Ratings Range
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>

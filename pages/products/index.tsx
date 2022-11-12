@@ -28,6 +28,7 @@ export default function Products({props}:any) {
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
     const [products , setProducts] = useState(false)
+    const [Allproducts , setAllProducts] = useState(props)
     var cookie = false
 
     const toast = useToast()
@@ -91,6 +92,11 @@ export default function Products({props}:any) {
             setProducts(!products)
         }
     }
+    const getProductsByPrice=(data:any)=>{
+        console.log(data)
+        setAllProducts(data)
+        setProducts(!products)
+    }
     useEffect(()=>{
 
     },[products])
@@ -152,7 +158,7 @@ export default function Products({props}:any) {
                     <DrawerHeader>Filters</DrawerHeader>
 
                     <DrawerBody>
-                        <LeftSec data={data} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
+                        <LeftSec data={Allproducts} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
                     </DrawerBody>
 
                     <DrawerFooter>
@@ -184,11 +190,11 @@ export default function Products({props}:any) {
                     <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                         bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
                     >
-                        <LeftSec data={props} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
+                        <LeftSec data={Allproducts} getProductByPrice={getProductsByPrice}/>
                     </Box>
 
                     <Box  w={{base:'95%',lg: "75%", xl:'78%'}} >
-                        <MidSec data={props} page={page} setPage={setPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} currPage="products"/>
+                        <MidSec data={Allproducts} page={page} setPage={setPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} currPage="products"/>
                     </Box>
 
                 </Flex>

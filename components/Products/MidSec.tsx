@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import PaginationComponent from "../../../Components/Pagination/PaginationComponent";
 import ProductCard from "./card/ProductCard";
 
-export default function MidSec({data, page, setPage, currPage}:any) {
+export default function MidSec({data, page, setPage, currPage, handleWishlist, handleDelWishlist}:any) {
     const [allData, setAllData] = useState([])
 
     useEffect(() => {
@@ -14,7 +14,6 @@ export default function MidSec({data, page, setPage, currPage}:any) {
     const totalPages = Math.ceil(allData.length/20)
 
 
-    console.log(totalPages, data.length)
 
     return(
         <Flex flexDir='column' zIndex='0' >
@@ -22,7 +21,7 @@ export default function MidSec({data, page, setPage, currPage}:any) {
             >
                 {
                     data.slice(0,20)?.map((item:any) => (
-                        <ProductCard {...item} key={item.id} currPage={currPage}/>
+                        <ProductCard {...item} key={item.id} currPage={currPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
                     ))
                 }
             </SimpleGrid>

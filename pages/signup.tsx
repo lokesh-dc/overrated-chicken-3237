@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon  } from "@chakra-ui/react"
+import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon, useToast  } from "@chakra-ui/react"
 
 // Import Components
 import Navbar from "../components/Login/Navbar"
@@ -10,22 +10,50 @@ import useForm from "../Hooks/useForm"
 import style from "../styles/auth.module.css"
 
 // Images import 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"
+import axios from "axios"
 
 export default function signup(){
     const { creds, execute} = useForm();
     const [formError, setFormError] = useState("");
 
+    const firstRef:any = useRef(null)
+    const toast = useToast()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
+        // console.log(creds, firstRef.current.value)
+        creds.password = firstRef.current.value
     }
 
     const handleSubmit = () =>{
-        alert(creds.firstName);
+        // alert(creds);
+        // console.log(creds)
+        axios.post('http://localhost:3000/api/users/signup', creds ).then((res:any) => {
+            // console.log(res, "SIGNUP ")
+            toast({
+                title: 'Account created.',
+                description: "We've created your account for you.",
+                status: 'success',
+                duration: 6000,
+                isClosable: true,
+            })
+        })
+        .catch((e) => {
+            console.log(e.response.data)
+            if(e.response.data == 'Email Id exists'){
+                toast({
+                    title: 'Email Already Exists.',
+                    description: "Use another email.",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+        })
     }
 
     return(
@@ -46,9 +74,9 @@ export default function signup(){
                         <Input placeholder="First name" name="firstName" onChange={handleChange} />
                         <Input placeholder="Last name"  name="lastName" onChange={handleChange} />
                     </Grid>
-                    <Input placeholder="example@email.com" name="email" />
+                    <Input placeholder="example@email.com" name="email" onChange={handleChange} />
                     {/* <Input type="password" placeholder="password" name="password" onChange={handleChange} /> */}
-                    <PasswordInput handleChange={handleChange}/>
+                    <PasswordInput firstRef={firstRef} handleChange={handleChange}/>
                     <InputGroup>
                         <InputLeftAddon children='+91' />
                         <Input type='tel' placeholder='Phone number' name="mobile" onChange={handleChange} />

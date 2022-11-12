@@ -17,8 +17,32 @@ import TabsSection from "../../components/SingleProduct/Tabs";
 import { BsCart, BsStarFill } from "react-icons/bs";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useRouter } from "next/router";
+import axios from "axios";
+// import { getServerSideProps } from ".";
 
-const SingleProductPage = () => {
+
+export async function getServerSideProps(props:any){
+  // console.log(props.req.url, "GSP")
+
+  return {
+    props: {props: props.req.url}
+  }
+}
+
+const SingleProductPage = ({props}:any) => {
+  const router = useRouter()
+  const [data, setData] = useState<any>()
+
+  // console.log(router.query.id, 'router', props)
+  useEffect(() => {
+    axios.get(`/api/products/${router.query.id}`).then((res) => setData(res.data))
+  }, [])
+
+  const handleClick= () => {
+    // console.log(data)
+  }
+
 
   return (
     <>
@@ -39,7 +63,7 @@ const SingleProductPage = () => {
           <Image
             borderRadius="20px"
             w="90%"
-            src="https://i.etsystatic.com/6541228/r/il/2bc891/3860052985/il_fullxfull.3860052985_s6mt.jpg"
+            src={data?.src}
           />
         </Box>
 
@@ -48,7 +72,7 @@ const SingleProductPage = () => {
             Mohalla Mart
           </Text>
           <Text fontSize="3xl" color={"black"} fontWeight="500">
-            Essential Men's Regular-Fit-Long Sleeve Oxford Shirt
+            {data?.title}
           </Text>
           <Box display="flex" mt="2" alignItems="center" gap="5px">
             {Array(5)
@@ -58,7 +82,7 @@ const SingleProductPage = () => {
                 <BsStarFill fontSize={"17px"} key={i}  color={i < 4 ? "orange": "grey"} />
               ))}
           </Box>
-          <Text fontSize="3xl" color={"black"} fontWeight="500">$ 433</Text>
+          <Text fontSize="3xl" color={"black"} fontWeight="500">$ {data?.price}</Text>
           <Box marginTop={"20px"}>
             <Box marginTop={"20px"}>
               <Text fontSize={"1xl"} fontWeight="500">
@@ -111,6 +135,7 @@ const SingleProductPage = () => {
                   colorScheme="#2a977d"
                   variant="outline"
                   color={"#2a977d"}
+                  
                 >
                   Add To Wishlist <SlBag />
                 </Button>
@@ -126,7 +151,7 @@ const SingleProductPage = () => {
           </Box>
         </Tooltip>
       </Box>
-        <TabsSection/>
+        {/* <TabsSection/> */}
       <Footer/>
     </>
   );

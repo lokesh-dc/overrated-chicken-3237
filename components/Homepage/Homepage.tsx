@@ -11,16 +11,17 @@ import hom from '../../Resources/homeBg.svg'
 
 const Homepage = () => {
   return (
-    <div>
+    <Box mb='50px'>
     <Advertise/>
-    <CaptionCarousel/>
+    {/* <CaptionCarousel/> */}
+    <Popular tit='category'/>
     <Essential/>
     <Box py={7} bgImage={hom.src} backgroundSize='contain'>
       <ChakPro/>
     </Box>
     <NewArrivals/>
-    <Popular/>
-    </div>
+    <Popular tit='traditional'/>
+    </Box>
   )
 }
 

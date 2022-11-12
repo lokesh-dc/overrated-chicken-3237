@@ -4,7 +4,7 @@ import { InputGroup,Input, InputRightElement, Button,   } from "@chakra-ui/react
 
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs"
 
-export default function PasswordInput({handleChange}:any) {
+export default function PasswordInput({handleChange, firstRef}:any) {
 
     const [show, setShow] = useState(false);
 
@@ -18,7 +18,9 @@ export default function PasswordInput({handleChange}:any) {
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
+                name='password'
                 onChange={handleChange}
+                ref={firstRef}
             />
             <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick} bgColor="transparent">

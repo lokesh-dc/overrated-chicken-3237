@@ -12,7 +12,7 @@ import { MdGraphicEq } from "react-icons/md";
 // import { filterProductByPrice } from "../../../API/api";
 
 export default function LeftSec({data, getProductByPrice, getProductByRating}:any) {
-    const [maxMin, setMaxMin] = useState([200, 2000])
+    const [maxMin, setMaxMin] = useState([10, 2000])
     console.log(data);
     const handleChange =(e:any)=>{
         setMaxMin(e)
@@ -41,7 +41,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                         <AccordionIcon />
                     </AccordionButton>
                     <AccordionPanel pb={4} >
-                        <RangeSlider aria-label={['min', 'max']} min={10} max={5000} defaultValue={[200, 2000]} onChangeEnd={(e)=>{handleChange(e)}} onChange={handleFilter}>
+                        <RangeSlider aria-label={['min', 'max']} min={10} max={5000} defaultValue={[10, 5000]} onChangeEnd={(e)=>{handleChange(e)}} onChange={handleFilter}>
                         <RangeSliderTrack bg='red.100'>
                             <RangeSliderFilledTrack bg='tomato' />
                         </RangeSliderTrack>

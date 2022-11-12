@@ -25,15 +25,15 @@ export default function signup(){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
-        console.log(creds, firstRef.current.value)
+        // console.log(creds, firstRef.current.value)
         creds.password = firstRef.current.value
     }
 
     const handleSubmit = () =>{
         // alert(creds);
-        console.log(creds)
+        // console.log(creds)
         axios.post('http://localhost:3000/api/users/signup', creds ).then((res:any) => {
-            console.log(res, "SIGNUP ")
+            // console.log(res, "SIGNUP ")
             toast({
                 title: 'Account created.',
                 description: "We've created your account for you.",

@@ -14,7 +14,6 @@ export default function MidSec({data, page, setPage, currPage, handleWishlist, h
     const totalPages = Math.ceil(allData.length/20)
 
 
-    console.log(totalPages, data.length)
 
     return(
         <Flex flexDir='column' zIndex='0' >

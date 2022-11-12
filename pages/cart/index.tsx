@@ -24,7 +24,7 @@ function Cart() {
   const toast = useToast()
 
   const makePayment = async (name:string, email:string, contact:number, amount:number) => {
-    console.log("here...", name);
+    // console.log("here...", name);
     const res = await initializeRazorpay();
 
     if (!res) {
@@ -47,7 +47,7 @@ function Cart() {
     // const data = axios.post('/api/razorpay', {
     //   name, email, contact, amount
     // }).then((res) => console.log(res, "DATA"))
-    console.log(data, "DATA2");
+    // console.log(data, "DATA2");
     var options = {
       key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
       name: "Mohalla Mart Pvt Ltd",

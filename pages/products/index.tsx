@@ -21,14 +21,14 @@ import { FiFilter } from "react-icons/fi";
 
 export default function Products({props}:any) {
 
-    console.log(props, "PROPS")
+    // console.log(props, "PROPS")
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
 
-    var cookie = false
+    var cookie = true
 
  
     const handleWishlist = (id:any) => {
@@ -60,12 +60,17 @@ export default function Products({props}:any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any>()
 
+    const handleClick =() => {
+        axios.get('/api/users/logout').then((res) => console.log(res))
+    }
+
     return(
     <>
         <Navbar />
 
 
         {/* <TopSec/> */}
+        {/* <Button onClick={handleClick}>Test</Button> */} //! TESTING LOGOUT ROUTE  
 
 
         {/* // ? Below is the code for Breadcrumb's and Sorting strip */}

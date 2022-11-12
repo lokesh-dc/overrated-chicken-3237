@@ -3,8 +3,13 @@ import { connect }  from "../../../lib/dbConnect";
 
 import productsModel from "../../../models/product.model";
 
+// import cookieCutter from 'cookie-cutter'
 
 export default async (req:any, res:any) => {
+
+    // console.log(cookieCutter.get("mohallaMartJwt"))
+
+    // console.log( 'THIS IS COOKIE AUTH JWT', cookies)
     try {
         await connect();
         if(req.method==="GET"){

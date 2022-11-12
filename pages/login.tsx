@@ -29,8 +29,8 @@ export default function signup(){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
-        console.log(creds, firstRef.current.value)
         creds.password = firstRef.current.value
+        console.log(creds, firstRef.current.value)
     }
 
     const handleSubmit = () =>{

@@ -20,11 +20,13 @@ export default async (req:any, res:any) => {
                     httpOnly: true,
                     secure: "development" !== "development",
                     sameSite: "strict",
-                    maxAge: 25,
+                    maxAge: 60*60*12, //12hours
                     path: "/",
                   });
 
                 res.setHeader("Set-Cookie", serialised);
+
+                // res.setHeader('Location', req.headers.referer || '/');
 
                 return res.send({message:"Succesfully Logged in", token})  
             }else{

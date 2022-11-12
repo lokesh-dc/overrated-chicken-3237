@@ -10,7 +10,7 @@ export default async function handler(req:any, res:any) {
     });
 
     var total:any = JSON.parse(req.body)
-    console.log(JSON.parse(req.body), "REQ BODY")
+    // console.log(JSON.parse(req.body), "REQ BODY")
 
     // Create an order -> generate the OrderID -> Send it to the Front-end
     // Also, check the amount and currency on the backend (Security measure)

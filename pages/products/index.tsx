@@ -27,10 +27,10 @@ export default function Products({props}:any) {
     const [page, setPage] = useState(1)
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
-
+    const [products , setProducts] = useState(false)
     var cookie = false
 
- 
+    console.log(products)
     const handleWishlist = (id:any) => {
         setLoading(true)
         if(cookie == true){
@@ -56,6 +56,24 @@ export default function Products({props}:any) {
         // })
         // .catch((err) => setLoading(false))
     }
+
+    const handleFilter =(e:any)=>{
+        console.log(e.target.value);
+        if(e.target.value=="ASC"){
+            let sorted =props.sort((a:any,b:any)=>{
+                return +(a.price) - +(b.price)
+            })
+            setProducts(!products)
+        }else if(e.target.value==="DESC"){
+            let sorted =props.sort((a:any,b:any)=>{
+                return +(b.price) - +(a.price)
+            })
+            setProducts(!products)
+        }
+    }
+    useEffect(()=>{
+
+    },[products])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any>()
@@ -90,7 +108,7 @@ export default function Products({props}:any) {
 
             <Flex justify={{base:'space-between', lg:'flex-start'}} w='80%' m='auto' align='center' pt={2} pb={2} fontSize='14px'>
                 <HStack w={{base:'30%',lg:'20%'}} align='center'>
-                    <Select placeholder="Sort By" variant='outline'  fontWeight='semibold' border='1px solid orange' colorScheme='orange' focusBorderColor="orange" w='150px' onChange={(e) => setFilter(e.target.value)}>
+                    <Select placeholder="Sort By" variant='outline'  fontWeight='semibold' border='1px solid orange' colorScheme='orange' focusBorderColor="orange" w='150px' onChange={handleFilter}>
                         <option value='DESC'>High to Low</option>
                         <option value='ASC'>Low to High</option>
                     </Select>

@@ -9,12 +9,12 @@ export default async (req:any, res:any) => {
     const {token} = req.headers;
     const {cookies} = req
 
-    console.log(cookies, 'COOKIES')
     
-    if(token){
+    if(cookies.mohallaMartJwt){
+        console.log(cookies.mohallaMartJwt, 'COOKIESs', token)
         try {
             await connect();
-            let {id} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            let {id} = jwt.verify(cookies.mohallaMartJwt, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="GET"){
                 const wishlist = await wishlistModel.find({userId : id}).populate("productId")
                 if(wishlist.length==0){
@@ -24,6 +24,7 @@ export default async (req:any, res:any) => {
             }
             
             else if(req.method==="POST"){
+                res.send(req.body)
                 const { productId } = req.body;
                 const checkProduct = await wishlistModel.findOne({productId, userId: id});
                 if(!checkProduct){
@@ -39,6 +40,7 @@ export default async (req:any, res:any) => {
                 return res.send("Deleted Successfully");
             }
         } catch (e:any) {
+            console.log('TRIGGER')
             console.error(e);
             res.status(500).send(e.message);
         }

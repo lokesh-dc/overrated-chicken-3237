@@ -10,13 +10,35 @@ import useForm from "../Hooks/useForm"
 // Import stylesheet
 import style from "../styles/auth.module.css"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"
 import {useRef} from 'react'
 import axios from "axios"
+import { useRouter } from "next/router"
 
-export default function signup(){
+
+export async function getServerSideProps({req}: any){
+    // console.log('SERVER SIDE ', req.cookies)
+
+    //? FOR REDIRECTING SSR (if users has already logged in they would not be allowed to enter login page)
+    //* BELOW CODE SOLVES FLASH/FLICKERING ISSUE OF PRIVATE ROUTES  
+    if(req.cookies.mohallaMartJwt){
+        return {
+            redirect: {
+                destination: '/products',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {props: req.cookies}
+    }
+}
+
+
+export default function signup({props}:any){
 
 
     const { creds, execute} = useForm();
@@ -25,6 +47,8 @@ export default function signup(){
     const firstRef:any = useRef(null)
 
     const toast = useToast()
+    const router = useRouter()
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
@@ -44,6 +68,8 @@ export default function signup(){
                 duration: 9000,
                 isClosable: true,
             })
+            router.push('/products')
+            console.log(window.document.cookie)
         })
         .catch((e) => {
             console.log(e.response.data)

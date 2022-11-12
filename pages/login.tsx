@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon  } from "@chakra-ui/react"
+import { Grid, Text, Input, Flex, Button, Checkbox, InputGroup,InputLeftAddon, Toast, useToast  } from "@chakra-ui/react"
 
 
 // Import Components
@@ -13,7 +13,8 @@ import style from "../styles/auth.module.css"
 import { useState } from "react"
 import BoxImage from "../components/Login/BoxImage"
 import Errordiv from "../components/Login/Errordiv"
-
+import {useRef} from 'react'
+import axios from "axios"
 
 export default function signup(){
 
@@ -21,14 +22,49 @@ export default function signup(){
     const { creds, execute} = useForm();
     const [formError, setFormError] = useState("");
 
+    const firstRef:any = useRef(null)
+
+    const toast = useToast()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
+        console.log(creds, firstRef.current.value)
+        creds.password = firstRef.current.value
     }
 
     const handleSubmit = () =>{
-        alert(creds.firstName);
+        // alert(creds.password);
+        axios.post("/api/users/login", creds).then((res) => {
+            console.log(res)
+            toast({
+                title: 'Login Successful',
+                description: "Guess what!, you have successfully logged in.",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            })
+        })
+        .catch((e) => {
+            console.log(e.response.data)
+            if(e.response.data == "Invalid Credentials"){
+                toast({
+                    title: 'Invalid Credentials.',
+                    description: "Please check your credentials and try again.",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }else{
+                toast({
+                    title: 'Something went wrong.',
+                    description: "Oops!, looks like something went wrong, Please try again.",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+        })
     }
 
     return(
@@ -44,8 +80,8 @@ export default function signup(){
                 >
                     <Text position="absolute" top={{base:"0", md:"-20px", lg:"-40px"}} left={{base:"10px", lg:"-60px"}} fontSize={{base:"1rem", md:"3rem"}} fontWeight="bold" >WELCOME ONBOARD!</Text>
                     <Text className={style.head}>Sign In</Text>
-                    <Input placeholder="example@email.com" name="email" />
-                    <PasswordInput handleChange={handleChange}/>
+                    <Input placeholder="example@email.com" name="email" onChange={handleChange}/>
+                    <PasswordInput firstRef={firstRef} handleChange={handleChange}/>
                     {
                         formError!=="" &&
                         <Errordiv formError={formError}/>

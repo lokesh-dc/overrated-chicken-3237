@@ -24,7 +24,6 @@ import { AiOutlineHeart } from 'react-icons/ai';
   // }
   
   function Rating({ rating, numReviews }:any) {
-    // console.log(rating, typeof numReviews)
     return (
       <Flex alignItems="center">
         {Array(5)
@@ -71,7 +70,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 
     title= title.slice(0,25)
     // const {handleAddCart} = useContext(AppContext)
-    console.log(currPage, 'this is current page')
+    // console.log(currPage, 'this is current page')
 
     return (
       <Flex alignItems="center" justifyContent="center" bgColor='rgba(255, 255, 255, .15)' _hover={{bgColor:'rgba(255, 255, 255, .55)'}} style={{backdropFilter: 'blur(7px)'}}

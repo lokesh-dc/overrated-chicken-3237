@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, Image, Input, Select, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, Image, Input, Select, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 
 import LeftSec from "../../components/Products/LeftSec";
@@ -21,7 +21,7 @@ import { FiFilter } from "react-icons/fi";
 
 export default function Products({props}:any) {
 
-    console.log(props, "PROPS")
+    // console.log(props, "PROPS")
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
@@ -31,12 +31,32 @@ export default function Products({props}:any) {
     const [Allproducts , setAllProducts] = useState(props)
     var cookie = false
 
-    // console.log(products)
+    const toast = useToast()
+
+    console.log(products)
     const handleWishlist = (id:any) => {
         setLoading(true)
         if(cookie == true){
-            axios.post('/api/wishlist', id).then((res) => console.log(res, 'this is wishlist res'))
-            .catch((e) => console.log(e, 'this is wishlist error'))
+            axios.post('/api/wishlist', id).then((res) => {
+                console.log(res, 'this is wishlist res')
+                toast({
+                    title: 'Item Added.',
+                    description: "Product added to Wishlist.",
+                    status: 'success',
+                    duration: 6000,
+                    isClosable: true,
+                })
+            })
+            .catch((e) => {
+                console.log(e.response.data, 'this is wishlist error')
+                toast({
+                    title: 'Something went wrong!',
+                    description: "Oops! Looks like some errorr",
+                    status: 'error',
+                    duration: 6000,
+                    isClosable: true,
+                })
+            })
         }else{
             alert("Login first")
         }
@@ -84,12 +104,17 @@ export default function Products({props}:any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any>()
 
+    const handleClick =() => {
+        axios.get('/api/users/logout').then((res) => console.log(res))
+    }
+
     return(
     <>
         <Navbar />
 
 
         {/* <TopSec/> */}
+        <Button onClick={handleClick}>Test</Button> //! TESTING LOGOUT ROUTE  
 
 
         {/* // ? Below is the code for Breadcrumb's and Sorting strip */}
@@ -192,3 +217,4 @@ export async function getServerSideProps() {
       props: {props: resp.data}, // will be passed to the page component as props
     }
   }
+

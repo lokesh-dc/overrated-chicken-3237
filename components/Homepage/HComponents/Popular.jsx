@@ -15,7 +15,7 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function Popular() {
+export default function Popular({tit}) {
  
   const [slider, setSlider] = useState({});
 
@@ -62,18 +62,20 @@ export default function Popular() {
   ];
 
   return (
+    <>
     
+    <Text fontSize='40px' alignItems='center' ml="5%" mt="30px" >Our Popular Products</Text>
     <Box
-      mt="30px"
+      // mt="30px"
       mb="30px"
       position={"relative"}
-      h={{ base: "300px", md: "350px", xl: "450px" }}
+      h={{ base: "500px", md: "350px", xl: "450px" }}
       width={"full"}
       overflow={"hidden"}
       textAlign={"center"}
     >
-          <Text fontSize='30px' mt="20px"
-      mb="20px" alignItems='center' color="red">15 to 20 Percent off on below category products</Text>
+          <Text fontSize='18px' mt="20px"
+      mb="20px" alignItems='center' color="red">15 to 20 Percent off on below {tit} products</Text>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -118,18 +120,19 @@ export default function Popular() {
            <>
          
            <Box key={index} position="relative">
-           <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
+           {/* <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
            <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="white" >{card.title1}</Text>
            <Text position="absolute" fontSize='40px' ml="50%" mt="8%" color="white" >{card.title3}</Text>
            <Text position="absolute" fontSize='20px' ml="50%" mt="6%" color="white" >{card.title31}</Text>
            <Text position="absolute" fontSize='40px' ml="43%" mt="1%" color="Red" >{card.title2}</Text>
            <Text position="absolute" fontSize='20px' ml="43%" mt="6%" color="Red" >{card.title21}</Text>
            <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="#6366F1" >{card.title4}</Text>
-           <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="#6366F1" >{card.title41}</Text>
+           <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="#6366F1" >{card.title41}</Text> */}
              <Image
                src={card.image}
-               w={{ base: "80%", md: "60%", lg: "60%" }}
+               w={{ base: "100%", md: "60%", lg: "60%" }}
                m="auto"
+               h={{base:'250px', md:'auto'}}
              />
              
            </Box>
@@ -137,5 +140,6 @@ export default function Popular() {
         ))}
       </Slider>
     </Box>
+    </>
   );
 }

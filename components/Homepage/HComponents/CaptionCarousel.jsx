@@ -120,14 +120,14 @@ export default function CaptionCarousel() {
           <>
          
           <Box key={index} position="relative">
-          <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
+          {/* <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="white" >{card.title}</Text>
           <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="white" >{card.title1}</Text>
           <Text position="absolute" fontSize='40px' ml="50%" mt="8%" color="white" >{card.title3}</Text>
           <Text position="absolute" fontSize='20px' ml="50%" mt="6%" color="white" >{card.title31}</Text>
           <Text position="absolute" fontSize='40px' ml="43%" mt="1%" color="Red" >{card.title2}</Text>
           <Text position="absolute" fontSize='20px' ml="43%" mt="6%" color="Red" >{card.title21}</Text>
           <Text position="absolute" fontSize='40px' ml="22%" mt="4%" color="#6366F1" >{card.title4}</Text>
-          <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="#6366F1" >{card.title41}</Text>
+          <Text position="absolute" fontSize='20px' ml="22%" mt="9%" color="#6366F1" >{card.title41}</Text> */}
             <Image
               src={card.image}
               w={{ base: "80%", md: "60%", lg: "60%" }}

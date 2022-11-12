@@ -7,7 +7,7 @@ const Essential = () => {
     <div>
       <Text fontSize='50px' alignItems='center' ml="5%">CHOOSE BY CATEGORIES</Text>
  <SimpleGrid
-         minChildWidth='200px' 
+         minChildWidth='150px' 
          placeItems='center' 
          gap={5} 
          w='90%'

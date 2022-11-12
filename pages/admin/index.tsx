@@ -9,6 +9,7 @@ import { FiPieChart } from 'react-icons/fi'
 import dashBack from '../../Resources/dashboard.svg'
 import AllTable from '../../components/AdminComps/Table/AllTable'
 import Dashboard from '../../components/AdminComps/Dashboard/Dashboard'
+import AdminForm from '../../components/AdminComps/forms/adminForm'
 // import AllTable from '../../components/AdminComps/Table/AllTable'
 
 const Admin = () => {
@@ -26,7 +27,7 @@ const Admin = () => {
                flexDir="column"
                p={{ base: 0, md: 4 }}
                h="100%"
-               w="14%"
+               w="15%"
                position="fixed"
                justifyContent="space-between"
             //    borderRight="1px solid lightgray"
@@ -212,15 +213,17 @@ const Admin = () => {
 
                //* CREATING PRODUCTS
                <TabPanel>
-               <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
-
-                </Box>
+                  <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
+                     <Text fontSize='4xl' color='white'>Create a new Product</Text>
+                     <AdminForm currPage="newProd"/>
+                  </Box>
                </TabPanel>
 
                //* CREATING BRANDS
                <TabPanel>
-               <Box w='100%' h='95vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
-
+               <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
+                     <Text fontSize='4xl' color='white'>Create a new Brand</Text>
+                     <AdminForm currPage="newBrand" />
                 </Box>
                </TabPanel>
                

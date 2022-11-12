@@ -27,22 +27,23 @@ const TestimonialContent = ({ children }: { children: ReactNode }) => {
       rounded={'xl'}
       align={'center'}
       pos={'relative'}
-      _after={{
-        content: `""`,
-        w: 0,
-        h: 0,
-        borderLeft: 'solid transparent',
-        borderLeftWidth: 16,
-        borderRight: 'solid transparent',
-        borderRightWidth: 16,
-        borderTop: 'solid',
-        borderTopWidth: 16,
-        borderTopColor: useColorModeValue('white', 'gray.800'),
-        pos: 'absolute',
-        bottom: '-16px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-      }}>
+      // _after={{
+      //   content: `""`,
+      //   w: 0,
+      //   h: 0,
+      //   borderLeft: 'solid transparent',
+      //   borderLeftWidth: 16,
+      //   borderRight: 'solid transparent',
+      //   borderRightWidth: 16,
+      //   borderTop: 'solid',
+      //   borderTopWidth: 16,
+      //   borderTopColor: useColorModeValue('white', 'gray.800'),
+      //   pos: 'absolute',
+      //   bottom: '-16px',
+      //   left: '50%',
+      //   transform: 'translateX(-50%)',
+      // }}
+      >
       {children}
     </Stack>
   );
@@ -88,6 +89,7 @@ const TestimonialAvatar = ({
     </Flex>
   );
 };
+
 const review =[
     {
     name:"Jane Cooper",
@@ -129,7 +131,7 @@ const review =[
 
 export default function WithSpeechBubbles() {
   return (
-    <Box maxH={"100vh"} overflow="scroll">
+    <Box maxH={"100vh"} overflowY="scroll">
       <AddReview/>
       <Container  maxW={'8xl'} py={16} as={Stack} spacing={12} >
         <SimpleGrid

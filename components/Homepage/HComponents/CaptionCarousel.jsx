@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Text, Box, IconButton, useBreakpointValue, Image } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
+import homeBg from '../../../Resources/homeBg.svg'
 
 const settings = {
   dots: true,
@@ -70,6 +71,7 @@ export default function CaptionCarousel() {
       width={"full"}
       overflow={"hidden"}
       textAlign={"center"}
+      // bg='red'
     >
 
 <Text fontSize='30px' mt="20px"

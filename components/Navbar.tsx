@@ -18,7 +18,7 @@ export default function Navbar(){
     const btnRef:any = useRef<any>()
     return(
         <HStack w='95%' m='auto' mt='10px' position='sticky' top='0%' zIndex='1000' alignItems="center" justify='space-between' py={3} px={6} borderRadius='3xl'
-        bgColor='rgba(255, 255, 255, .75)' style={{backdropFilter: 'blur(7px)'}} boxShadow='2xl'>
+        bgColor='rgba(255, 255, 255, .70)' style={{backdropFilter: 'blur(7px)'}} boxShadow='xl'>
             <Link href="/" >
                 <Flex gap="5px" alignItems="center">
                     <Img src={logo.src} w="60px" h="60px" />

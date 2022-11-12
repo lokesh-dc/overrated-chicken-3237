@@ -77,7 +77,7 @@ const Advertise = () => {
                 </SimpleGrid>
             </VStack>
         </SimpleGrid>
-        <Text fontSize='50px' alignItems='center' ml="5%" mt="30px" mb="30px">CHECKOUT OUR NEW OFFERS</Text>
+        {/* <Text fontSize='50px' alignItems='center' ml="5%" mt="30px" mb="30px">CHECKOUT OUR NEW OFFERS</Text> */}
     </>
   )
 }

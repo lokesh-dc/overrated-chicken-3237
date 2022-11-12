@@ -7,12 +7,14 @@ import {
   Text,
   Flex,
   VStack,
+  HStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import { RadioSizeCard } from "../../components/SingleProduct/RadioCard";
 import { AiOutlineStar } from "react-icons/ai";
 import { SlBag } from "react-icons/sl";
 import TabsSection from "../../components/SingleProduct/Tabs";
-import { BsStarFill } from "react-icons/bs";
+import { BsCart, BsStarFill } from "react-icons/bs";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -99,8 +101,8 @@ const SingleProductPage = () => {
                 <Button borderRadius={"50%"} bg="grey"></Button>
                 <Button borderRadius={"50%"} colorScheme="orange"></Button>
               </Flex>
-              <VStack w="80%" m="auto" marginTop={"60px"} gap="10px">
-                <Button w="100%" color="white" bg={"#2a977d"}>
+              <HStack w="80%" m="auto" marginTop={"30px"} gap="10px">
+                <Button position='sticky' bottom='10px' w="100%" color="white" bg={"#2a977d"}>
                   {" "}
                   Buy Now
                 </Button>
@@ -112,11 +114,18 @@ const SingleProductPage = () => {
                 >
                   Add To Wishlist <SlBag />
                 </Button>
-              </VStack>
+              </HStack>
             </Box>
           </Box>
         </Box>
       </SimpleGrid>
+      <Box position='fixed' top='90%' right='4%'>
+        <Tooltip placement='top' hasArrow label='Buy Now' >
+          <Box  zIndex='99999'>
+            <BsCart style={{fontSize:'30px', }}/>
+          </Box>
+        </Tooltip>
+      </Box>
         <TabsSection/>
       <Footer/>
     </>

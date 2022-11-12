@@ -29,7 +29,7 @@ const TopSec = () => {
                 variant='unstyled'
             />
 
-            <CloseIcon w={2} h={3} bg="gray.50" borderRadius='full' onClick={handleClick}/>
+            {/* <CloseIcon w={2} h={3} bg="gray.50" borderRadius='full' onClick={handleClick}/> */}
 
             <Center h='20px' bg='gray' display={{base:'none', md:'block'}}>
                 <Divider orientation='vertical'/>

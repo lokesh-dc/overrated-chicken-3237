@@ -1,12 +1,12 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import Tab1 from "./Tab1";
+import WithSpeechBubbles from "./Tab1";
 import Feature from "./Tab2";
 
 const TabsSection = () => {
   return (
     <>
-      <Tabs align="center" variant='enclosed' marginTop={"90px"}>
+      <Tabs isLazy align="center" variant='enclosed' marginTop={"90px"}>
         <TabList>
           <Tab w="50%" fontSize={"3xl"}>Reviews</Tab>
           <Tab w="50%" fontSize={"3xl"}>Feature</Tab>
@@ -14,7 +14,7 @@ const TabsSection = () => {
         {/* ============================ */}
         <TabPanels>
           <TabPanel>
-            <Tab1 />
+            <WithSpeechBubbles />
           </TabPanel>
           <TabPanel>
             <Feature/>

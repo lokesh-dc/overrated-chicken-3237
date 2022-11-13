@@ -66,10 +66,12 @@ import { AiOutlineHeart } from 'react-icons/ai';
     currPage,
     handleWishlist,
     handleDelWishlist,
-    handleAddToCart
+    handleAddToCart,
+    productId
   }:any) {
+    // console.log(title, 'THIS IS PRODUCT ID')
 
-    title= title.slice(0,25)
+    title= title?.slice(0,25)
     // const {handleAddCart} = useContext(AppContext)
     // console.log(currPage, 'this is current page')
 
@@ -80,13 +82,11 @@ import { AiOutlineHeart } from 'react-icons/ai';
         <Box
           maxW="sm"
           h={{base:'auto', lg:'500px'}}
-          // mixBlendMode='multiply'
           >
   
           <Link href={`/products/${_id}`}>
           <Image
             mixBlendMode='multiply'
-            // borderRadius='full'
             src={src}
             alt={`Picture of ${title}...`}
             roundedTop="lg"

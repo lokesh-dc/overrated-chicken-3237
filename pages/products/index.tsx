@@ -258,7 +258,7 @@ export default function Products(props:any) {
                     <Box bg='white'  w='20%' h='fit-content' borderRadius='2xl'  display={{base:'none', lg:'block'}} position='sticky' top='100px' p={2}
                         bgColor='rgba(255, 255, 255, .35)' style={{backdropFilter: 'blur(5px)'}} boxShadow='2xl' _hover={{boxShadow:'0 0 1rem 0 rgba(0, 0, 0, .2)'}}
                     >
-                        <LeftSec data={Allproducts} getProductsByPrice={getProductsByPrice} getProductByRating={getProductsByRating}/>
+                        <LeftSec data={props.props} getProductsByPrice={getProductsByPrice} getProductByRating={getProductsByRating}/>
                     </Box>
 
                     <Box  w={{base:'95%',lg: "75%", xl:'78%'}} >

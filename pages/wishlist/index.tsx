@@ -17,8 +17,8 @@ const index = ({props}: any) => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`https://shop-api-gqqn.onrender.com/products`).then((res:any) => setData(res.data))
-        .catch((err) => setLoading(false))
+        axios.get(`/api/wishlist`).then((res:any) => setData(res.data))
+        .catch((err) => console.log(err,'wishlist error here'))
     }, [page, filter])
 
     const getProductByPrice = (from:any, to:any) => {
@@ -61,7 +61,7 @@ const index = ({props}: any) => {
             </Box>
 
             <Box  w={{base:'95%', xl:'78%'}} >
-                <MidSec data={props} page={page} setPage={setPage} currPage="wishlist"  handleDelWishlist={handleDelWishlist}/>
+                <MidSec wishData={data} page={page} setPage={setPage} currPage="wishlist"  handleDelWishlist={handleDelWishlist}/>
             </Box>
 
         </Flex>

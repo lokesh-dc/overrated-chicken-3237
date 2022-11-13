@@ -19,6 +19,7 @@ export default async (req:any, res:any) => {
                 if(wishlist.length==0){
                     return res.send("Your Wishlist is empty");
                 }
+                // console.log(wishlist, 'THIS IS WISHLIST')
                 return res.json(wishlist);
             }
             

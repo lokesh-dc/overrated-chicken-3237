@@ -11,7 +11,7 @@ import { useState } from "react";
 import { MdGraphicEq } from "react-icons/md";
 // import { filterProductByPrice } from "../../../API/api";
 
-export default function LeftSec({data, getProductsByPrice, getProductByRating}:any) {
+export default function LeftSec({data, getProductsByPrice, getProductByRating,resetProducts}:any) {
     const [maxMin, setMaxMin] = useState([1, 500])
     console.log(data,'data')
    
@@ -23,11 +23,14 @@ export default function LeftSec({data, getProductsByPrice, getProductByRating}:a
         console.log(filterData)
         getProductsByPrice(filterData)
     }
+    const handleReset =()=>{
+        resetProducts()
+    }
     return (
         <Box px={2} py={2} >
             <HStack justify='space-between' py={2} px={4}>
                 <Text fontWeight='bold' fontSize='20px'>Filter</Text>
-                <Button variant='outline' borderRadius='3xl'>Reset</Button>
+                <Button variant='outline' borderRadius='3xl' onClick={handleReset}>Reset</Button>
             </HStack>
             <Accordion defaultIndex={[0]} allowMultiple >
 
@@ -90,11 +93,11 @@ export default function LeftSec({data, getProductsByPrice, getProductByRating}:a
                     </h2>
                     <AccordionPanel pb={4} >
                         <Flex flexDir='column' gap={2} justify='center' align='flex-start' pl={6}>
-                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(0,1)}>1 & below</Checkbox>
-                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(1.1,2)}>1.1 to 2</Checkbox>
-                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(2,3)}>2.1 to 3</Checkbox>
-                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(3,4)}>3.1 to 4</Checkbox>
-                            <Checkbox fontSize='15px' defaultChecked color='#2e2c38' onClick={() => getProductByRating(4,5)}>4.1 & above</Checkbox>
+                            <Checkbox fontSize='15px'  color='#2e2c38' onChange={() => getProductByRating(0,1)}>1 & below</Checkbox>
+                            <Checkbox fontSize='15px'  color='#2e2c38' onChange={() => getProductByRating(1.1,2)}>1.1 to 2</Checkbox>
+                            <Checkbox fontSize='15px'  color='#2e2c38' onChange={() => getProductByRating(2,3)}>2.1 to 3</Checkbox>
+                            <Checkbox fontSize='15px' color='#2e2c38' onChange={() => getProductByRating(3,4)}>3.1 to 4</Checkbox>
+                            <Checkbox fontSize='15px'  color='#2e2c38' onChange={() => getProductByRating(4,5)}>4.1 & above</Checkbox>
                         </Flex>
                     </AccordionPanel>
                 </AccordionItem>

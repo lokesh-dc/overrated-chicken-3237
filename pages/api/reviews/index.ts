@@ -9,7 +9,8 @@ export default async (req:any, res:any) => {
         await connect();
         let { content, productId,rating } = req.body;
         const {id} =req.headers
-        const date= new Date().toString()
+        const dateToChange= new Date().toString().split(" ");
+        const date = `${dateToChange[2]}/${dateToChange[1]}/${dateToChange[0]}`
         if(req.method==="GET"){
             const reviews = await reviewModel.find({productId:id}).populate("userId");
             res.send(reviews);
@@ -32,7 +33,7 @@ export default async (req:any, res:any) => {
                 const { cookies } = req;
                 const parseCookie:any= JSON.parse(cookies.mohallaMartJwt)
                 const Userid =  jwt.verify(parseCookie.token, "vdvhsvdsvcdcvsdvcvkc");
-                let hasReviewed = await reviewModel.findOne({id, userId: Userid.id});
+                let hasReviewed = await reviewModel.findOne({productId:id, userId: Userid.id});
                 if(!hasReviewed){
                     return res.status(401).send("Missing Permissions");
                 }

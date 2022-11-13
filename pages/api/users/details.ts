@@ -3,10 +3,12 @@ import userModel from "../../../models/user.model";
 const jwt = require("jsonwebtoken");
 
 export default async (req:any, res:any) => {
-    const {token} = req.headers;
-    if(token){        
+    const { cookies } = req;
+    const parseCookie:any= JSON.parse(cookies.mohallaMartJwt)
+    console.log(parseCookie.token)
+    if(parseCookie.token){        
         try{
-            let {id,  email} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            let {id,  email} = jwt.verify(parseCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             let user = await userModel.findOne({_id: id, email});
             res.send({ack: true, user});
         }

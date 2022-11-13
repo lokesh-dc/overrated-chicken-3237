@@ -30,6 +30,7 @@ const SingleProductPage = ({props}:any) => {
   const [data, setData] = useState<any>()
   const [reviews,setReviews] = useState<any>()
   const [reRender , setReRender] = useState(false)
+  const [loggedIn , setLoggedIn]  = useState("")
   // console.log(props.cook)
 
   // console.log(router.query.id, 'router', props)
@@ -52,9 +53,11 @@ const SingleProductPage = ({props}:any) => {
     // console.log(data)
   }
 
-  // useEffect(()=>{
-
-  // },[])
+  useEffect(()=>{
+      axios.get(`/api/users/details`).then((res)=>{
+        setLoggedIn(res.data.user.email)
+      })
+  },[])
 
   const handleSubmitReview=(data:any,fillStar:any)=>{
     axios.post(`/api/reviews`,{
@@ -71,7 +74,7 @@ const SingleProductPage = ({props}:any) => {
   const deleteReview =()=>{
     axios.delete(`/api/reviews`,{
       headers:{
-        Prodid:router.query.id
+        id:router.query.id
       }
     }).then((res)=>{
       console.log(res)
@@ -186,7 +189,7 @@ const SingleProductPage = ({props}:any) => {
           </Box>
         </Tooltip>
       </Box>
-        <TabsSection handleSubmitReview={handleSubmitReview} showReviews={reviews} deleteReview={deleteReview}/>
+        <TabsSection handleSubmitReview={handleSubmitReview} loggedIn={loggedIn} showReviews={reviews} deleteReview={deleteReview}/>
       <Footer/>
     </>
   );

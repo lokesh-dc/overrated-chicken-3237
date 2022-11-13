@@ -17,8 +17,8 @@ export default function Orders() {
     return(
         <>
             <Navbar/>
-            <Text fontSize="3rem">Your Orders</Text>
-            <Stack spacing="6" w="60%" m="auto">
+            <Text fontSize="3rem" py={8} px={8} w='70%' m="auto">Your Orders</Text>
+            <Stack spacing="6" w="60%" m="auto" mb='100px'>
               {
                 ordersData?.map((item:any) => (
                     <CartItem key={item._id} {...item} />

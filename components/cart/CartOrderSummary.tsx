@@ -32,7 +32,7 @@ import {
     )
   }
   
-  export const CartOrderSummary = ({makePayment}:any) => {
+  export const CartOrderSummary = ({makePayment, totalCost}:any) => {
 
     const nameRef:any = useRef<any>(null)
     const emailRef = useRef<any>(null)
@@ -48,7 +48,7 @@ import {
         <Heading size="md">Order Summary</Heading>
   
         <Stack spacing="6">
-          <OrderSummaryItem label="Subtotal" value={formatPrice(597)} />
+          <OrderSummaryItem label="Subtotal" value={formatPrice(totalCost)} />
           
           <Flex flexDir='column' gap={3}>
             <VStack spacing={0} align='flex-start'>
@@ -70,11 +70,11 @@ import {
               Total
             </Text>
             <Text fontSize="xl" fontWeight="extrabold">
-              {formatPrice(597)}
+              {formatPrice(totalCost)}
             </Text>
           </Flex>
         </Stack>
-        <Button disabled={name.length == 0 ? true : false}  colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />} onClick={() => makePayment(nameRef.current.value, emailRef.current.value, Number(contactRef.current.value), 567)}>
+        <Button disabled={name.length == 0 ? true : false}  colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />} onClick={() => makePayment(nameRef.current.value, emailRef.current.value, Number(contactRef.current.value), totalCost)}>
           Purchase
         </Button>
       </Stack>

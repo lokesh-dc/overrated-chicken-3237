@@ -35,9 +35,9 @@ export default async (req:any, res:any) => {
                 }
             } 
             // else if(req.method === "DELETE"){
-            //     // const { productid } = req.headers;
-            //     console.log('ID', req.headers, 'abc', req.body)
-            //     // const wishlist = await wishlistModel.deleteOne({userId: id, productId: productid});
+                // const { productid } = req.headers;
+                // console.log('ID', req.headers, 'abc', req.body)
+                // const wishlist = await wishlistModel.deleteOne({userId: id, productId: productid});
             //     return res.send("Deleted Successfully");
             // }
         } catch (e:any) {

@@ -176,9 +176,7 @@ export default function Products(props:any) {
         } )
     }
 
-    const handleClick =() => {
-        axios.get('/api/users/logout').then((res) => console.log(res))
-    }
+    
 
     const resetProducts =()=>{
         setAllProducts(props.props);
@@ -189,14 +187,14 @@ export default function Products(props:any) {
     <>
         {
             props.cook == '' ? 
-            <Navbar props="" handleSearch={handleSearch}/> : 
+            <Navbar props="" handleSearch={handleSearch} /> : 
             <Navbar  props={props.cook} handleSearch={handleSearch} /> 
 
         }
 
 
         {/* <TopSec/> */}
-        <Button onClick={handleClick}>Test</Button> //! TESTING LOGOUT ROUTE  
+        {/* <Button onClick={handleClick}>Test</Button> //! TESTING LOGOUT ROUTE   */}
 
 
         {/* // ? Below is the code for Breadcrumb's and Sorting strip */}
@@ -256,7 +254,7 @@ export default function Products(props:any) {
 
 
             {/* //? Here starts the code for Product's grid & Filters */}
-            {/* <Image display={{base:'none', md:'block'}} src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' /> */}
+            <Image display={{base:'none', md:'block'}} src={blob1.src} w='300px' position='fixed' top='40%' left='20%' zIndex='-10' />
             <Image display={{base:'none', md:'block'}} src={blob2.src} w='400px' position='fixed' top='40%' left='80%' zIndex='-10' />
             <Image display={{base:'none', md:'block'}} src={blob3.src} w='400px' position='fixed' top='20%' left='50%' zIndex='-10' />
             {/* <Image display={{base:'none', md:'block'}} src='https://animoto.com/static/TealDots-212c4a91665ce0cc624cdf92514a34d6.svg' w='180px' position='fixed' top='20%' left='0%' zIndex='-10' /> */}

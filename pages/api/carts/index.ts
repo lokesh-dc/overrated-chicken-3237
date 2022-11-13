@@ -27,8 +27,8 @@ export default async (req:any, res:any) => {
             
             else if(req.method==="POST"){
                 const { productId } = req.body;
-                // console.log(productId, 'ID ,PRODUCTSSSDSF')
-                const checkProduct = await cartModel.findOne({productId, id});
+                console.log(productId, 'ID ,PRODUCTSSSDSF')
+                const checkProduct = await cartModel.findOne({productId,userId: id});
                 if(!checkProduct){
                     await cartModel.create({productId, userId: id});
                     return res.send("Product added");

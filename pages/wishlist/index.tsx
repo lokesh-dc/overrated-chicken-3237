@@ -30,10 +30,10 @@ const index = ({props}: any) => {
         // .catch((err) => setLoading(false))
     }
     
-    const handleDelWishlist = (id:any) => {
+    const handleDelWishlist = (productId:any) => {
         setLoading(true)
-        console.log("DELETE WISHLIST", id)
-        axios.delete('/api/wishlist', id).then((res) => console.log(res, 'delete wishlist res'))
+        console.log("DELETE WISHLIST", productId)
+        axios.delete(`/api/wishlist/query/${productId}`).then((res) => console.log(res, 'delete wishlist res'))
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)

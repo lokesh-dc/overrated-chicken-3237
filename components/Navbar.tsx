@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Img, Flex, Button,  HStack, Menu, MenuButton, MenuList, MenuItem, Tooltip, useDisclosure, Collapse, Stack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, VStack, cookieStorageManager } from "@chakra-ui/react";
 
 
+
 import logo from "../Resources/logo-circle.png"
 import style from "../styles/navbar.module.css"
 import removedBG from '../Resources/removedBgMohallamart.png'
@@ -13,10 +14,32 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi"
 import { useRef } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
-export default function Navbar(){
+export default function Navbar({props}:any){
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef:any = useRef<any>()
+    const router = useRouter()
+    const toast = useToast()
+
+    // if(props != ""){
+    //     props = JSON.parse(props)
+    // }
+    const handleSeller = () => {
+        console.log(props, 'NAVBAR PROPS')
+        if(props != ""){
+            router.push("/becomeseller")
+        }else{
+            toast({
+                title:'You have to Login first',
+                description: "Login OR Create an account first",
+                status: 'warning',
+                duration: 6000,
+                isClosable: true,
+            })
+            router.push("/login")
+        }
+    }
     return(
         <HStack w='95%' m='auto' mt='10px' position='sticky' top='0%' zIndex='1000' alignItems="center" justify='space-between' py={3} px={6} borderRadius='3xl'
         bgColor='rgba(255, 255, 255, .70)' style={{backdropFilter: 'blur(7px)'}} boxShadow='xl'>
@@ -101,7 +124,7 @@ export default function Navbar(){
                     <Button variant='outline' mr={3} onClick={onClose}>
                     Close
                     </Button>
-                    <Button colorScheme='blue'>Become a Seller </Button>
+                    <Button colorScheme='blue' onClick={handleSeller}>Become a Seller </Button>
                 </DrawerFooter>
                 </DrawerContent>
             </Drawer>

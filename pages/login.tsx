@@ -52,6 +52,7 @@ export default function signup({props}:any){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let { name, value } = e.target;
         execute(name, value);
+        creds.password = firstRef.current.value
         console.log(creds, firstRef.current.value)
     }
 
@@ -60,7 +61,7 @@ export default function signup({props}:any){
             title: 'Signing you in.',
             description: "Checking your credentials",
             status: 'info',
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
         })
         axios.post("/api/users/login", creds).then((res) => {
@@ -72,7 +73,6 @@ export default function signup({props}:any){
                 isClosable: true,
             })
             router.push('/products')
-            console.log(window.document.cookie)
         })
         .catch((e) => {
             console.log(e.response.data)

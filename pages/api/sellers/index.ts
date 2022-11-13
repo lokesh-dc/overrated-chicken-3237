@@ -6,10 +6,12 @@ const jwt = require("jsonwebtoken");
 
 export default async (req:any, res:any) => {
     const { token } = req.headers;
-    if(token){
+    const {cookies} = req
+    const parsedCookie = JSON.parse(cookies.mohallaMartJwt)
+    if(parsedCookie.token){
         try {
             await connect();
-            let {id} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            let {id} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             let logged_User = await userModel.findOne({_id: id});
             if(req.method==="GET"){
                 if(logged_User?.role==="Admin"){
@@ -21,10 +23,10 @@ export default async (req:any, res:any) => {
                 }
             }
             else if(req.method==="POST"){
-                if(logged_User?.role==="Admin" || logged_User?.role==="Seller"){
+                if(logged_User?.role==="Admin" || logged_User?.role==="Buyer"){
                     let { storeName , reg} = req.body;
                     await seller.create({storeName, userId : id, reg});
-                    return res.send("Seller successfullt created!");
+                    return res.send("Seller successfully created!");
                 }else{
                     return res.status(401).send("Unauthorised Access!");
                 }

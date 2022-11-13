@@ -24,7 +24,7 @@ The One-stop Shopping Destination. E-commerce wesite that offers the most compre
 
 
 ## Contributing
-- Lokesh D Choudhary
+- Lokesh Choudhary
 - Aryan Sinha 
 - Utkarsh 
 - Sunil Ingole

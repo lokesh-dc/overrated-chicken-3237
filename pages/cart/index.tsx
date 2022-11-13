@@ -80,6 +80,7 @@ function Cart({props}:any) {
         alert(`Payment Id: ${response.razorpay_payment_id}`);
         alert(`Order Id: ${response.razorpay_order_id}`);
         alert(`Razorpay Signature${response.razorpay_signature}`);
+        axios.post("http://localhost:3000/api/orders", {"message": "success"}).then((res)=> console.log(res)).catch((e)=> console.log(e.message));
       },
       prefill: {
         name: {name},

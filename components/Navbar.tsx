@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { Img, Flex, Button,  HStack, Menu, MenuButton, MenuList, MenuItem, Tooltip, useDisclosure, Collapse, Stack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, VStack, cookieStorageManager } from "@chakra-ui/react";
+import { Img, Flex, Button,  HStack, Menu, MenuButton, MenuList, MenuItem, Tooltip, useDisclosure, Collapse, Stack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, VStack, cookieStorageManager, useToast } from "@chakra-ui/react";
 
 
 
@@ -16,7 +16,7 @@ import { useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export default function Navbar({props}:any){
+export default function Navbar({props, handleSearch}:any){
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef:any = useRef<any>()
     const router = useRouter()
@@ -51,7 +51,7 @@ export default function Navbar({props}:any){
             </Link>
 
             {/* <Box w='65%' border='1px solid red'> */}
-                <TopSec/>
+                <TopSec handleSearch={handleSearch} />
             {/* </Box> */}
 
             <Flex w='20%' justifyContent="space-evenly" display={{base:'none', sm:"none", md:"flex" }} >

@@ -1,13 +1,15 @@
 import { ChevronDownIcon, ChevronUpIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import { Box, Button, Center, Divider, HStack, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useState , useRef} from 'react'
 import { FiCrosshair } from 'react-icons/fi'
 // import MidMenu from '../../../Components/Navbar/DeskNav/MidSec/MidMenu'
 // import { Button } from 'semantic-ui-react'
 
-const TopSec = () => {
+const TopSec = ({handleSearch}:any) => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+
+    const queryRef:any = useRef<any>(null)
 
     const [menuItem, setMenuItem] = useState('All Departments')
   return (
@@ -18,12 +20,13 @@ const TopSec = () => {
         >
 
             <Box w='30px' >
-                <SearchIcon color='gray' fontSize='20px'/>
+                <SearchIcon onClick={() => handleSearch(queryRef.current.value)} color='gray' fontSize='20px'/>
             </Box>
 
             <Input
                 px={4}
                 // bg='white'
+                ref={queryRef}
                 fontSize='18px'
                 placeholder='Search Products...'
                 variant='unstyled'

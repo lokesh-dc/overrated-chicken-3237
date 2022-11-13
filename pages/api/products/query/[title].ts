@@ -9,6 +9,7 @@ export default async (req:any, res:any) => {
         await connect();
         if(req.method==="GET"){
            let products = await productsModel.find({ "title" : { "$regex": title , "$options": "i" } },);
+           
            res.send(products)
         }else{
             return res.status(401).send("Operation not allowed");

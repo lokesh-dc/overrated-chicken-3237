@@ -33,6 +33,10 @@ export default function Products(props:any) {
 
     const toast = useToast()
 
+    const handleSearch = (query:any) => {
+        axios.get(`/api/products/query/${query}`).then((res) => setAllProducts(res.data))
+    }
+
     // console.log(products)
     const handleWishlist = (productId:any) => {
         setLoading(true)
@@ -175,8 +179,8 @@ export default function Products(props:any) {
     <>
         {
             props.cook == '' ? 
-            <Navbar props=""/> : 
-            <Navbar  props={props.cook}/> 
+            <Navbar props="" handleSearch={handleSearch}/> : 
+            <Navbar  props={props.cook} handleSearch={handleSearch} /> 
 
         }
 

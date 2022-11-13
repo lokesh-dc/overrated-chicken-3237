@@ -3,7 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import WithSpeechBubbles from "./Tab1";
 import Feature from "./Tab2";
 
-const TabsSection = () => {
+const TabsSection = ({handleSubmitReview , showReviews,deleteReview}:any) => {
   return (
     <>
       <Tabs isLazy align="center" variant='enclosed' marginTop={"90px"}>
@@ -14,7 +14,7 @@ const TabsSection = () => {
         {/* ============================ */}
         <TabPanels>
           <TabPanel>
-            <WithSpeechBubbles />
+            <WithSpeechBubbles handleSubmitReview={handleSubmitReview} showReviews={showReviews} deleteReview={deleteReview}/>
           </TabPanel>
           <TabPanel>
             <Feature/>

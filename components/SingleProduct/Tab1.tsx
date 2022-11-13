@@ -9,10 +9,13 @@ import {
   Avatar,
   useColorModeValue,
   SimpleGrid,
+  Button,
 } from '@chakra-ui/react';
 import { AiOutlineStar } from 'react-icons/ai';
 import { AddReview } from './AddReview';
 import { BsStar, BsStarFill } from 'react-icons/bs';
+import { DeleteIcon } from '@chakra-ui/icons';
+import axios from 'axios';
 
 const Testimonial = ({ children }: { children: ReactNode }) => {
   return <Box>{children}</Box>;
@@ -90,55 +93,20 @@ const TestimonialAvatar = ({
   );
 };
 
-const review =[
-    {
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
-
-},
-{
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
-
-},
-{
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
-
-},
-{
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
-
-},
-{
-    name:"Jane Cooper",
-    date:"12-05-4555",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctorneque sed imperdiet nibh lectus feugiat nunc sem",
-    header:"Efficent Collabrating"
-
-},
-
-]
-
-export default function WithSpeechBubbles() {
+export default function WithSpeechBubbles({handleSubmitReview,showReviews,deleteReview}:any) {
+  console.log(showReviews)
+  const handleDelete=()=>{
+    deleteReview()
+  }
   return (
     <Box maxH={"100vh"} overflowY="scroll">
-      <AddReview/>
+      <AddReview handleSubmitReview={handleSubmitReview}/>
       <Container  maxW={'8xl'} py={16} as={Stack} spacing={12} >
         <SimpleGrid
             columns={[1,2,3]}
             gap="20"
           >
-          {review.map((e)=>{
+          {showReviews?.map((e:any)=>{
           return <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
@@ -158,9 +126,10 @@ export default function WithSpeechBubbles() {
               src={
                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               }
-              name={e.name}
+              name={e.userId.firstName}
               title={e.date}
             />
+            <Button marginTop={"10px"} onClick={handleDelete}>Delete Your Review</Button>
           </Testimonial>
           }
           )}

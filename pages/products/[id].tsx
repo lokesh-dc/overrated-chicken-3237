@@ -22,27 +22,62 @@ import axios from "axios";
 // import { getServerSideProps } from ".";
 
 
-export async function getServerSideProps(props:any){
-  // console.log(props.req.url, "GSP")
 
-  return {
-    props: {props: props.req.url}
-  }
-}
+
 
 const SingleProductPage = ({props}:any) => {
   const router = useRouter()
   const [data, setData] = useState<any>()
+  const [reviews,setReviews] = useState<any>()
+  const [reRender , setReRender] = useState(false)
+  // console.log(props.cook)
 
   // console.log(router.query.id, 'router', props)
   useEffect(() => {
     axios.get(`/api/products/${router.query.id}`).then((res) => setData(res.data))
   }, [])
 
+  useEffect(()=>{
+    console.log(router.query.id)
+    axios.get(`/api/reviews` ,{
+       headers:{
+        id:router.query.id
+       }
+    }).then((res)=>{
+      setReviews(res.data)
+    })
+  },[])
+  // console.log(reviews)
   const handleClick= () => {
     // console.log(data)
   }
 
+  // useEffect(()=>{
+
+  // },[])
+
+  const handleSubmitReview=(data:any,fillStar:any)=>{
+    axios.post(`/api/reviews`,{
+      productId:router.query.id,
+      content:data,
+      rating:fillStar,
+    }).then((res)=>{
+      console.log(res)
+    })
+    setReRender(!reRender)
+
+  }
+
+  const deleteReview =()=>{
+    axios.delete(`/api/reviews`,{
+      headers:{
+        Prodid:router.query.id
+      }
+    }).then((res)=>{
+      console.log(res)
+    })
+    setReRender(!reRender)
+  }
 
   return (
     <>
@@ -151,10 +186,12 @@ const SingleProductPage = ({props}:any) => {
           </Box>
         </Tooltip>
       </Box>
-        <TabsSection/>
+        <TabsSection handleSubmitReview={handleSubmitReview} showReviews={reviews} deleteReview={deleteReview}/>
       <Footer/>
     </>
   );
 };
 
 export default SingleProductPage;
+
+

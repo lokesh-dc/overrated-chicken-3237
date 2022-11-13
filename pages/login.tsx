@@ -65,7 +65,6 @@ export default function signup({props}:any){
             isClosable: true,
         })
         axios.post("/api/users/login", creds).then((res) => {
-            console.log(res)
             toast({
                 title: 'Login Successful',
                 description: "Hooray! You have successfully logged in.",

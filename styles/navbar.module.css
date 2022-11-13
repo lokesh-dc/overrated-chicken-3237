@@ -1,0 +1,15 @@
+.drawer{
+    gap: 20px;
+}
+
+.drawer > a{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgba(179, 179, 179, 0.61);
+}
+
+.drawer button{
+    background-color: black;
+    text-transform: uppercase;
+    margin: 10px 0 ;
+}

@@ -13,7 +13,7 @@ export default async (req:any, res:any) => {
             let userCheck = await user.findOne({ email, password});
             if(userCheck){
                 let id = userCheck._id;
-                let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc");
+                let token = jwt.sign({email, id},"vdvhsvdsvcdcvsdvcvkc",{expiresIn : "20 sec"});
                 let refreshToken = jwt.sign({email, id},"refreshbvhvbfhvfbhfvkbvfdkdfbdfhbvdfbvdf");
 
                 const cookieToken = serialize("mohallaMartJwt", JSON.stringify({token, refreshToken}), {

@@ -19,9 +19,9 @@ export default async (req:any, res:any) => {
             if(req.method==="GET"){
                 console.log('TEST')
                 const cart = await cartModel.find({userId : id}).populate("productId")
-                if(cart.length===0){
-                    res.send("Your cart is empty!");
-                }
+                // if(cart.length===0){
+                //     res.send("Your cart is empty!");
+                // }
                 return res.json(cart);
             }
             
@@ -37,8 +37,9 @@ export default async (req:any, res:any) => {
                 }
             } 
             else if(req.method === "DELETE"){
-                const { id } = req.body;
-                const wishlist = await cartModel.deleteOne({_id: id});
+                const { productid }:any = req.headers;
+                // console.log( 'delete ID', productid, req.headers, 'abc')
+                const wishlist = await cartModel.deleteOne({userId: id, productId: productid});
                 if(!wishlist){
                     res.status(404).send("Product not found.");
                 }

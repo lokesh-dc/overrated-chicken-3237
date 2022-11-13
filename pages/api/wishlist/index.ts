@@ -16,9 +16,9 @@ export default async (req:any, res:any) => {
             let {id} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="GET"){
                 const wishlist = await wishlistModel.find({userId : id}).populate("productId")
-                if(wishlist.length==0){
-                    return res.send("Your Wishlist is empty");
-                }
+                // if(wishlist.length==0){
+                //     return res.send("Your Wishlist is empty");
+                // }
                 // console.log(wishlist, 'THIS IS WISHLIST')
                 return res.json(wishlist);
             }
@@ -34,11 +34,12 @@ export default async (req:any, res:any) => {
                     return res.send("Product already Added");
                 }
             } 
-            else if(req.method === "DELETE"){
-                const { id } = req.body;
-                const wishlist = await wishlistModel.deleteOne({_id: id});
-                return res.send("Deleted Successfully");
-            }
+            // else if(req.method === "DELETE"){
+            //     // const { productid } = req.headers;
+            //     console.log('ID', req.headers, 'abc', req.body)
+            //     // const wishlist = await wishlistModel.deleteOne({userId: id, productId: productid});
+            //     return res.send("Deleted Successfully");
+            // }
         } catch (e:any) {
             console.log('TRIGGER')
             console.error(e);

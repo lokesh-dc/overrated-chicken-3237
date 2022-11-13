@@ -20,9 +20,9 @@ const QuantitySelect = (props: SelectProps) => {
   )
 }
 
-export const CartItem = (props:any, onClickDelete:any) => {
+export const CartItem = (props:any) => {
   const {productId}:any = props
-  console.log(productId, 'cart Item')
+  console.log(props, 'cart Item')
 
   const onChangeQuantity = (e:any) => {
     console.log(e)
@@ -46,7 +46,7 @@ export const CartItem = (props:any, onClickDelete:any) => {
           }}
         />
         <PriceTag price={productId.price} currency={"INR"} />
-        <CloseButton aria-label={`Delete ${productId.title} from cart`} onClick={onClickDelete} />
+        <CloseButton aria-label={`Delete ${productId.title} from cart`} onClick={() => props.handleDelete(productId._id)} />
       </Flex>
 
       {/* Mobile */}

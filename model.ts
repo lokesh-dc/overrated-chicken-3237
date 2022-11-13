@@ -4,4 +4,3 @@ import productModel from "./models/cart.model"
 import wishlistModel from "./models/cart.model"
 
 
-ex

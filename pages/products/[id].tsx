@@ -151,7 +151,7 @@ const SingleProductPage = ({props}:any) => {
           </Box>
         </Tooltip>
       </Box>
-        {/* <TabsSection/> */}
+        <TabsSection/>
       <Footer/>
     </>
   );

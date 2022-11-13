@@ -33,7 +33,7 @@ export default function signup(){
         toast({
             title: 'Signing up.',
             description: "Creating your account.",
-            status: 'success',
+            status: 'info',
             duration: 1000,
             isClosable: true,
         })
@@ -46,7 +46,7 @@ export default function signup(){
                 duration: 6000,
                 isClosable: true,
             })
-            Router.push("/verify");
+            Router.push("/login");
         })
         .catch((e) => {
             console.log(e.response.data)

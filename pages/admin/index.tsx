@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs, VStack, Box, Heading, Text, useToast } from '@chakra-ui/react'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { AiOutlineHome, AiOutlineTeam } from 'react-icons/ai'
 import { BiTimeFive } from 'react-icons/bi'
 import { CgBriefcase } from 'react-icons/cg'
@@ -15,6 +15,9 @@ import axios from 'axios'
 // import AllTable from '../../components/AdminComps/Table/AllTable'
 
 const Admin = () => {
+   const [users ,setUsers] = useState<any>([]) 
+   const [brands, setBrands] = useState<any>([])
+   const [products, SetProducts] = useState<any>([])
 
    const toast = useToast()
 
@@ -49,6 +52,19 @@ const Admin = () => {
          console.log(e, 'error creating brand')
       })
    }
+
+    useEffect(() => {
+      axios.get('/api/brands').then((res) => setBrands(res.data))
+      .catch((e) => console.log(e))
+   }, [])
+   useEffect(() => {
+      axios.get("/api/users").then((res) => setUsers(res.data))
+      .catch((e) => console.log(e,'e users'))
+   }, [])
+   useEffect(() => {
+      axios.get('/api/products').then((res) => SetProducts(res.data))
+      .catch((e) => console.log(e, "PRODUCTS FETCH ERROR"))
+   }, [])
 
   return (
     <Tabs
@@ -228,7 +244,7 @@ const Admin = () => {
                <TabPanel >
                     <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
                         <Text fontSize='4xl' color='white'>Users</Text>
-                        <AllTable title="User" roleHeading="role" role="Admin" amount="2500" totalP="Total Purchases(in Rs)" user='Aaryan Sinha' email="aaryansinha16@gmail.com"/>
+                        <AllTable data={users} title="User" roleHeading="role" totalP="Total Purchases(in Rs)" />
                     </Box>
                </TabPanel>
 
@@ -236,7 +252,7 @@ const Admin = () => {
                <TabPanel>
                   <Box p={6} w='100%' h='90vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
                         <Text fontSize='4xl' color='white'>Brands</Text>
-                        <AllTable title="User" roleHeading="role" role="Admin" amount="2500" totalP="Total Purchases(in Rs)" user='Aaryan Sinha' email="aaryansinha16@gmail.com"/>
+                        <AllTable data={brands} title="Brands" />
                   </Box>
                </TabPanel>
 
@@ -244,7 +260,7 @@ const Admin = () => {
                <TabPanel>
                   <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' overflowY='scroll'>
                         <Text fontSize='4xl' color='white'>Products</Text>
-                        <AllTable title="Products" roleHeading="Brand" role="Addidas" amount="4.5" totalP="Ratings" user='Sneakers' />
+                        <AllTable data={products} title="Products" roleHeading="Price"  totalP="Ratings" />
                   </Box>
                </TabPanel>
 

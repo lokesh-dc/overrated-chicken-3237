@@ -4,20 +4,22 @@ import userModel from "../../../models/user.model";
 const jwt = require("jsonwebtoken");
 
 export default async (req:any, res:any) => {
-    const {token} = req.headers;
-    if(!token){
+    const { cookies } = req;
+    const parsedCookie = JSON.parse(cookies.mohallaMartJwt)
+    if(!parsedCookie.token){
         return res.status(401).send("Unauthorised access");
     }
     try {
         await connect();
-        const {id, email} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+        const {id, email} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
 
         let loggedUser = await  userModel.findOne({_id: id ,email})
         if(!loggedUser){
             return res.send("Unauthorised access detected. Kindly Login!");
         }
         if(req.method==="GET"){   
-            if(loggedUser==="Admin"){
+            // console.log('looGGEEDDD USER',loggedUser)
+            if(loggedUser.role ==="Admin"){
                 let users = await userModel.find({}, {password: 0})
                 return res.json(users)
             }else{

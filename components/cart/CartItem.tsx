@@ -3,18 +3,6 @@ import * as React from 'react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 
-type CartItemProps = {
-  isGiftWrapping?: boolean
-  name: string
-  description: string
-  quantity: number
-  price: number
-  currency: string
-  imageUrl: string
-  onChangeQuantity?: (quantity: number) => void
-  onClickGiftWrapping?: () => void
-  onClickDelete?: () => void
-}
 
 const QuantitySelect = (props: SelectProps) => {
   return (
@@ -32,38 +20,33 @@ const QuantitySelect = (props: SelectProps) => {
   )
 }
 
-export const CartItem = (props: CartItemProps) => {
-  const {
-    isGiftWrapping,
-    name,
-    description,
-    quantity,
-    imageUrl,
-    currency,
-    price,
-    onChangeQuantity,
-    onClickDelete,
-  } = props
+export const CartItem = (props:any, onClickDelete:any) => {
+  const {productId}:any = props
+  console.log(productId, 'cart Item')
+
+  const onChangeQuantity = (e:any) => {
+    console.log(e)
+  }
 
   return (
     <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
-      <CartProductMeta
-        name={name}
-        description={description}
-        image={imageUrl}
-        isGiftWrapping={isGiftWrapping}
+     <CartProductMeta
+        name={productId.title}
+        description={"Hello world"}
+        image={productId.src}
+        // isGiftWrapping={isGiftWrapping}
       />
 
-      {/* Desktop */}
+     {/* Desktop */}
       <Flex width="full" justify="space-between" display={{ base: 'none', md: 'flex' }}>
         <QuantitySelect
-          value={quantity}
+          value={productId.quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value)
           }}
         />
-        <PriceTag price={price} currency={currency} />
-        <CloseButton aria-label={`Delete ${name} from cart`} onClick={onClickDelete} />
+        <PriceTag price={productId.price} currency={"INR"} />
+        <CloseButton aria-label={`Delete ${productId.title} from cart`} onClick={onClickDelete} />
       </Flex>
 
       {/* Mobile */}
@@ -78,13 +61,13 @@ export const CartItem = (props: CartItemProps) => {
           Delete
         </Link>
         <QuantitySelect
-          value={quantity}
+          // value={productId.quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value)
           }}
         />
-        <PriceTag price={price} currency={currency} />
-      </Flex>
+        <PriceTag price={productId.price} currency={"INR"} />
+      </Flex>  
     </Flex>
   )
 }

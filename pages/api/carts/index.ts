@@ -1,15 +1,23 @@
+import { Console } from "console";
 import { connect }  from "../../../lib/dbConnect";
 import cartModel from "../../../models/cart.model";
 const jwt = require("jsonwebtoken");
 
 export default async (req:any, res:any) => {
-    const {token} = req.headers;
-    if(token){
+    const {cookies} = req
+    //? A SMALL BUG HERE WHICH CAUSES NO HARM TO THE FEATURE -> if the cookie is undefined...
+    // if(!cookies){
+    //     return res.send("LOL")
+    // }
+
+    const parsedCookie = JSON.parse(cookies.mohallaMartJwt) 
+    if(parsedCookie.token){
         try {
             await connect();
 
-            let {id} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            let {id} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="GET"){
+                console.log('TEST')
                 const cart = await cartModel.find({userId : id}).populate("productId")
                 if(cart.length===0){
                     res.send("Your cart is empty!");
@@ -18,10 +26,11 @@ export default async (req:any, res:any) => {
             }
             
             else if(req.method==="POST"){
-                const { productId, userId } = req.body;
-                const checkProduct = await cartModel.findOne({productId, userId});
+                const { productId } = req.body;
+                // console.log(productId, 'ID ,PRODUCTSSSDSF')
+                const checkProduct = await cartModel.findOne({productId, id});
                 if(!checkProduct){
-                    await cartModel.create({productId, userId});
+                    await cartModel.create({productId, userId: id});
                     return res.send("Product added");
                 }else{
                     return res.send("Product already Added");
@@ -36,8 +45,9 @@ export default async (req:any, res:any) => {
                 return res.send("Deleted Successfully");
             }
         } catch (e:any) {
+            console.log('eerrrroTEST')
             console.error(e);
-            res.status(500).send(e.message);
+            res.status(500).send("LOL");
         }
     }else{
         res.status(401).send("Unauthorised access!");

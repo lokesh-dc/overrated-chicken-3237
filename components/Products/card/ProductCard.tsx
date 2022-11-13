@@ -65,7 +65,8 @@ import { AiOutlineHeart } from 'react-icons/ai';
     quantity,
     currPage,
     handleWishlist,
-    handleDelWishlist
+    handleDelWishlist,
+    handleAddToCart
   }:any) {
 
     title= title.slice(0,25)
@@ -139,7 +140,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'0.8em'}>
-                <IconButton aria-label='add-to-cart' variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart />}/>
+                <IconButton onClick={() => handleAddToCart(_id)} aria-label='add-to-cart' variant='ghost' size='lg' colorScheme='yellow' icon={<FiShoppingCart />}/>
               </Tooltip>
             </Flex>
   

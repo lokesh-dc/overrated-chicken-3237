@@ -11,19 +11,16 @@ import { useState } from "react";
 import { MdGraphicEq } from "react-icons/md";
 // import { filterProductByPrice } from "../../../API/api";
 
-export default function LeftSec({data, getProductByPrice, getProductByRating}:any) {
-    const [maxMin, setMaxMin] = useState([10, 2000])
-    console.log(data);
-    const handleChange =(e:any)=>{
-        setMaxMin(e)
-
-    }
-    const handleFilter=()=>{
-        let filterData = data.filter((e:any)=>{
-            return +(e.price) >= maxMin[0] && +(e.price) <= maxMin[1]
+export default function LeftSec({data, getProductsByPrice, getProductByRating}:any) {
+    const [maxMin, setMaxMin] = useState([1, 500])
+   
+    const handleFilter=(e:any)=>{
+        console.log(e, 'range')
+        let filterData = data.filter((ele:any)=>{
+            return +(ele.price) >= e[0] && +(ele.price) <= e[1]
         })
         // console.log(filterData)
-        getProductByPrice(filterData)
+        getProductsByPrice(filterData)
     }
     return (
         <Box px={2} py={2} >
@@ -31,7 +28,7 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                 <Text fontWeight='bold' fontSize='20px'>Filter</Text>
                 <Button variant='outline' borderRadius='3xl'>Reset</Button>
             </HStack>
-            <Accordion defaultIndex={[0,1,2]} allowMultiple >
+            <Accordion defaultIndex={[0]} allowMultiple >
 
                 <AccordionItem py={2} >
                     <AccordionButton>
@@ -41,7 +38,10 @@ export default function LeftSec({data, getProductByPrice, getProductByRating}:an
                         <AccordionIcon />
                     </AccordionButton>
                     <AccordionPanel pb={4} >
-                        <RangeSlider aria-label={['min', 'max']} min={10} max={5000} defaultValue={[10, 5000]} onChangeEnd={(e)=>{handleChange(e)}} onChange={handleFilter}>
+                        <RangeSlider aria-label={['min', 'max']} min={1} max={500} defaultValue={[10, 5000]} onChangeEnd={(e:any)=>{
+                            handleFilter(e)
+                            setMaxMin(e)
+                            }}>
                         <RangeSliderTrack bg='red.100'>
                             <RangeSliderFilledTrack bg='tomato' />
                         </RangeSliderTrack>

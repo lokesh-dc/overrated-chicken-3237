@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import PaginationComponent from "../../../Components/Pagination/PaginationComponent";
 import ProductCard from "./card/ProductCard";
 
-export default function MidSec({data, page, setPage, currPage, handleWishlist, handleDelWishlist}:any) {
+export default function MidSec({data, page, setPage, currPage, handleWishlist, handleDelWishlist, handleAddToCart}:any) {
     const [allData, setAllData] = useState([])
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function MidSec({data, page, setPage, currPage, handleWishlist, h
             >
                 {
                     data.slice(0,20)?.map((item:any) => (
-                        <ProductCard {...item} key={item.id} currPage={currPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist}/>
+                        <ProductCard {...item} key={item.id} currPage={currPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} handleAddToCart={handleAddToCart}/>
                     ))
                 }
             </SimpleGrid>

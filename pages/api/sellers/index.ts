@@ -26,6 +26,7 @@ export default async (req:any, res:any) => {
                 if(logged_User?.role==="Admin" || logged_User?.role==="Buyer"){
                     let { storeName , reg} = req.body;
                     await seller.create({storeName, userId : id, reg});
+                    let user = await userModel.findByIdAndUpdate(id, {role: "Seller"})
                     return res.send("Seller successfully created!");
                 }else{
                     return res.status(401).send("Unauthorised Access!");

@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs, VStack, Box, Heading, Text } from '@chakra-ui/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs, VStack, Box, Heading, Text, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { AiOutlineHome, AiOutlineTeam } from 'react-icons/ai'
 import { BiTimeFive } from 'react-icons/bi'
@@ -11,9 +11,45 @@ import dashBack from '../../Resources/mesh1.png'
 import AllTable from '../../components/AdminComps/Table/AllTable'
 import Dashboard from '../../components/AdminComps/Dashboard/Dashboard'
 import AdminForm from '../../components/AdminComps/forms/adminForm'
+import axios from 'axios'
 // import AllTable from '../../components/AdminComps/Table/AllTable'
 
 const Admin = () => {
+
+   const toast = useToast()
+
+   const handleCreateProduct = (title:any, price:any, src:any, description:any, brand:any) => {
+      // console.log('trigger')
+      // console.log(title, price, brand, description, image)
+      axios.post('/api/products', {title, price, src, description}).then((res) => {
+         console.log(res.data,'created product')
+         toast({
+            title: 'Product Created.',
+            description: "Congrats! your new product has been added.",
+            status: 'success',
+            duration: 4000,
+            isClosable: true,
+          })
+      }).catch((e) => {
+         console.log(e, 'error')
+         toast({
+            title: 'Something went wrong.',
+            description: "Oops!, please try again.",
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          })
+      })
+   }
+
+   const handleCreateBrand = (name:any, logo:any) => {
+      axios.post('/api/brands', {name, logo}).then((res) => {
+         console.log(res, 'brand created')
+      }).catch((e) => {
+         console.log(e, 'error creating brand')
+      })
+   }
+
   return (
     <Tabs
             variant="soft-rounded"
@@ -21,7 +57,7 @@ const Admin = () => {
             minH="100vh"
             defaultIndex={0}
             bg="whitesmoke"
-            isLazy={true}
+            isLazy
             overflow='hidden'
          >
             <TabList
@@ -216,7 +252,7 @@ const Admin = () => {
                <TabPanel>
                   <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
                      <Text fontSize='4xl' color='white'>Create a new Product</Text>
-                     <AdminForm currPage="newProd"/>
+                     <AdminForm handleCreateProduct={handleCreateProduct} currPage="newProd"/>
                   </Box>
                </TabPanel>
 
@@ -224,7 +260,7 @@ const Admin = () => {
                <TabPanel>
                <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .15)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
                      <Text fontSize='4xl' color='white'>Create a new Brand</Text>
-                     <AdminForm currPage="newBrand" />
+                     <AdminForm handleCreateBrand={handleCreateBrand} currPage="newBrand" />
                 </Box>
                </TabPanel>
                

@@ -93,11 +93,12 @@ const TestimonialAvatar = ({
   );
 };
 
-export default function WithSpeechBubbles({handleSubmitReview,showReviews,deleteReview}:any) {
+export default function WithSpeechBubbles({handleSubmitReview,showReviews,deleteReview,loggedIn}:any) {
   console.log(showReviews)
   const handleDelete=()=>{
     deleteReview()
   }
+  console.log(loggedIn)
   return (
     <Box maxH={"100vh"} overflowY="scroll">
       <AddReview handleSubmitReview={handleSubmitReview}/>
@@ -107,6 +108,7 @@ export default function WithSpeechBubbles({handleSubmitReview,showReviews,delete
             gap="20"
           >
           {showReviews?.map((e:any)=>{
+            console.log(e)
           return <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
@@ -129,7 +131,7 @@ export default function WithSpeechBubbles({handleSubmitReview,showReviews,delete
               name={e.userId.firstName}
               title={e.date}
             />
-            <Button marginTop={"10px"} onClick={handleDelete}>Delete Your Review</Button>
+            {e.userId.email=== loggedIn ? <Button marginTop={"10px"} onClick={handleDelete}>Delete Your Review</Button> : null}
           </Testimonial>
           }
           )}

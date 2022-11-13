@@ -78,19 +78,18 @@ export default function Products(props:any) {
         }
         // console.log("ADDED TO WISHLIST", id)
     }
-    const handleDelWishlist = (id:any) => {
+    const handleDelWishlist = (productId:any) => {
         setLoading(true)
-        console.log("DELETE WISHLIST", id)
-        axios.delete("/api/wishlist", id).then((res:any) => {
+        // console.log("DELETE WISHLIST", productid)
+
+        // axios.delete('/api/wishlist', {"headers": {productId}}).then((res) => console.log(res.data, 'DELETE CART ITEM'))
+        // .catch((e) => console.log(e.data, 'error delete cart item'))
+
+        axios.delete(`/api/wishlist${productId}`).then((res:any) => {
             console.log(res, "PRODUCT DELETED ")
         }).catch((e) => {
             console.log(e, 'DELETE FAIL')
         })
-        // filterProductByRating(from, to).then((res) => {
-        //     setData(res.data)
-        //     setLoading(false)
-        // })
-        // .catch((err) => setLoading(false))
     }
 
     const handleFilter =(e:any)=>{

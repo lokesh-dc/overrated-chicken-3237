@@ -31,7 +31,7 @@ const AllTable = ({title, role, amount, totalP, user, email, roleHeading, data}:
                                 <Text fontSize='14px'>{item?.email}</Text>
                             </VStack>
                         </Td>
-                        <Td textAlign='center'>{item?.role}{`${item?.price}₹`}</Td>
+                        <Td textAlign='center'>{item?.role}{item?.price}</Td>
                         {title != "User" || title != "Brands" && <Td textAlign='center' isNumeric>{amount}</Td>}
                         <Td textAlign='center' >Edit</Td>
                     </Tr>

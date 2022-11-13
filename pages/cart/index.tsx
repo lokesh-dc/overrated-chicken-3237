@@ -32,11 +32,15 @@ function Cart({props}:any) {
   console.log(props, 'props')
   const amountRef = useRef(null)
   const toast = useToast()
-  const [data, setData] = useState<any>([])
+  const [cartData, setCartData] = useState<any>([])
+  const [change ,setChange] = useState<any>(false)
 
   useEffect(() => {
-    axios.get("/api/carts").then((r) => setData(r.data)).catch((e) => alert(e))
-  }, [])
+    axios.get("/api/carts").then((r) => {
+      setCartData(r.data)
+      console.log(r.data)
+    }).catch((e) => alert(e))
+  }, [change])
 
   const [totalCost, setTotalCost] = useState<any>(0)
 
@@ -108,6 +112,20 @@ function Cart({props}:any) {
       document.body.appendChild(script);
     });
   };
+
+  const deleteItem = (productId:any) => {
+    // console.log(productId, 'DELETE ID')
+    axios.delete('/api/carts', {"headers": {productId}}).then((res) => console.log(res.data, 'DELETE CART ITEM'))
+    .catch((e) => console.log(e.data, 'error delete cart item'))
+
+    setChange(!change)
+  }
+
+
+
+  const handleQuantity = () => {
+
+  }
  
   
 
@@ -129,13 +147,18 @@ function Cart({props}:any) {
         >
           <Stack spacing={{ base: '8', md: '10' }} flex="2">
             <Heading fontSize="2xl" fontWeight="extrabold">
-              Shopping Cart ({data.length} items)
+              Shopping Cart ({cartData?.length} items)
             </Heading>
 
             <Stack spacing="6">
-              {data.map((item:any) => (
-                <CartItem key={item._id} {...item} />
-              ))}
+              {
+                cartData.length == 0 ?
+                <Heading>Your cart is Empty!</Heading> 
+                : 
+                cartData?.map((item:any) => (
+                  <CartItem key={item._id} {...item} handleDelete={deleteItem}/>
+                ))
+              }
             </Stack>
           </Stack>
 

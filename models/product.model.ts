@@ -5,6 +5,7 @@ const productsSchema = new Schema({
     title : {type : String},
     src : {type: String},
     seller : {type : mongoose.Schema.Types.ObjectId, ref:"seller"},
+    price: {type : String},
     description : {type: String}
 })
 

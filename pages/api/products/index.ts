@@ -19,6 +19,7 @@ export default async (req:any, res:any) => {
         
         else if(req.method==="POST"){
             const { title, price, quantity, src, description } = req.body;
+            console.log('PRICEEEEEE', price)
             const product = await productsModel.create({title, price, quantity, src, description});
             return res.json(product);   
         }

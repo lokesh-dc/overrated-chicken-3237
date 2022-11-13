@@ -18,12 +18,13 @@ const Admin = () => {
    const [users ,setUsers] = useState<any>([]) 
    const [brands, setBrands] = useState<any>([])
    const [products, SetProducts] = useState<any>([])
+   const [change, setChange] = useState<any>(false)
 
    const toast = useToast()
 
    const handleCreateProduct = (title:any, price:any, src:any, description:any, brand:any) => {
       // console.log('trigger')
-      // console.log(title, price, brand, description, image)
+      console.log(title, price, typeof price, description)
       axios.post('/api/products', {title, price, src, description}).then((res) => {
          console.log(res.data,'created product')
          toast({
@@ -43,6 +44,7 @@ const Admin = () => {
             isClosable: true,
           })
       })
+      setChange(!change)
    }
 
    const handleCreateBrand = (name:any, logo:any) => {
@@ -51,20 +53,22 @@ const Admin = () => {
       }).catch((e) => {
          console.log(e, 'error creating brand')
       })
+
+      setChange(!change)
    }
 
     useEffect(() => {
       axios.get('/api/brands').then((res) => setBrands(res.data))
       .catch((e) => console.log(e))
-   }, [])
+   }, [change])
    useEffect(() => {
       axios.get("/api/users").then((res) => setUsers(res.data))
       .catch((e) => console.log(e,'e users'))
-   }, [])
+   }, [change])
    useEffect(() => {
       axios.get('/api/products').then((res) => SetProducts(res.data))
       .catch((e) => console.log(e, "PRODUCTS FETCH ERROR"))
-   }, [])
+   }, [change])
 
   return (
     <Tabs

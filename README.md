@@ -60,16 +60,6 @@ The One-stop Shopping Destination. E-commerce wesite that offers the most compre
 ```
 
 
-
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
-
-
 ## Support
 
 For support, email lokesh.cdewanand@gmail.com or join our Slack channel.

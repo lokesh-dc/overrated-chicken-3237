@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Component, useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 import { CartItem } from "../../components/cart/CartItem";
@@ -29,20 +30,27 @@ import Navbar from "../../components/Navbar";
 // }
 
 function Cart({props}:any) {
+  const router = useRouter()
   console.log(props, 'props')
   const amountRef = useRef(null)
   const toast = useToast()
   const [cartData, setCartData] = useState<any>([])
   const [change ,setChange] = useState<any>(false)
+  const [totalCost, setTotalCost] = useState<any>(0)
 
   useEffect(() => {
     axios.get("/api/carts").then((r) => {
       setCartData(r.data)
       console.log(r.data)
-    }).catch((e) => alert(e))
+      var sum = 0
+      for(var i = 0; i<r.data.length; i++){
+        sum += Number(r.data[i].productId.price)
+      }
+      setTotalCost(sum)
+    }).catch((e) => console.log(e))
   }, [change])
 
-  const [totalCost, setTotalCost] = useState<any>(0)
+
 
   
 
@@ -81,10 +89,37 @@ function Cart({props}:any) {
       image: "https://manuarora.in/logo.png",
       handler: function (response:any) {
         // Validate payment at server - using webhooks is a better idea.
-        alert(`Payment Id: ${response.razorpay_payment_id}`);
-        alert(`Order Id: ${response.razorpay_order_id}`);
-        alert(`Razorpay Signature${response.razorpay_signature}`);
-        axios.post("http://localhost:3000/api/orders", {"message": "success"}).then((res)=> console.log(res)).catch((e)=> console.log(e.message));
+        // alert(`Payment Id: ${response.razorpay_payment_id}`);
+        // alert(`Order Id: ${response.razorpay_order_id}`);
+        // alert(`Razorpay Signature${response.razorpay_signature}`);
+
+        toast({
+          title: 'Payment Success.',
+          description: `Order Id: ${response.razorpay_order_id}`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        // toast({
+        //   title: 'Payment Success.',
+        //   description: `Payment Id: ${response.razorpay_payment_id}`,
+        //   status: 'success',
+        //   duration: 3000,
+        //   isClosable: true,
+        // })
+        // toast({
+        //   title: 'Payment Success.',
+        //   description: `Razorpay Signature${response.razorpay_signature}`,
+        //   status: 'success',
+        //   duration: 3000,
+        //   isClosable: true,
+        // })
+
+
+        axios.post("http://localhost:3000/api/orders", {"message": "success"}).then((res)=> {
+          console.log(res)
+        }).catch((e)=> console.log(e.message));
+        router.push("/orders")
       },
       prefill: {
         name: {name},
@@ -163,7 +198,7 @@ function Cart({props}:any) {
           </Stack>
 
           <Flex direction="column" align="center" flex="1">
-            <CartOrderSummary makePayment={makePayment}/>
+            <CartOrderSummary totalCost={totalCost} makePayment={makePayment}/>
             <HStack mt="6" fontWeight="semibold">
               <p>or</p>
               <Link href="/products" style={{color:'blue.500'}}>Continue shopping</Link>

@@ -14,12 +14,13 @@ const index = ({props}: any) => {
     const [page, setPage] = useState(1)
     const [filter, setFilter] = useState("ASC")
     const [loading , setLoading ] = useState(false)
+    const [change , setChange] = useState<any>(false)
 
     useEffect(() => {
         setLoading(true)
         axios.get(`/api/wishlist`).then((res:any) => setData(res.data))
         .catch((err) => console.log(err,'wishlist error here'))
-    }, [page, filter])
+    }, [page, filter, change])
 
     const getProductByPrice = (from:any, to:any) => {
         setLoading(true)
@@ -34,6 +35,7 @@ const index = ({props}: any) => {
         setLoading(true)
         console.log("DELETE WISHLIST", productId)
         axios.delete(`/api/wishlist/query/${productId}`).then((res) => console.log(res, 'delete wishlist res'))
+        setChange(!change)
         // filterProductByRating(from, to).then((res) => {
         //     setData(res.data)
         //     setLoading(false)

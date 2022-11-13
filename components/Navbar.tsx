@@ -15,6 +15,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export default function Navbar({props, handleSearch}:any){
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -25,8 +26,11 @@ export default function Navbar({props, handleSearch}:any){
     // if(props != ""){
     //     props = JSON.parse(props)
     // }
+    if(props){
+        props = JSON.parse(props) || null
+    }
+    console.log(props, 'NAVBAR PROPS')
     const handleSeller = () => {
-        console.log(props, 'NAVBAR PROPS')
         if(props != ""){
             router.push("/becomeseller")
         }else{
@@ -39,6 +43,10 @@ export default function Navbar({props, handleSearch}:any){
             })
             router.push("/login")
         }
+    }
+
+    const handleLogout =() => {
+        axios.get('/api/users/logout').then((res) => console.log(res))
     }
     return(
         <HStack w='95%' m='auto' mt='10px' position='sticky' top='0%' zIndex='1000' alignItems="center" justify='space-between' py={3} px={6} borderRadius='3xl'
@@ -64,9 +72,16 @@ export default function Navbar({props, handleSearch}:any){
                     </MenuButton>
                     <MenuList>
                         <Link href="/login">
-                            <MenuItem  command='⌘T'>
-                                Login
-                            </MenuItem>
+                            {
+                                props ? 
+                                <MenuItem  command='⌘T' onClick={handleLogout}>
+                                    Logout
+                                </MenuItem>
+                                :
+                                <MenuItem  command='⌘T'>
+                                    Login
+                                </MenuItem>
+                            }
                         </Link>
                         <MenuItem command='⌘N'>
                             Become a Seller
@@ -84,7 +99,7 @@ export default function Navbar({props, handleSearch}:any){
 
                 <Tooltip label="Wishlist">
                     <Link href="/wishlist">
-                        <BiShoppingBag style={{fontSize:'26px'}}/>
+                        <AiOutlineHeart style={{fontSize:'26px', color:'red'}}/>
                     </Link>
                 </Tooltip>
             </Flex>

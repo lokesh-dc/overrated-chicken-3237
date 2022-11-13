@@ -1,12 +1,16 @@
 import React from 'react'
 import {Image} from "@chakra-ui/react"
 import { Box, SimpleGrid, Text, VStack } from "@chakra-ui/react"
+import Link from 'next/link'
 const Advertise = () => {
   return (
     <>
+    <Link href="/products">
+
         <Image height="50vh" width="90%" margin="auto" mt="30px"
             src='https://img.shop.com/Image/homepage/giftsforfamily-hero1664399961627.jpg'
         />
+        </Link>
 
         <SimpleGrid
          minChildWidth='200px' 

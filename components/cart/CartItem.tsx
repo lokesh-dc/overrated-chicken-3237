@@ -1,7 +1,8 @@
-import { CloseButton, Flex, Link, Select, SelectProps, useColorModeValue } from '@chakra-ui/react'
+import { Box, CloseButton, Flex, Link, Select, SelectProps, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
+import { AddReview } from '../SingleProduct/AddReview'
 
 
 const QuantitySelect = (props: SelectProps) => {
@@ -29,7 +30,8 @@ export const CartItem = (props:any) => {
   }
 
   return (
-    <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
+    <>
+    <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center" boxShadow='lg' px={4} py={5} rounded='2xl'>
      <CartProductMeta
         name={productId.title}
         description={"Hello world"}
@@ -68,6 +70,10 @@ export const CartItem = (props:any) => {
         />
         <PriceTag price={productId.price} currency={"INR"} />
       </Flex>  
+      <Box w='200px'>
+        <AddReview/>
+      </Box>
     </Flex>
+    </>
   )
 }

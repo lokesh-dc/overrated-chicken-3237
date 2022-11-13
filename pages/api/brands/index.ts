@@ -14,15 +14,20 @@ export default async (req:any, res:any) => {
             const products = await brandModel.find({})
             return res.send(products);
         }else{
-            const { token } = req.headers;
-            if(!token){
+            const { cookies } = req;
+            const parsedCookie:any = JSON.parse(cookies.mohallaMartJwt)
+            console.log(parsedCookie, 'PARSED COOKIE')
+            if(!parsedCookie.token){
                 return res.send("Unauthorised access!");
             }
 
-            const {id, email} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            const {id, email} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             let loggedUser = await  userModel.findOne({_id: id ,email})
+            console.log('LLAALALALAALA',loggedUser);
+            
             if(!loggedUser || !(loggedUser?.role==="Seller" || loggedUser?.role==="Admin")){
-                return res.Status().send("Unauthorised access");
+                console.log('TIMTINTINTINT')
+                return res.status().send("Unauthorised access");
             }
             if(req.method==="POST"){
                 let { name, logo, offer} = req.body;

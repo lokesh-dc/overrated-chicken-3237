@@ -1,22 +1,42 @@
 import { Button, HStack, Input, Select, Textarea, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, {useRef} from 'react'
 
-const AdminForm = ({currPage}:any) => {
+const AdminForm = ({currPage, handleCreateProduct, handleCreateBrand}:any) => {
+
+  const titleRef:any = useRef(null)
+  const priceRef:any = useRef(null)
+  const imageRef:any = useRef(null)
+  const descRef:any = useRef(null)
+  const brandRef:any = useRef(null)
+
+  function abc (){
+    console.log('abc')
+  }
+
   return (
     <VStack  w='80%' m='auto'  spacing={6} py={10}>
         <HStack>
-            <Input bg='white' placeholder={currPage == "newProd" ? 'Product Name...': 'Brand Name...'} required/>
-            {currPage == "newProd" && <Input bg='white' type='number' placeholder='Product Price' />}
+            <Input ref={titleRef} bg='white' placeholder={currPage == "newProd" ? 'Product Name...': 'Brand Name...'} required/>
+            {currPage == "newProd" && <Input ref={priceRef} bg='white' type='number' placeholder='Product Price' />}
         </HStack>
-        <Input bg='white' placeholder='Image URL' />
-        <Textarea bg='white' placeholder={currPage == "newProd" ? 'Product Description': 'Brand Description...'} />
-        {currPage == 'newProd' && <Select bg='white' placeholder='Select Brand'>
+        <Input ref={imageRef} bg='white' placeholder='Image URL' />
+        {currPage == "newProd" && <Textarea onChange={() => abc()} ref={descRef} bg='white' placeholder={currPage == "newProd" ? 'Product Description': 'Brand Description...'} />}
+        {currPage == 'newProd' && <Select ref={brandRef} bg='white' placeholder='Select Brand'>
             <option>Addidas</option>
             <option>Nike</option>
             <option>Onida</option>
             <option>Apple</option>
         </Select>}
-        <Button>Create {currPage == "newProd" ?  "Product" : "Brand"}</Button>
+        {currPage == "newProd" && <Button onClick={() => handleCreateProduct(
+          titleRef.current.value,
+          priceRef.current.value,
+          imageRef.current.value,
+          descRef.current.value,
+          brandRef.current.value
+        )} >Create Product </Button>}
+        {currPage == 'newBrand' && <Button onClick={() => { 
+          handleCreateBrand(titleRef.current.value, imageRef.current.value)
+         }}>Create Brand</Button>}
     </VStack>
   )
 }

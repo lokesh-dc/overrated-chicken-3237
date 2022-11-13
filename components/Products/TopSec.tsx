@@ -15,7 +15,7 @@ const TopSec = ({handleSearch}:any) => {
   return (
     // <VStack w='100%' h='100px' bg='orange' align='center' justify='center' zIndex='2'>
 
-        <HStack display={{base:'none', sm:'flex'}} size='md' w={{base:'80%', md:'50%'}} borderRadius='md' py={{base:3, md:2}} px={5}  boxShadow='lg'
+        <HStack display={{base:'none', sm:'flex'}}  w={{base:'80%', md:'50%'}} borderRadius='md' py={{base:3, md:2}} px={5}  boxShadow='lg'
         bgColor='rgba(255, 255, 255, .65)' style={{backdropFilter: 'blur(5px)'}} _hover={{bgColor:'rgba(255, 255, 255, .95)'}}
         >
 
@@ -55,7 +55,7 @@ const TopSec = ({handleSearch}:any) => {
                         {menuItem}
                     </MenuButton>
                     <MenuList minWidth='240px' overflowY='scroll' h='300px' >
-                            <MenuOptionGroup type='radio' onChange={(e) => setMenuItem(e.toUpperCase())} zIndex='100'>
+                            <MenuOptionGroup type='radio' onChange={(e:any) => setMenuItem(e.toUpperCase())} zIndex='100'>
                                 <MenuItemOption value='All Departments'>All Departments</MenuItemOption>
                                 <MenuItemOption value='phone'>Auto</MenuItemOption>
                                 <MenuItemOption value='baby'>Baby</MenuItemOption>

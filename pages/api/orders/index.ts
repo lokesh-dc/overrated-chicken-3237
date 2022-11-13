@@ -1,32 +1,30 @@
 import { connect }  from "../../../lib/dbConnect";
+import { cartModel } from "../../../models";
 import ordersModel from "../../../models/orders.mdel";
 const jwt = require("jsonwebtoken");
 
 let date = new Date();
 
 export default async (req:any, res:any) => {
-    const {token} = req.headers;
-    if(token){
+    const {cookies} = req;
+    const parsedCookie = JSON.parse(cookies.mohallaMartJwt) 
+    if(parsedCookie.token){
         try {
             await connect();
-            let {id} = jwt.verify(token, "vdvhsvdsvcdcvsdvcvkc");
+            console.log("cookie", parsedCookie.token)
+            let {id} = jwt.verify(parsedCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="GET"){
                 const orders = await ordersModel.find({userId : id}).populate("productId")
-                if(orders.length==0){
-                    return res.send("Orders are empty");
-                }
                 return res.json(orders);
             }
             
             else if(req.method==="POST"){
-                const { productId } = req.body;
-                const checkProduct = await ordersModel.findOne({productId, userId: id});
-                if(!checkProduct){
-                    await ordersModel.create({productId, userId: id, date});
-                    return res.send("Product added");
-                }else{
-                    return res.send("Product already Added");
-                }
+                const { message } = req.body;
+                let cart = await cartModel.find({userId:id}, {_id:0});
+                let orders = await ordersModel.insertMany(cart);
+                let deleted = await cartModel.deleteMany(cart);
+                console.log(deleted);
+                return res.send(orders);
             } 
             else if(req.method === "DELETE"){
                 const { id } = req.body;

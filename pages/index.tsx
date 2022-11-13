@@ -42,23 +42,23 @@ export default function Home({props}:any) {
   )
 }
 
-export async function getServerSideProps({req}: any){
-  console.log('SERVER SIDE ', req.cookies)
-  // let {token} = JSON.parse(req.cookies.mohollamartJwt);
-  let {token} = JSON.parse(req.cookies.mohallaMartJwt);
-    let resp = await axios.get("http://localhost:3000/api/users/details", {headers: {token}})
-    if(resp.data.ack===false){
-      let {token, refreshToken} = JSON.parse(req.cookies.mohallaMartJwt);
-      console.log(refreshToken)
-      resp = await axios.get("http://localhost:3000/api/users/refresh", {headers: {"token": refreshToken}})
-      if(resp.data.ack){
-        let {token} = JSON.parse(req.cookies.mohallaMartJwt);
-        resp = await axios.get("http://localhost:3000/api/users/details", {headers: {token}})
-      }
-    }
-    let data = resp.data;
-    console.log(data)
-  return {
-      props: {props: data}
-  }
-}
+// export async function getServerSideProps({req}: any){
+//   console.log('SERVER SIDE ', req.cookies)
+//   // let {token} = JSON.parse(req.cookies.mohollamartJwt);
+//   let {token} = JSON.parse(req.cookies.mohallaMartJwt);
+//     let resp = await axios.get("http://localhost:3000/api/users/details", {headers: {token}})
+//     if(resp.data.ack===false){
+//       let {token, refreshToken} = JSON.parse(req.cookies.mohallaMartJwt);
+//       console.log(refreshToken)
+//       resp = await axios.get("http://localhost:3000/api/users/refresh", {headers: {"token": refreshToken}})
+//       if(resp.data.ack){
+//         let {token} = JSON.parse(req.cookies.mohallaMartJwt);
+//         resp = await axios.get("http://localhost:3000/api/users/details", {headers: {token}})
+//       }
+//     }
+//     let data = resp.data;
+//     console.log(data)
+//   return {
+//       props: {props: data}
+//   }
+// }

@@ -4,12 +4,8 @@ import { useEffect, useState } from "react";
 // import PaginationComponent from "../../../Components/Pagination/PaginationComponent";
 import ProductCard from "./card/ProductCard";
 
-export default function MidSec({data, page, setPage, currPage, handleWishlist, handleDelWishlist, handleAddToCart}:any) {
+export default function MidSec({data, page, setPage, currPage, handleWishlist, handleDelWishlist, handleAddToCart, wishData}:any) {
     const [allData, setAllData] = useState([])
-
-    useEffect(() => {
-        // getTotalPages().then((res) => setAllData(res.data))
-    },[])
 
     const totalPages = Math.ceil(allData.length/20)
 
@@ -20,7 +16,13 @@ export default function MidSec({data, page, setPage, currPage, handleWishlist, h
             <SimpleGrid minChildWidth='250px' placeItems='center' gap={4} 
             >
                 {
-                    data.slice(0,20)?.map((item:any) => (
+                    wishData?.slice(0,20)?.map((item:any) => (
+                        <ProductCard {...item.productId} key={item.id} currPage={currPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} handleAddToCart={handleAddToCart}/>
+                        ))
+                        
+                    }
+                {
+                    data?.slice(0,20)?.map((item:any) => (
                         <ProductCard {...item} key={item.id} currPage={currPage} handleWishlist={handleWishlist} handleDelWishlist={handleDelWishlist} handleAddToCart={handleAddToCart}/>
                     ))
                 }

@@ -13,13 +13,14 @@ import { MdGraphicEq } from "react-icons/md";
 
 export default function LeftSec({data, getProductsByPrice, getProductByRating}:any) {
     const [maxMin, setMaxMin] = useState([1, 500])
+    console.log(data,'data')
    
     const handleFilter=(e:any)=>{
         console.log(e, 'range')
         let filterData = data.filter((ele:any)=>{
             return +(ele.price) >= e[0] && +(ele.price) <= e[1]
         })
-        // console.log(filterData)
+        console.log(filterData)
         getProductsByPrice(filterData)
     }
     return (
@@ -41,7 +42,7 @@ export default function LeftSec({data, getProductsByPrice, getProductByRating}:a
                         <RangeSlider aria-label={['min', 'max']} min={1} max={500} defaultValue={[10, 5000]} onChangeEnd={(e:any)=>{
                             handleFilter(e)
                             setMaxMin(e)
-                            }}>
+                            }} >
                         <RangeSliderTrack bg='red.100'>
                             <RangeSliderFilledTrack bg='tomato' />
                         </RangeSliderTrack>
@@ -69,7 +70,7 @@ export default function LeftSec({data, getProductsByPrice, getProductByRating}:a
                     <AccordionPanel pb={4}>
                         <Flex flexDir='column' gap={3} justify='center' align='flex-start' pl={6}>
                             {
-                                data.slice(0,6).map((item:any) => (
+                                data?.slice(0,6)?.map((item:any) => (
                                     // <Button fontSize='15px' color='#2e2c38' variant='link' key={item.id}>{item.brand}({item.number_of_reviews})</Button>
                                     <Checkbox defaultChecked fontSize='15px' color='#2e2c38' key={item.id}>{item.brand}({item.number_of_reviews})</Checkbox>
                                 ))

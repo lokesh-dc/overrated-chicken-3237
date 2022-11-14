@@ -73,6 +73,8 @@ export default function Popular({tit}) {
       width={"full"}
       overflow={"hidden"}
       textAlign={"center"}
+      // bg="white"
+      bgColor='rgba(255, 255, 255, .10)' style={{backdropFilter: 'blur(7px)'}} boxShadow='xl'
     >
           <Text fontSize='18px' mt="20px"
       mb="20px" alignItems='center' color="red">15 to 20 Percent off on below {tit} products</Text>

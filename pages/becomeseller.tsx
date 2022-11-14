@@ -10,12 +10,14 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import {useRef, useState} from 'react'
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 export const getServerSideProps = async ({req}:any) => {
@@ -39,6 +41,8 @@ export default function becomeseller({props}:any) {
 
   const storeRef:any = useRef(null)
   const regRef:any = useRef(null)
+  const toast = useToast()
+  const router = useRouter()
 
   const handleSeller = () => {
     console.log(storeRef.current.value, regRef.current.value)
@@ -47,8 +51,23 @@ export default function becomeseller({props}:any) {
       reg: regRef.current.value
     }).then((res:any) => {
       console.log(res,'sellerRes')
+      toast({
+        title: 'Congrats!.',
+        description: "You have successfully became a seller at MohallaMart",
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
+      router.push("/admin")
     }).catch((e) => {
       console.log(e, 'sellerError')
+      toast({
+        title: 'Oops!.',
+        description: "Looks like something went wrong, please try again!",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
     })
   }
 

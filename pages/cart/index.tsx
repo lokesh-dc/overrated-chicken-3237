@@ -117,7 +117,7 @@ function Cart({props}:any) {
 
 
         axios.post("http://localhost:3000/api/orders", {"message": "success"}).then((res)=> {
-          console.log(res)
+          console.log(res, 'orders post')
         }).catch((e)=> console.log(e.message));
         router.push("/orders")
       },

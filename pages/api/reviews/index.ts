@@ -7,12 +7,12 @@ const jwt = require("jsonwebtoken");
 export default async (req:any, res:any) => {
     try {
         await connect();
-        let { content, productId,rating } = req.body;
-        const {id} =req.headers
+        let { content, prodId,rating } = req.body;
+        const {productid} =req.headers
         const dateToChange= new Date().toString().split(" ");
         const date = `${dateToChange[2]}/${dateToChange[1]}/${dateToChange[0]}`
         if(req.method==="GET"){
-            const reviews = await reviewModel.find({productId:id}).populate("userId");
+            const reviews = await reviewModel.find({productId:productid}).populate("userId");
             res.send(reviews);
         }else {
             const { cookies } = req;
@@ -22,9 +22,9 @@ export default async (req:any, res:any) => {
             }
             let { id } =  jwt.verify(parseCookie.token, "vdvhsvdsvcdcvsdvcvkc");
             if(req.method==="POST"){
-                let hasReviewed = await reviewModel.findOne({productId, userId: id});
+                let hasReviewed = await reviewModel.findOne({productId:prodId, userId: id});
                 if(!hasReviewed){
-                    await reviewModel.create({ productId, userId: id, content,rating ,date:date});
+                    await reviewModel.create({ productId: prodId, userId: id, content,rating ,date:date});
                     return res.send("Review added Successfully");
                 }else{
                     return res.send("Already reviewed");
@@ -32,12 +32,12 @@ export default async (req:any, res:any) => {
             }else if(req.method==="DELETE"){
                 const { cookies } = req;
                 const parseCookie:any= JSON.parse(cookies.mohallaMartJwt)
-                const Userid =  jwt.verify(parseCookie.token, "vdvhsvdsvcdcvsdvcvkc");
-                let hasReviewed = await reviewModel.findOne({productId:id, userId: Userid.id});
+                const {id} =  jwt.verify(parseCookie.token, "vdvhsvdsvcdcvsdvcvkc");
+                let hasReviewed = await reviewModel.findOne({productId:productid, userId: id});
                 if(!hasReviewed){
                     return res.status(401).send("Missing Permissions");
                 }
-                const deleteStatus = await reviewModel.deleteOne({id});
+                const deleteStatus = await reviewModel.deleteOne({productId:productid});
                 if(deleteStatus.deletedCount>0){
                     return res.send("Review deleted successfully.")
                 }

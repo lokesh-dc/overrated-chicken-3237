@@ -1,5 +1,6 @@
 import { Avatar, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, VStack } from '@chakra-ui/react'
 import React from 'react'
+import { EditModal } from './EditModal'
 
 const AllTable = ({title, role, amount, totalP, user, email, roleHeading, data}:any) => {
 
@@ -33,7 +34,7 @@ const AllTable = ({title, role, amount, totalP, user, email, roleHeading, data}:
                         </Td>
                         <Td textAlign='center'>{item?.role}{item?.price}</Td>
                         {title != "User" || title != "Brands" && <Td textAlign='center' isNumeric>{amount}</Td>}
-                        <Td textAlign='center' >Edit</Td>
+                        <Td textAlign='center' ><EditModal/> </Td>
                     </Tr>
                 ))
             }   

@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs, VStack, Box, Heading, Text, useToast } from '@chakra-ui/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs, VStack, Box, Heading, Text, useToast, Button } from '@chakra-ui/react'
 import React, {useState, useEffect} from 'react'
 import { AiOutlineHome, AiOutlineTeam } from 'react-icons/ai'
 import { BiTimeFive } from 'react-icons/bi'
@@ -10,15 +10,42 @@ import { FiPieChart } from 'react-icons/fi'
 import dashBack from '../../Resources/mesh1.png'
 import AllTable from '../../components/AdminComps/Table/AllTable'
 import Dashboard from '../../components/AdminComps/Dashboard/Dashboard'
-import AdminForm from '../../components/AdminComps/forms/adminForm'
+import AdminForm from '../../components/AdminComps/forms/AdminForm'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 // import AllTable from '../../components/AdminComps/Table/AllTable'
 
-const Admin = () => {
+export async function getServerSideProps({req}:any) {
+   // let resp:any = await axios.get("http://localhost:3000/api/products")
+
+   if(!req.cookies.mohallaMartJwt){
+       return {
+           redirect: {
+               destination: '/products',
+               permanent: false,
+           },
+       }
+   }
+   
+   return {
+     props: {props: req.cookies.mohallaMartJwt}, // will be passed to the page component as props
+   }
+ }
+
+const Admin = ({props}:any) => {
    const [users ,setUsers] = useState<any>([]) 
    const [brands, setBrands] = useState<any>([])
    const [products, SetProducts] = useState<any>([])
    const [change, setChange] = useState<any>(false)
+   const [role, setRole] = useState<String>("")
+   const router = useRouter()
+
+   var token = JSON.parse(props).token
+   console.log( 'PROPS, ADMIN', token)
+
+   useEffect(() => {
+      axios.get('/api/users/rolecheck').then((res) => setRole(res.data))
+   }, [])
 
    const toast = useToast()
 
@@ -57,6 +84,10 @@ const Admin = () => {
       setChange(!change)
    }
 
+
+   const [allOrders, setAllOrders] = useState([])
+   const [allBrands, setAllBrands] = useState([])
+
     useEffect(() => {
       axios.get('/api/brands').then((res) => setBrands(res.data))
       .catch((e) => console.log(e))
@@ -68,7 +99,33 @@ const Admin = () => {
    useEffect(() => {
       axios.get('/api/products').then((res) => SetProducts(res.data))
       .catch((e) => console.log(e, "PRODUCTS FETCH ERROR"))
+
+      axios.get('/api/orders/allorders').then((res) => {
+         console.log(res.data,'ALL ORDERS')
+         setAllOrders(res.data)
+      })
+      .catch((e) => console.log(e, 'ERROR , ALL ORDERS'))
+
+      axios.get('/api/brands').then((res) => {
+         console.log(res.data, 'ALL BRANDS')
+         setAllBrands(res.data)
+      }).catch((e) => console.log(e, 'BRANDS ERROR'))
    }, [change])
+
+   const handleLogout = () => {
+      axios.get('/api/users/logout').then((res) => {
+         console.log(res, 'LOGOUT SUCCESS')
+         toast({
+             title: 'Logout Successfull.',
+             description: "You have logged out successfully.",
+             status: 'info',
+             duration: 9000,
+             isClosable: true,
+           })
+     })
+     router.push("/products")
+   }
+
 
   return (
     <Tabs
@@ -115,6 +172,7 @@ const Admin = () => {
                   </Tab>
 
                   <Tab
+                     isDisabled={role != 'Admin' && true}
                      fontSize={"lg"}
                      transition="0.2s ease-out"
                      _hover={{
@@ -134,6 +192,7 @@ const Admin = () => {
                   </Tab>
 
                   <Tab
+                     isDisabled={role != 'Admin' && true}
                      fontSize={"lg"}
                      transition="0.2s ease-out"
                      _hover={{
@@ -214,7 +273,8 @@ const Admin = () => {
                </VStack>
 
                <Box>
-                <Tab
+                <Button
+                  onClick={handleLogout}
                  fontSize={"lg"}
                      transition="0.2s ease-out"
                      _hover={{
@@ -231,7 +291,7 @@ const Admin = () => {
                      justifyContent="flex-start">
                     <FiPieChart fontSize="26px" color="gray" />{" "}
                     LogOut
-                </Tab>
+                </Button>
                </Box>
 
             </TabList>
@@ -240,7 +300,7 @@ const Admin = () => {
 
                <TabPanel >
                      <Box className='tbl' p={6} w='100%' h='90vh'  bgColor='rgba(255, 255, 255, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto' >
-                        <Dashboard/>
+                        <Dashboard allUsers={users} allBrands={brands} allProducts={allOrders}/>
                     </Box>
                </TabPanel>
 
@@ -272,7 +332,7 @@ const Admin = () => {
                <TabPanel>
                   <Box w='100%' p={6} h='90vh'  bgColor='rgba(0, 0, 0, .20)' borderRadius='2xl' style={{backdropFilter: 'blur(5px)'}} boxShadow='lg' m='auto'>
                      <Text fontSize='4xl' color='white'>Create a new Product</Text>
-                     <AdminForm handleCreateProduct={handleCreateProduct} currPage="newProd"/>
+                     <AdminForm handleCreateProduct={handleCreateProduct} allBrands={allBrands} currPage="newProd"/>
                   </Box>
                </TabPanel>
 

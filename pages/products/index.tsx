@@ -202,15 +202,16 @@ export default function Products(props:any) {
             mt='40px'
             w='100%'
             mb='20px'
+            // bgColor='rgba(237, 245, 224, 0.7)' 
         >
             <Flex justify='flex-start' w='80%' m='auto' fontSize='12px' color='#6c6d70'>
                     <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
                         <BreadcrumbItem>
-                            <BreadcrumbLink href='/'>SHOP.COM</BreadcrumbLink>
+                            <BreadcrumbLink href='/'>MohallaMart</BreadcrumbLink>
                         </BreadcrumbItem>
 
                         <BreadcrumbItem>
-                            <BreadcrumbLink href='/products'>Rc-Toys</BreadcrumbLink>
+                            <BreadcrumbLink href='/products'>Products</BreadcrumbLink>
                         </BreadcrumbItem>
                     </Breadcrumb>
             </Flex>

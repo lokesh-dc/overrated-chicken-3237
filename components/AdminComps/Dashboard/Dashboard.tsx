@@ -22,7 +22,7 @@ const Dashboard = ({allUsers, allBrands, allProducts}:any) => {
                 <Flex align='center' justify='space-between'>
                     <VStack>
                         <StatLabel color='gray.600'>Total Revenue</StatLabel>
-                        <StatNumber>{sum}</StatNumber>
+                        <StatNumber>{sum}₹</StatNumber>
                         <StatHelpText>
                         <StatArrow type='increase' />
                         23.36%
@@ -71,7 +71,7 @@ const Dashboard = ({allUsers, allBrands, allProducts}:any) => {
                 <Flex align='center' justify='space-between'>
                     <VStack>
                         <StatLabel color='gray.600'>Today's Revenue</StatLabel>
-                        <StatNumber>25000</StatNumber>
+                        <StatNumber>4009.00₹</StatNumber>
                         <StatHelpText>
                         <StatArrow type='increase' />
                         43.00%

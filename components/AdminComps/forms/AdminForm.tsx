@@ -1,7 +1,7 @@
 import { Button, HStack, Input, Select, Textarea, VStack } from '@chakra-ui/react'
 import React, {useRef} from 'react'
 
-const AdminForm = ({currPage, handleCreateProduct, handleCreateBrand}:any) => {
+const AdminForm = ({currPage, handleCreateProduct, handleCreateBrand, allBrands}:any) => {
 
   const titleRef:any = useRef(null)
   const priceRef:any = useRef(null)
@@ -22,10 +22,11 @@ const AdminForm = ({currPage, handleCreateProduct, handleCreateBrand}:any) => {
         <Input ref={imageRef} bg='white' placeholder='Image URL' />
         {currPage == "newProd" && <Textarea onChange={() => abc()} ref={descRef} bg='white' placeholder={currPage == "newProd" ? 'Product Description': 'Brand Description...'} />}
         {currPage == 'newProd' && <Select ref={brandRef} bg='white' placeholder='Select Brand'>
-            <option>Addidas</option>
-            <option>Nike</option>
-            <option>Onida</option>
-            <option>Apple</option>
+           {
+            allBrands?.map((item:any) => (
+              <option>{item.name}</option>
+            ))
+           }
         </Select>}
         {currPage == "newProd" && <Button onClick={() => handleCreateProduct(
           titleRef.current.value,

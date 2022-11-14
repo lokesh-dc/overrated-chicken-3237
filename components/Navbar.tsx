@@ -12,16 +12,30 @@ import { BiUser, BiCart, BiShoppingBag } from "react-icons/bi"
 import TopSec from "./Products/TopSec";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi"
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import {GrUserAdmin} from 'react-icons/gr'
 
 export default function Navbar({props, handleSearch}:any){
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef:any = useRef<any>()
     const router = useRouter()
     const toast = useToast()
+    const [role, setRole] = useState<any>()
+
+    useEffect(() => {
+        axios.get('/api/users/rolecheck').then((res:any) => {
+            console.log(res.data , 'ROLE, NAVBAR')
+            setRole(res.data)
+        })
+        .catch((e) => {
+            console.log(e, 'e TOLE NAVBAR')
+            setRole("Buyer")
+        })
+     }, [])
+  
 
     // if(props != ""){
     //     props = JSON.parse(props)
@@ -46,7 +60,17 @@ export default function Navbar({props, handleSearch}:any){
     }
 
     const handleLogout =() => {
-        axios.get('/api/users/logout').then((res) => console.log(res))
+        axios.get('/api/users/logout').then((res) => {
+            console.log(res, 'LOGOUT SUCCESS')
+            toast({
+                title: 'Logout Successfull.',
+                description: "You have logged out successfully.",
+                status: 'info',
+                duration: 9000,
+                isClosable: true,
+              })
+      
+        })
     }
     return(
         <HStack w='95%' m='auto' mt='10px' position='sticky' top='0%' zIndex='1000' alignItems="center" justify='space-between' py={3} px={6} borderRadius='3xl'
@@ -83,9 +107,11 @@ export default function Navbar({props, handleSearch}:any){
                                 </MenuItem>
                             }
                         </Link>
-                        <MenuItem command='⌘N'>
-                            Become a Seller
-                        </MenuItem>
+                        <Link href='/becomeseller'>
+                            <MenuItem command='⌘N'>
+                                Become a Seller
+                            </MenuItem>
+                        </Link>
                     </MenuList>
                 </Menu>
 
@@ -102,6 +128,15 @@ export default function Navbar({props, handleSearch}:any){
                         <AiOutlineHeart style={{fontSize:'26px', color:'red'}}/>
                     </Link>
                 </Tooltip>
+                {
+                    role != "Buyer" && 
+                    <Tooltip label="Admin Panel">
+                        <Link href="/admin">
+                            <GrUserAdmin style={{fontSize:'26px', color:'green'}}/>
+                        </Link>
+                    </Tooltip>
+
+                }
             </Flex>
 
              
@@ -131,7 +166,7 @@ export default function Navbar({props, handleSearch}:any){
                     <Link href='products'>See all Products</Link>
                         <Link href='wishlist'>Wishlist</Link>
                         <Link href='cart'>Cart</Link>
-                        <Button colorScheme='transparent'>Login</Button>
+                        <Link href="/login"><Button colorScheme='transparent'>Login</Button></Link>
                     </Flex>
                 </DrawerBody>
 

@@ -5,8 +5,16 @@ import { GiCash } from 'react-icons/gi'
 import { FaGlobeAsia, FaWallet } from 'react-icons/fa'
 import { FiDelete } from 'react-icons/fi'
 import { DeleteIcon } from '@chakra-ui/icons'
+import users from '../../../pages/api/users'
 
-const Dashboard = () => {
+const Dashboard = ({allUsers, allBrands, allProducts}:any) => {
+    console.log(allProducts, 'DASHBAORD')
+
+    var sum = 0
+    for(var i = 0; i<allProducts.length; i++){
+        sum += +allProducts[i].productId.price
+    }
+
   return (
     <>
         <SimpleGrid minChildWidth='100px'placeItems='center'>
@@ -14,7 +22,7 @@ const Dashboard = () => {
                 <Flex align='center' justify='space-between'>
                     <VStack>
                         <StatLabel color='gray.600'>Total Revenue</StatLabel>
-                        <StatNumber>345,670₹</StatNumber>
+                        <StatNumber>{sum}</StatNumber>
                         <StatHelpText>
                         <StatArrow type='increase' />
                         23.36%
@@ -30,7 +38,7 @@ const Dashboard = () => {
                 <Flex align='center' justify='space-between'>
                     <VStack>
                         <StatLabel color='gray.600'>Total Users</StatLabel>
-                        <StatNumber>20</StatNumber>
+                        <StatNumber>{allUsers.length}</StatNumber>
                         <StatHelpText>
                         <StatArrow type='increase' />
                         200%
@@ -46,7 +54,7 @@ const Dashboard = () => {
                 <Flex align='center' justify='space-between'>
                     <VStack>
                         <StatLabel color='gray.600'>Total Brands</StatLabel>
-                        <StatNumber>12</StatNumber>
+                        <StatNumber>{allBrands.length}</StatNumber>
                         <StatHelpText>
                         <StatArrow type='increase' />
                             8%

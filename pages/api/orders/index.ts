@@ -22,8 +22,8 @@ export default async (req:any, res:any) => {
                 const { message } = req.body;
                 let cart = await cartModel.find({userId:id}, {_id:0});
                 let orders = await ordersModel.insertMany(cart);
-                let deleted = await cartModel.deleteMany(cart);
-                console.log(deleted);
+                // let deleted = await cartModel.deleteMany(cart);
+                // console.log(deleted);
                 return res.send(orders);
             } 
             else if(req.method === "DELETE"){

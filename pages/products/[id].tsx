@@ -33,21 +33,23 @@ const SingleProductPage = ({props}:any) => {
   const [loggedIn , setLoggedIn]  = useState("")
   // console.log(props.cook)
 
-  // console.log(router.query.id, 'router', props)
+  console.log(router.query.id, 'router', props)
   useEffect(() => {
     axios.get(`/api/products/${router.query.id}`).then((res) => setData(res.data))
+    .catch((e) => console.log(e, 'PRODUCT FETCH ERROR'))
   }, [])
 
   useEffect(()=>{
     console.log(router.query.id)
     axios.get(`/api/reviews` ,{
        headers:{
-        id:router.query.id
+        productid:router.query.id
        }
     }).then((res)=>{
+
       setReviews(res.data)
     })
-  },[])
+  },[reRender])
   // console.log(reviews)
   const handleClick= () => {
     // console.log(data)
@@ -55,18 +57,27 @@ const SingleProductPage = ({props}:any) => {
 
   useEffect(()=>{
       axios.get(`/api/users/details`).then((res)=>{
+        console.log(res, 'SETLOGGED IN')
         setLoggedIn(res.data.user.email)
-      })
+      }).catch((e) => console.log(e))
   },[])
 
   const handleSubmitReview=(data:any,fillStar:any)=>{
     axios.post(`/api/reviews`,{
-      productId:router.query.id,
+      prodId:router.query.id,
       content:data,
       rating:fillStar,
     }).then((res)=>{
       console.log(res)
+      axios.get(`/api/reviews` ,{
+        headers:{
+         productid:router.query.id
+        }
+     }).then((res)=>{
+       setReviews(res.data)
+     })
     })
+
     setReRender(!reRender)
 
   }
@@ -74,7 +85,7 @@ const SingleProductPage = ({props}:any) => {
   const deleteReview =()=>{
     axios.delete(`/api/reviews`,{
       headers:{
-        id:router.query.id
+        productid:router.query.id
       }
     }).then((res)=>{
       console.log(res)
